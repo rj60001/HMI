@@ -1,0 +1,93 @@
+/* Animations */
+@keyframes bounce {
+  50% {transform: translateY(-5%);}
+  100% {transform: translateY(5%);}
+}
+
+@keyframes flyAway {
+  100% {transform: translateY(2000px);}
+}
+
+@keyframes fadeIn {
+  0% {display: none;}
+  100% {display: block;}
+}
+
+@keyframes floatOne {
+  50% {transform: translate(5%, 5%);}
+}
+
+@keyframes floatTwo {
+  50% {transform: translate(-5%, -5%);}
+}
+
+@keyframes floatThree {
+  50% {transform: translate(-5%, 5%);}
+}
+
+@keyframes floatFour {
+  50% {transform: translate(5%, -5%);}
+}
+/* Elements */
+body {
+  background-color: rgb(241, 89, 89);
+  color: #EDEDED;
+  font-style:'Comfortaa', cursive;
+  overflow: hidden;
+}
+
+h1 {
+  font-family: 'Megrim', cursive;
+  font-size: 1000%;
+  color: rgb(255, 255, 204);
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+div {
+  display: block;
+}
+/* IDs */
+#enterBtn {
+  display: block;
+  cursor: pointer;
+  animation-name: none;
+  animation-duration: 0.5s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  transition-timing-function: ease-in-out;
+}
+
+#bgObjCon {
+  font-family: 'Megrim', cursive;
+  color: rgb(241, 149, 149);
+}
+
+/* Classes */
+.bgObjBig {
+  font-size: 600%;
+  animation-name: floatOne;
+  animation-duration: 5s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  transition-timing-function: ease-in-out;
+}
+
+.bgObjMed {
+  font-size: 400%;
+  animation-name: floatOne;
+  animation-duration: 5s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  transition-timing-function: ease-in-out;
+}
+
+.bgObjSmall {
+  font-size: 200%;
+  animation-name: floatOne;
+  animation-duration: 5s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  transition-timing-function: ease-in-out;
+}
