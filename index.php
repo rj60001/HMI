@@ -24,4 +24,13 @@
   <div name="bgObj" class="bgObjSmall" style="position: absolute; top: 80%; left: 78%; animation-name: floatThree; animation-fill-mode: backwards;">C</div>
   <div name="bgObj" class="bgObjSmall" style="position: absolute; top: 40%; left: 10%; animation-name: floatThree; animation-fill-mode: backwards;">C</div>
 </div>
+<div id="menuCon">
+  <div id="menuBar">
+    <a>HOME</a>
+    <a>TOOL</a>
+    <a>NEWS</a>
+    <a>ABOUT</a>
+    <a>FORUM</a>
+  </div>
+</div>
 <script src="loginScript.js"></script>

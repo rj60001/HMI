@@ -1,0 +1,47 @@
+/*Animations*/
+@keyframes fadeIn {
+  100% {opacity: 1;}
+}
+/*Elements*/
+a {
+  font-family: 'Megrim', cursive;
+  font-size: 300%;
+  font-weight: bold;
+  color: rgb(255, 255, 204);
+  margin-left: 1%;
+  margin-right: 1%;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+/*IDs*/
+#menuCon {
+  opacity: 0;
+  min-width: 1px;
+  min-height: 1px;
+  width: 100%;
+  height: 100%;
+  animation-name: none;
+  animation-duration: 6s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+#menuBar {
+  background-color: rgb(241, 149, 149);
+  min-width: 1px;
+  min-height: 1px;
+  width: 90%;
+  height: 10%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 30%;
+  margin-bottom: 5%;
+  list-style: none;
+  list-style-type: none;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 5px;
+  border-color: rgb(241, 149, 149);
+  text-align: center;
+}
+/*classes*/

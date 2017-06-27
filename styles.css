@@ -8,11 +8,6 @@
   100% {transform: translateY(2000px);}
 }
 
-@keyframes fadeIn {
-  0% {display: none;}
-  100% {display: block;}
-}
-
 @keyframes floatOne {
   50% {transform: translate(5%, 5%);}
 }
@@ -63,7 +58,6 @@ div {
   font-family: 'Megrim', cursive;
   color: rgb(241, 149, 149);
 }
-
 /* Classes */
 .bgObjBig {
   font-size: 600%;
