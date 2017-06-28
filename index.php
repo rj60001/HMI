@@ -1,4 +1,4 @@
-<?php $title="HMI - Hello!"; require("template.php");  ?>
+<?php $title="HMI - Hello!"; require("template.php"); ?>
 <div id="enterBtnCon"><h1 id="enterBtn">A</h1></div>
 <div id="bgObjCon">
   <div name="bgObj" class="bgObjBig" style="position: absolute; top: 69%; left: 10%; animation-fill-mode: backwards;">A</div>
@@ -26,11 +26,17 @@
 </div>
 <div id="menuCon">
   <div id="menuBar">
-    <a>HOME</a>
-    <a>TOOL</a>
-    <a>NEWS</a>
-    <a>ABOUT</a>
-    <a>FORUM</a>
+    <div id="menuTextCon">
+      <a onclick="menuBtnClick('home')">HOME</a>
+      <a onclick="menuBtnClick('tool')">TOOL</a>
+      <a onclick="menuBtnClick('news')">NEWS</a>
+      <a onclick="menuBtnClick('about')">ABOUT</a>
+      <a onclick="menuBtnClick('forum')">FORUM</a>
+    </div>
+  </div>
+  <div id="menuCard">
+    
   </div>
 </div>
-<script src="loginScript.js"></script>
+<script src="entryScript.js"></script>
+<script src="menuScript.js"></script>

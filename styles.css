@@ -25,38 +25,42 @@
 }
 /* Elements */
 body {
-  background-color: rgb(241, 89, 89);
-  color: #EDEDED;
+  background-color: #EEE2DF;
+  color: #81726A;
   font-style:'Comfortaa', cursive;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 h1 {
   font-family: 'Megrim', cursive;
   font-size: 1000%;
-  color: rgb(255, 255, 204);
+  color: #4E3D42;
   text-align: center;
-  margin-left: auto;
-  margin-right: auto;
+  padding-left: auto;
+  padding-right: auto;
+  box-sizing: border-box;
 }
 
 div {
   display: block;
+  box-sizing: border-box;
 }
 /* IDs */
 #enterBtn {
   display: block;
   cursor: pointer;
-  animation-name: none;
-  animation-duration: 0.5s;
+  animation-duration: 8s;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
   transition-timing-function: ease-in-out;
+  position: relative;
+  z-index: 2;
 }
 
 #bgObjCon {
   font-family: 'Megrim', cursive;
-  color: rgb(241, 149, 149);
+  color: #D1C1BC;
 }
 /* Classes */
 .bgObjBig {
