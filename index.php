@@ -27,15 +27,23 @@
 <div id="menuCon">
   <div id="menuBar">
     <div id="menuTextCon">
-      <a onclick="menuBtnClick('home')">HOME</a>
-      <a onclick="menuBtnClick('tool')">TOOL</a>
-      <a onclick="menuBtnClick('news')">NEWS</a>
-      <a onclick="menuBtnClick('about')">ABOUT</a>
-      <a onclick="menuBtnClick('forum')">FORUM</a>
+      <a onclick="menuBtnClick('home');">HOME</a>
+      <a onclick="menuBtnClick('tool');">TOOL</a>
+      <a onclick="menuBtnClick('news');">NEWS</a>
+      <a onclick="menuBtnClick('about');">ABOUT</a>
+      <a onclick="menuBtnClick('forum');">FORUM</a>
     </div>
   </div>
   <div id="menuCard">
-    
+    <h1 id="titleText">HISTONE MODIFICATION INTEPRETER <span id="optionsIcon" onclick="menuBtnClick('options');">&#9776;</span></h1>
+    <hr>
+    <div id="homePage">
+      <p class="subTitle">HOME</p>
+    </div>
+    <div id="optionsPage">
+      <p class="subTitle">OPTIONS</p>
+      <input type="checkbox" class="bar">Light Mode </input>
+    </div>
   </div>
 </div>
 <script src="entryScript.js"></script>

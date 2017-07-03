@@ -9,27 +9,33 @@
 }
 
 @keyframes floatOne {
-  50% {transform: translate(5%, 5%);}
+  50% {transform: translate(10%, 10%);}
 }
 
 @keyframes floatTwo {
-  50% {transform: translate(-5%, -5%);}
+  50% {transform: translate(-10%, -10%);}
 }
 
 @keyframes floatThree {
-  50% {transform: translate(-5%, 5%);}
+  50% {transform: translate(-10%, 10%);}
 }
 
 @keyframes floatFour {
-  50% {transform: translate(5%, -5%);}
+  50% {transform: translate(10%, -10%);}
 }
 /* Elements */
+::selection {
+  background-color: inherit;
+  color: inherit;
+}
+
 body {
   background-color: #EEE2DF;
   color: #81726A;
   font-style:'Comfortaa', cursive;
   overflow: hidden;
   box-sizing: border-box;
+  cursor: default;
 }
 
 h1 {
