@@ -1,0 +1,104 @@
+/* Animations */
+@keyframes bounce {
+  50% {transform: translateY(-5%);}
+  100% {transform: translateY(5%);}
+}
+
+@keyframes enterBtnAlt {
+  50% {color: #EEE82C;}
+}
+
+@keyframes flyAway {
+  100% {transform: translateY(2000px);}
+}
+
+@keyframes floatOne {
+  50% {transform: translate(10%, 10%);}
+}
+
+@keyframes floatTwo {
+  50% {transform: translate(-10%, -10%);}
+}
+
+@keyframes floatThree {
+  50% {transform: translate(-10%, 10%);}
+}
+
+@keyframes floatFour {
+  50% {transform: translate(10%, -10%);}
+}
+/* Elements */
+::selection {
+  background-color: inherit;
+  color: inherit;
+}
+
+body {
+  background: #4776E6;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #8E54E9, #4776E6);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #8E54E9, #4776E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: #D1C1BC;
+  font-style: 'Comfortaa', cursive;
+  overflow: hidden;
+  box-sizing: border-box;
+  cursor: default;
+}
+
+h1 {
+  font-family: 'Megrim', cursive;
+  font-size: 1000%;
+  color: #D1C1BC;
+  text-align: center;
+  padding-left: auto;
+  padding-right: auto;
+  box-sizing: border-box;
+}
+
+div {
+  display: block;
+  box-sizing: border-box;
+}
+/* IDs */
+#enterBtn {
+  display: block;
+  cursor: pointer;
+  animation-duration: 4s;
+  animation-name: enterBtnAlt;
+  animation-iteration-count: infinite;
+  animation-fill-mode: forwards;
+  transition-timing-function: ease-in-out;
+  position: relative;
+  z-index: 2;
+}
+
+#bgObjCon {
+  font-family: 'Megrim', cursive;
+  color: #D1C1BC;
+}
+/* Classes */
+.bgObjBig {
+  font-size: 600%;
+  animation-name: floatOne;
+  animation-duration: 5s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  transition-timing-function: ease-in-out;
+}
+
+.bgObjMed {
+  font-size: 400%;
+  animation-name: floatOne;
+  animation-duration: 5s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  transition-timing-function: ease-in-out;
+}
+
+.bgObjSmall {
+  font-size: 200%;
+  animation-name: floatOne;
+  animation-duration: 5s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  transition-timing-function: ease-in-out;
+}

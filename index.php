@@ -1,4 +1,4 @@
-<?php $title="HMI - Hello!"; require("template.php"); ?>
+<?php $title="Ragnarök"; require("template.php"); ?>
 <div id="enterBtnCon"><h1 id="enterBtn">A</h1></div>
 <div id="bgObjCon">
   <div name="bgObj" class="bgObjBig" style="position: absolute; top: 69%; left: 10%; animation-fill-mode: backwards;">A</div>
@@ -24,27 +24,19 @@
   <div name="bgObj" class="bgObjSmall" style="position: absolute; top: 80%; left: 78%; animation-name: floatThree; animation-fill-mode: backwards;">C</div>
   <div name="bgObj" class="bgObjSmall" style="position: absolute; top: 40%; left: 10%; animation-name: floatThree; animation-fill-mode: backwards;">C</div>
 </div>
-<div id="menuCon">
-  <div id="menuBar">
-    <div id="menuTextCon">
-      <a onclick="menuBtnClick('home');">HOME</a>
-      <a onclick="menuBtnClick('tool');">TOOL</a>
-      <a onclick="menuBtnClick('news');">NEWS</a>
-      <a onclick="menuBtnClick('about');">ABOUT</a>
-      <a onclick="menuBtnClick('forum');">FORUM</a>
-    </div>
+<div id="mainCon">
+  <div id="menuCon">
+    <p><i class="material-icons">home</i></p>
+    <p><i class="material-icons">build</i></p>
+    <p><i class="material-icons">announcement</i></p>
+    <p><i class="material-icons">help</i></p>
+    <p><i class="material-icons">subject</i></p>
   </div>
-  <div id="menuCard">
-    <h1 id="titleText">HISTONE MODIFICATION INTEPRETER <span id="optionsIcon" onclick="menuBtnClick('options');">&#9776;</span></h1>
-    <hr>
-    <div id="homePage">
-      <p class="subTitle">HOME</p>
-    </div>
-    <div id="optionsPage">
-      <p class="subTitle">OPTIONS</p>
-      <input type="checkbox" class="bar">Light Mode </input>
-    </div>
+  <div id="textCon">
+    <p class="title">Ragnarök</p>
+    <p class="subTitle"eee>WELCOME</p>
+    <p class="text">Lorem ipsum dolor sit amet, impetus laoreet deterruisset vel et, pri tempor dolorum id. Sumo nonumes ea eam, an sit possim everti habemus, quo ei impetus inermis. Eu soluta noluisse pri, et mei vidit persequeris. Similique dissentiunt ea eam, cetero salutatus dignissim et est. Dicta animal qui et, ad quo decore commodo legimus. Vis veri decore eu.Nostrud debitis has ne, lorem splendide efficiantur ex vim. An assueverit mediocritatem concludaturque usu, omnis percipit mel et. Pri magna blandit ne, regione consulatu complectitur eos an. No gloriatur complectitur nec, mel dicat assueverit ex. Te vix illud fabulas graecis.<p>
   </div>
 </div>
-<script src="entryScript.js"></script>
-<script src="menuScript.js"></script>
+<script src="js/entryScript.js"></script>
+<script src="js/menuScript.js"></script>
