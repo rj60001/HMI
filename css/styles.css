@@ -44,6 +44,15 @@ body {
   cursor: default;
 }
 
+body::-webkit-scrollbar {
+  background-color: #D1C1BC;
+  width: 1%;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #444;
+}
+
 h1 {
   font-family: 'Megrim', cursive;
   font-size: 1000%;

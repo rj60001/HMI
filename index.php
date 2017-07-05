@@ -32,10 +32,11 @@
     <p><i class="material-icons">help</i></p>
     <p><i class="material-icons">subject</i></p>
   </div>
+  <p class="title">Ragnarök</p>
   <div id="textCon">
-    <p class="title">Ragnarök</p>
-    <p class="subTitle"eee>WELCOME</p>
-    <p class="text">Lorem ipsum dolor sit amet, impetus laoreet deterruisset vel et, pri tempor dolorum id. Sumo nonumes ea eam, an sit possim everti habemus, quo ei impetus inermis. Eu soluta noluisse pri, et mei vidit persequeris. Similique dissentiunt ea eam, cetero salutatus dignissim et est. Dicta animal qui et, ad quo decore commodo legimus. Vis veri decore eu.Nostrud debitis has ne, lorem splendide efficiantur ex vim. An assueverit mediocritatem concludaturque usu, omnis percipit mel et. Pri magna blandit ne, regione consulatu complectitur eos an. No gloriatur complectitur nec, mel dicat assueverit ex. Te vix illud fabulas graecis.<p>
+    <p class="subTitle">WELCOME</p>
+    <p name="text" class="text">Lorem ipsum dolor sit amet, an vim partem graeco aeterno, affert liberavisse intellegebat ad quo, usu oblique omnesque constituto cu. No mei unum ignota noster. Mel esse delenit in. Viris dignissim in vis. Sed agam delicata consequat ne, elit dicit cum in.Ius vero deserunt no. Ne amet erant qui, autem explicari eam ex. Ponderum intellegebat cum id. Nec aliquip repudiare at.In mundi tractatos adipiscing ius, alia neglegentur qui id. Ferri aliquando interesset has et, et vix numquam mediocritatem. Eum eu porro inani. Vel ne dicunt pertinacia. Suas quas efficiendi pri cu.Ne mel lucilius moderatius, has oratio veniam persius ut. Utroque nominavi splendide nec ei. Ex pro idque legere mediocrem, ex qui homero splendide. Ne est definiebas consequuntur, duo ex saepe ullamcorper. Mea ne nibh labitur definitionem.
+    Sit no wisi mundi vulputate, no debet ullamcorper sea. An liber atomorum pertinacia ius, quando petentium et usu, cu sea erant civibus accumsan. His quod veri cetero ut, sit in possim minimum. Iuvaret dolorem philosophia sit ei.<p>
   </div>
 </div>
 <script src="js/entryScript.js"></script>
