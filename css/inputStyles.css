@@ -1,0 +1,43 @@
+select {
+  background-color: #444;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 5px;
+  border-color: #444;
+  color: #D1C1BC;
+  font-family: "Comfortaa", cursive;
+  width: 100%;
+}
+
+input {
+  background-color: #444;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 5px;
+  border-color: #444;
+  color: #D1C1BC;
+  font-family: "Comfortaa", cursive;
+  width: 100%;
+}
+
+textarea {
+  background-color: #444;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 5px;
+  border-color: #444;
+  color: #D1C1BC;
+  font-family: "Comfortaa", cursive;
+  width: 100%;
+  max-width: 100%;
+  min-height: 40%;
+  max-height: 40%
+}
+
+textarea::-webkit-scrollbar {
+  background-color: #666;
+}
+
+textarea::-webkit-scrollbar-thumb {
+  background-color: #D1C1BC;
+}

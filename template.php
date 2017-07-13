@@ -6,7 +6,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/menuStyles.css">
-    <link rel="stylesheet" href="css/mediaStyles.css"
+    <link rel="stylesheet" href="css/inputStyles.css">
+    <link rel="stylesheet" href="css/mediaStyles.css">
   </head>
   <body>
   </body>

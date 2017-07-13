@@ -1,12 +1,26 @@
 /*Animations*/
 @keyframes fadeIn {
-    100% {
-        opacity: 1;
-    }
+    100% {opacity: 1;}
+}
+@keyframes fadeOut {
+    100% {opacity: 0;}
 }
 /*Elements*/
 p {
   margin-bottom: -1%;
+}
+
+hr {
+  outline-width: thin;
+  outline-color: #D1C1BC;
+}
+
+input {
+  cursor: pointer;
+}
+
+select {
+  cursor: pointer;
 }
 /*IDs*/
 #mainCon {
@@ -33,17 +47,19 @@ p {
   text-align: center;
 }
 
-#titleCon {
-    width: 91%;
-    min-width: 1px;
-    margin-left: 7%;
-    margin-right: 2%;
-    position: fixed;
-    display: block;
-    background-color: #FF0000
+#homePage {
+  opacity: 1;
+}
+/*Classes*/
+.menuRule {
+  width: 70%;
 }
 
-#textCon {
+.page {
+  opacity: 0;
+  position: absolute;
+  top: 0px;
+  left: 0px;
   width: 91%;
   height: 96%;
   min-width: 1px;
@@ -52,15 +68,25 @@ p {
   margin-right: 2%;
   margin-bottom: 4%;
   margin-top: 2%;
+  animation-iteration-count: 1;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  transition-timing-function: ease-in-out;
 }
-/*Classes*/
+
+.textCon {
+  width: 100%;
+  height: 100%;
+  min-width: 1px;
+  min-height: 1px;
+}
+
 .title {
   font-size: 300%;
   font-weight: bolder;
   font-family: "Comfortaa", cursive;
   color: #EEE82C;
-  margin-left: 7%;
-  margin-right: 2%;
+  margin-top: -1%;
 }
 
 .subTitle {
@@ -70,7 +96,7 @@ p {
 }
 
 .text {
-  height: 100%;
+  max-height: 200%;
   font-size: 130%;
   font-family: "Comfortaa", cursive;
   column-count: 4;
@@ -78,4 +104,14 @@ p {
   column-rule-width: medium;
   column-fill: auto;
   padding-right: 1%;
+}
+
+.textLateral {
+  font-size: 130%;
+  font-family: "Comfortaa", cursive;
+  padding-right: 1%;
+}
+
+.material-icons {
+  cursor: pointer;
 }
