@@ -12,7 +12,7 @@ p {
 
 hr {
   outline-width: thin;
-  outline-color: #D1C1BC;
+  outline-color: #FEFEFE;
 }
 
 input {
@@ -22,10 +22,22 @@ input {
 select {
   cursor: pointer;
 }
+
+fieldset {
+  border-color: #EFEFEF;
+  border-width: thick;
+  border-style: solid;
+  border-radius: 5px;
+  color: #EFEFEF;
+  font-size: 130%;
+  max-width: 100%;
+  min-width: 100%;
+  box-sizing: border-box;
+}
 /*IDs*/
 #mainCon {
   opacity: 0;
-  position: absolute;
+  position: fixed;
   top: 0px;
   left: 0px;
   width: 100%;
@@ -35,6 +47,16 @@ select {
   animation-duration: 4s;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
+  overflow-x: hidden;
+}
+
+#mainCon::-webkit-scrollbar {
+  background-color: #D1C1BC;
+  width: 1%;
+}
+
+#mainCon::-webkit-scrollbar-thumb {
+  background-color: #444;
 }
 
 #menuCon {
@@ -45,6 +67,7 @@ select {
   min-height: 1px;
   background-color: #444;
   text-align: center;
+  color: #D1C1BC;
 }
 
 #homePage {
@@ -85,33 +108,59 @@ select {
   font-size: 300%;
   font-weight: bolder;
   font-family: "Comfortaa", cursive;
-  color: #EEE82C;
+  color: #FFB71C;
   margin-top: -1%;
 }
 
 .subTitle {
   font-size: 190%;
   font-family: "Comfortaa", cursive;
-  color: #FFFFFF;
+  color: #FEFEFE;
 }
 
 .text {
-  max-height: 200%;
-  font-size: 130%;
-  font-family: "Comfortaa", cursive;
-  column-count: 4;
-  column-rule-color: #D1C1BC;
-  column-rule-width: medium;
-  column-fill: auto;
-  padding-right: 1%;
-}
-
-.textLateral {
   font-size: 130%;
   font-family: "Comfortaa", cursive;
   padding-right: 1%;
 }
 
 .material-icons {
+  cursor: pointer;
+}
+
+.doubleForm {
+  min-width: 49%;
+  max-width: 49%;
+  display: inline;
+  height: 75%;
+  overflow-y: auto;
+}
+
+.button {
+  background-color: rgba(0, 0, 0, 0);
+  border-width: thick;
+  border-radius: 5px;
+  border-color: #EFEFEF;
+  border-style: solid;
+  text-align: center;
+  min-width: 90%;
+  max-width: 90%;
+  min-height: 15%;
+  max-height: 15%;
+  color: #EFEFEF;
+  vertical-align: bottom;
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+
+  p {
+    height: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+.button:hover {
+  background-color: #EFEFEF;
+  color: #16A7E5;
   cursor: pointer;
 }

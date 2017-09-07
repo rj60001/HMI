@@ -4,10 +4,6 @@
   100% {transform: translateY(5%);}
 }
 
-@keyframes enterBtnAlt {
-  50% {color: #EEE82C;}
-}
-
 @keyframes flyAway {
   100% {transform: translateY(2000px);}
 }
@@ -27,6 +23,11 @@
 @keyframes floatFour {
   50% {transform: translate(10%, -10%);}
 }
+
+@keyframes backgroundGlide {
+  50% {background-position: 100% 0%;}
+  100% {background-position: 0% 100%;}
+}
 /* Elements */
 ::selection {
   background-color: inherit;
@@ -34,29 +35,24 @@
 }
 
 body {
-  background: #4776E6;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #8E54E9, #4776E6);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #8E54E9, #4776E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  color: #D1C1BC;
+  background: linear-gradient(45deg, #17EA29, #16A7E5, #17EA29);
+  background-size: 400% 400%;
+  background-position: 0% 100%;
+  color: #EFEFEF;
   font-style: 'Comfortaa', cursive;
   overflow: hidden;
   box-sizing: border-box;
   cursor: default;
-}
-
-body::-webkit-scrollbar {
-  background-color: #D1C1BC;
-  width: 1%;
-}
-
-body::-webkit-scrollbar-thumb {
-  background-color: #444;
+  animation-name: backgroundGlide;
+  animation-duration: 30s;
+  animation-iteration-count: infinite;
+  animation-fill-mode: forwards;
 }
 
 h1 {
   font-family: 'Megrim', cursive;
   font-size: 1000%;
-  color: #D1C1BC;
+  color: #FEFEFE;
   text-align: center;
   padding-left: auto;
   padding-right: auto;
@@ -71,10 +67,6 @@ div {
 #enterBtn {
   display: block;
   cursor: pointer;
-  animation-duration: 4s;
-  animation-name: enterBtnAlt;
-  animation-iteration-count: infinite;
-  animation-fill-mode: forwards;
   transition-timing-function: ease-in-out;
   position: relative;
   z-index: 2;
@@ -82,7 +74,13 @@ div {
 
 #bgObjCon {
   font-family: 'Megrim', cursive;
-  color: #D1C1BC;
+}
+
+#dayChangeBtn {
+  position: fixed;
+  right: 2vw;
+  top: 2vw;
+  z-index: 1000;
 }
 /* Classes */
 .bgObjBig {

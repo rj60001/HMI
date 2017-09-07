@@ -1,37 +1,56 @@
+/* Classes */
+.firstItem {
+  margin-top: 5%;
+}
+
+.lastItem {
+  margin-bottom: 5%;
+}
+/* Elements */
 select {
-  background-color: #444;
+  background-color: #EFEFEF;
   border-radius: 5px;
   border-style: solid;
   border-width: 5px;
-  border-color: #444;
-  color: #D1C1BC;
+  border-color: #EFEFEF;
+  color: #16A7E5;
   font-family: "Comfortaa", cursive;
-  width: 100%;
+  width: 90%;
+  font-size: 80%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-bottom: 2%;
+  min-height: 8%;
 }
 
 input {
-  background-color: #444;
+  background-color: #EFEFEF;
   border-radius: 5px;
   border-style: solid;
   border-width: 5px;
-  border-color: #444;
-  color: #D1C1BC;
+  border-color: #EFEFEF;
+  color: #16A7E5;
   font-family: "Comfortaa", cursive;
-  width: 100%;
+  font-size: 80%;
+  width: 90%;
+  min-height: 8%;
+  box-sizing: border-box;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-bottom: 2%;
 }
 
 textarea {
-  background-color: #444;
-  border-radius: 5px;
-  border-style: solid;
-  border-width: 5px;
-  border-color: #444;
-  color: #D1C1BC;
+  background-color: rgba(0, 0, 0, 0);
+  color: #FEFEFE;
+  border-color: rgba(0, 0, 0, 0);
   font-family: "Comfortaa", cursive;
-  width: 100%;
+  font-size: 80%;
+  min-width: 100%;
   max-width: 100%;
   min-height: 40%;
   max-height: 40%
+  text-transform: uppercase;
 }
 
 textarea::-webkit-scrollbar {
@@ -40,4 +59,21 @@ textarea::-webkit-scrollbar {
 
 textarea::-webkit-scrollbar-thumb {
   background-color: #D1C1BC;
+}
+
+textarea:hover,
+input:hover,
+textarea:active,
+input:active,
+textarea:focus,
+input:focus,
+button:focus,
+button:active,
+button:hover,
+label:focus,
+.btn:active,
+.btn.active
+{
+    outline:0px !important;
+    -webkit-appearance:none;
 }

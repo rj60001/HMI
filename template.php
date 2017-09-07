@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="css/menuStyles.css">
     <link rel="stylesheet" href="css/inputStyles.css">
     <link rel="stylesheet" href="css/mediaStyles.css">
+    <script src="js/entryScript.js"></script>
+    <script src="js/menuScript.js"></script>
+    <script src="js/inputScript.js"></script>
   </head>
   <body>
   </body>
