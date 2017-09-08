@@ -1,11 +1,4 @@
-/* Classes */
-.firstItem {
-  margin-top: 5%;
-}
 
-.lastItem {
-  margin-bottom: 5%;
-}
 /* Elements */
 select {
   background-color: #EFEFEF;
@@ -49,7 +42,7 @@ textarea {
   min-width: 100%;
   max-width: 100%;
   min-height: 40%;
-  max-height: 40%
+  max-height: 40%;
   text-transform: uppercase;
 }
 
