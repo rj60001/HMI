@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="css/mediaStyles.css">
   </head>
   <body>
-    poo
     <script src="https://www.w3schools.com/lib/w3.js"></script>
     <script src="js/entryScript.js"></script>
     <script src="js/menuScript.js"></script>
@@ -127,5 +126,17 @@
           </div>
         </div>
       </div>
+      <script>
+function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("newsPage").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("GET", "demo_get.asp", true);
+  xhttp.send();
+}
+</script>
    </body>
 </html>
