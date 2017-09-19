@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="css/mediaStyles.css">
   </head>
   <body>
+    Version 0.1
     <script src="https://www.w3schools.com/lib/w3.js"></script>
     <script src="js/entryScript.js"></script>
     <script src="js/menuScript.js"></script>
