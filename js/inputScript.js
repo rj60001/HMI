@@ -18,3 +18,20 @@ function restoreValue(value){
     value.value = x;
   }
 }
+
+function checkPassword(obj){
+  match = true;
+  if(obj.name = "passwordConSU"){
+    if(obj.value != document.getElementById("passwordSU").value){
+      match = false;
+    }
+  }
+  if(obj.value.length < 6 || !match){
+    obj.style.borderColor = "#FF0000";
+    obj.style.color = "#FF0000";
+  }
+  else {
+    obj.style.borderColor = "#EFEFEF";
+    obj.style.color = "16A7E5";
+  }
+}

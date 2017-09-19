@@ -72,7 +72,7 @@
         </div>
       </div>
       <div id="newsPage" class="page">
-        <p name="title" class="title">Nomios</p>
+        <p name="title" class="tindexitle">Nomios</p>
         <div class="textCon">
           <p name="subTitle" class="subTitle"></p>
           <p class="text"></p>
@@ -100,43 +100,37 @@
             <br>
             <fieldset class="doubleForm">
               <div class="con">
-                <input id="firstName" type="text" value="Rosalind" info="Rosalind" onfocus="clearValue(this);" onblur="restoreValue(this);"/>
-                <input id="secondName" type="text" value="Franklin" info="Franklin" onfocus="clearValue(this);" onblur="restoreValue(this);"/>
-                <input id="emailAddress" type="email" value="fr@example.com" info="fr@example.com" onfocus="clearValue(this);" onblur="restoreValue(this);"/>
-                <input id="password" type="password" value="Password" info="Password" onfocus="clearValue(this);" onblur="restoreValue(this);"/>
-                <input id="passwordCon" type="password" value="Password" info="Password" onfocus="clearValue(this);" onblur="restoreValue(this);"/>
-                <select id="interest">
-                  <option value="NULL">Interest</option>
-                  <option value="Scientist">For science!</option>
-                  <option value="Company">For a company</option>
-                  <option value="Student">I'm a student :)</option>
-                  <option value="Curious">Just curious</option>
-                </select>
-                <div name="button" class="button"><p>Sign up</p></div>
+                <form action="index.php?page=account" method="post"></form>
+                  <input id="firstNameSU" type="text" value="Rosalind" info="Rosalind" onfocus="clearValue(this);" onblur="restoreValue(this);"/>
+                  <input id="secondNameSU" type="text" value="Franklin" info="Franklin" onfocus="clearValue(this);" onblur="restoreValue(this);"/>
+                  <input id="emailAddressSU" type="email" value="fr@example.com" info="fr@example.com" onfocus="clearValue(this);" onblur="restoreValue(this);"/>
+                  <input id="passwordSU" type="password" value="Password" info="Password" onfocus="clearValue(this);" onblur="restoreValue(this); checkPassword(this);"/>
+                  <input id="passwordConSU" type="password" value="Password" info="Password" onfocus="clearValue(this);" onblur="restoreValue(this); checkPassword(this);"/>
+                  <select id="interestSU">
+                    <option value="NULL">Interest</option>
+                    <option value="Scientist">For science!</option>
+                    <option value="Company">For a company</option>
+                    <option value="Student">I'm a student :)</option>
+                    <option value="Curious">Just curious</option>
+                  </select>
+                  <input type="submit" value="Sign up" class="button"/>
+                  <input name="submittedSU" type="hidden" value="TRUE"/>
+                </form>
                 </div>
                 </fieldset>
                 <fieldset class="doubleForm">
                   <div class="con">
-                    <input id="emailAddress" type="email" value="fr@example.com" info="fr@example.com" onfocus="clearValue(this);" onblur="restoreValue(this);"/>
-                    <input id="password" type="password" value="Password" info="Password" onfocus="clearValue(this);" onblur="restoreValue(this);"/>
-                    <div name="button" class="button"><p>Sign in</p></div>
+                    <form action="index.php?page=account" method="post">
+                      <input id="emailAddressSI" type="email" value="fr@example.com" info="fr@example.com" onfocus="clearValue(this);" onblur="restoreValue(this);"/>
+                      <input id="passwordSI" type="password" value="Password" info="Password" onfocus="clearValue(this);" onblur="restoreValue(this);"/>
+                      <input type="submit" value="Sign up" class="button"/>
+                      <input name="submittedSI" type="hidden" value="TRUE"/>
+                    </form>
                   </div>
                 </fieldset>
              </div>
           </div>
         </div>
       </div>
-      <script>
-function loadDoc() {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("newsPage").innerHTML = this.responseText;
-    }
-  };
-  xhttp.open("GET", "demo_get.asp", true);
-  xhttp.send();
-}
-</script>
    </body>
 </html>
