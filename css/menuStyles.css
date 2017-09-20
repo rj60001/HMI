@@ -15,14 +15,6 @@ hr {
   outline-color: #FEFEFE;
 }
 
-input {
-  cursor: pointer;
-}
-
-select {
-  cursor: pointer;
-}
-
 fieldset {
   border-color: #EFEFEF;
   border-width: thick;
@@ -142,6 +134,7 @@ fieldset {
   border-radius: 5px;
   border-color: #EFEFEF;
   border-style: solid;
+  box-sizing: border-box;
   text-align: center;
   min-width: 90%;
   max-width: 90%;
@@ -150,8 +143,8 @@ fieldset {
   color: #EFEFEF;
   vertical-align: bottom;
   box-sizing: border-box;
-  margin-left: auto;
-  margin-right: auto;
+  padding-left: 5%;
+  padding-right: 5%;
 
   p {
     height: 50%;

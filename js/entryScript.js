@@ -42,7 +42,7 @@ function setColorScheme(time){
     body.style.backgroundSize = "400% 400%";
     body.style.backgroundPosition = "0% 100%";
     body.style.color = "#FEFEFE";
-    
+
     objects = document.getElementsByName("title");
     for(i = 0; i < objects.length; i++){
       objects[i].style.color = "#FFB71C";
@@ -67,6 +67,11 @@ function setColorScheme(time){
       objects[i].style.borderColor = "#EFEFEF";
       objects[i].style.backgroundColor = "#EFEFEF";
     }
+    objects = document.getElementsByClassName("button");
+    for(i = 0; i < objects.length; i++){
+      objects[i].style.color = "#EFEFEF";
+      objects[i].style.backgroundColor = "rgba(0, 0, 0, 0)";
+    }
     objects = document.getElementsByTagName("textarea");
     for(i = 0; i < objects.length; i++){
       objects[i].style.color = "#16A7E5";
@@ -80,7 +85,7 @@ function setColorScheme(time){
       objects[i].style.backgroundColor = "#EFEFEF";
     }
 
-    css = ".button:hover { background-color: #EFEFEF; color: #16A7E5 !important; }";
+    css = ".button:hover { background-color: #EFEFEF !important; color: #16A7E5 !important; }";
     style = document.createElement("style");
     style.appendChild(document.createTextNode(css));
     document.getElementsByTagName("head")[0].appendChild(style);
@@ -112,6 +117,11 @@ function setColorScheme(time){
       objects[i].style.borderColor = "#999";
       objects[i].style.backgroundColor = "#999";
     }
+    objects = document.getElementsByClassName("button");
+    for(i = 0; i < objects.length; i++){
+      objects[i].style.color = "#999";
+      objects[i].style.backgroundColor = "rgba(0, 0, 0, 0)";
+    }
     objects = document.getElementsByTagName("textarea");
     for(i = 0; i < objects.length; i++){
       objects[i].style.color = "#444";
@@ -124,7 +134,7 @@ function setColorScheme(time){
       objects[i].style.borderColor = "#999";
       objects[i].style.backgroundColor = "#999";
     }
-    css = ".button:hover { background-color: #999; color: #444 !important; }";
+    css = ".button:hover { background-color: #999 !important; color: #444 !important; }";
     style = document.createElement("style");
     style.appendChild(document.createTextNode(css));
     document.getElementsByTagName("head")[0].appendChild(style);

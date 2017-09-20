@@ -1,3 +1,4 @@
+<?php $db = mysqli_connect("db697606360.db.1and1.com", "dbo697606360", "iN5@n1tY", "db697606360"); ?>
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -101,13 +102,13 @@
             <br>
             <fieldset class="doubleForm">
               <div class="con">
-                <form action="index.php?page=account" method="post"></form>
-                  <input id="firstNameSU" type="text" value="Rosalind" info="Rosalind" onfocus="clearValue(this);" onblur="restoreValue(this);"/>
-                  <input id="secondNameSU" type="text" value="Franklin" info="Franklin" onfocus="clearValue(this);" onblur="restoreValue(this);"/>
-                  <input id="emailAddressSU" type="email" value="fr@example.com" info="fr@example.com" onfocus="clearValue(this);" onblur="restoreValue(this);"/>
-                  <input id="passwordSU" type="password" value="Password" info="Password" onfocus="clearValue(this);" onblur="restoreValue(this); checkPassword(this);"/>
-                  <input id="passwordConSU" type="password" value="Password" info="Password" onfocus="clearValue(this);" onblur="restoreValue(this); checkPassword(this);"/>
-                  <select id="interestSU">
+                <form action="./index.php" method="post">
+                  <input name="firstNameSU" type="text" value="Rosalind" info="Rosalind" onfocus="clearValue(this);" onblur="restoreValue(this);"/>
+                  <input name="secondNameSU" type="text" value="Franklin" info="Franklin" onfocus="clearValue(this);" onblur="restoreValue(this);"/>
+                  <input name="emailAddressSU" type="email" value="fr@example.com" info="fr@example.com" onfocus="clearValue(this);" onblur="restoreValue(this);"/>
+                  <input name="passwordSU" type="password" value="Password" info="Password" onfocus="clearValue(this);" onblur="restoreValue(this); checkPassword(this);"/>
+                  <input name="passwordConSU" type="password" value="Password" info="Password" onfocus="clearValue(this);" onblur="restoreValue(this); checkPassword(this);"/>
+                  <select name="interestSU">
                     <option value="NULL">Interest</option>
                     <option value="Scientist">For science!</option>
                     <option value="Company">For a company</option>
@@ -121,10 +122,10 @@
                 </fieldset>
                 <fieldset class="doubleForm">
                   <div class="con">
-                    <form action="index.php?page=account" method="post">
+                    <form action="./index.php" method="post">
                       <input id="emailAddressSI" type="email" value="fr@example.com" info="fr@example.com" onfocus="clearValue(this);" onblur="restoreValue(this);"/>
                       <input id="passwordSI" type="password" value="Password" info="Password" onfocus="clearValue(this);" onblur="restoreValue(this);"/>
-                      <input type="submit" value="Sign up" class="button"/>
+                      <input type="submit" value="Sign in" class="button"/>
                       <input name="submittedSI" type="hidden" value="TRUE"/>
                     </form>
                   </div>
@@ -132,6 +133,22 @@
              </div>
           </div>
         </div>
+        <?php
+          $trim = array_map('trim', $_POST);
+          if(isset($trim["submittedSU"])){
+            $fn = $trim["firstNameSU"];
+            $sn = $trim["secondNameSU"];
+            $ea = $trim["emailAddressSU"];
+            $pw = $trim["passwordSU"];
+            $in = $trim["interestSU"];
+
+            $q = "INSERT INTO users VALUES(NULL, $fn, $sn, $ea, crypt($pw, 'iN5@n1tY'), $in)";
+            $r = mysqli_query($db, $q);
+            echo($popupTop);
+            #echo();
+            echo($popupBottom);
+          }
+        ?>
       </div>
    </body>
 </html>
