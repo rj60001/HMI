@@ -8,7 +8,9 @@ function init() {
   body = document.getElementsByTagName("BODY")[0];
   enterBtn.onclick = function(){
     menuPopUp(enterBtn, bgObjs, bgObjCon, menu, body);
+    document.cookie = "accessedBefore=TRUE;";
   }
+  closeBtnClick();
 }
 
 function randint(min, max) {
@@ -75,8 +77,6 @@ function setColorScheme(time){
     objects = document.getElementsByTagName("textarea");
     for(i = 0; i < objects.length; i++){
       objects[i].style.color = "#16A7E5";
-      objects[i].style.borderColor = "#EFEFEF";
-      objects[i].style.backgroundColor = "#EFEFEF";
     }
     objects = document.getElementsByTagName("select");
     for(i = 0; i < objects.length; i++){
@@ -125,8 +125,6 @@ function setColorScheme(time){
     objects = document.getElementsByTagName("textarea");
     for(i = 0; i < objects.length; i++){
       objects[i].style.color = "#444";
-      objects[i].style.borderColor = "#999";
-      objects[i].style.backgroundColor = "#999";
     }
     objects = document.getElementsByTagName("select");
     for(i = 0; i < objects.length; i++){
@@ -154,5 +152,22 @@ function dayChangeClick(){
     setColorScheme("day");
     btn.setAttribute("info", "day");
     btn.innerHTML = '<i class="material-icons">brightness_3</i>';
+  }
+}
+
+function closeBtnClick(){
+  crosses = document.getElementsByClassName("crossPU");
+  tabs = document.getElementsByClassName("boardConPU");
+  for(i=0;i < tabs.length; i++){
+    crosses[i].onclick = function(){
+      tabs[i].style.display = "none";
+    }
+  }
+}
+
+function reload(){
+  if(!window.location.hash){
+    window.location += "#loaded";
+    window.location.reload();
   }
 }

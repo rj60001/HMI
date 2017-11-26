@@ -25,6 +25,7 @@ fieldset {
   max-width: 100%;
   min-width: 100%;
   box-sizing: border-box;
+  font-family: "Comfortaa", cursive;
 }
 /*IDs*/
 #mainCon {
@@ -64,6 +65,10 @@ fieldset {
 
 #homePage {
   opacity: 1;
+}
+
+.postBtn {
+  display: none;
 }
 /*Classes*/
 .menuRule {
@@ -118,51 +123,4 @@ fieldset {
 
 .material-icons {
   cursor: pointer;
-}
-
-.doubleForm {
-  min-width: 49%;
-  max-width: 49%;
-  display: inline;
-  height: 75%;
-  overflow-y: hidden;
-}
-
-.button {
-  background-color: rgba(0, 0, 0, 0);
-  border-width: thick;
-  border-radius: 5px;
-  border-color: #EFEFEF;
-  border-style: solid;
-  box-sizing: border-box;
-  text-align: center;
-  min-width: 90%;
-  max-width: 90%;
-  min-height: 15%;
-  max-height: 15%;
-  color: #EFEFEF;
-  vertical-align: bottom;
-  box-sizing: border-box;
-  padding-left: 5%;
-  padding-right: 5%;
-
-  p {
-    height: 50%;
-    transform: translateY(-50%);
-  }
-}
-
-.button:hover {
-  background-color: #EFEFEF;
-  color: #16A7E5;
-  cursor: pointer;
-}
-
-.con {
-  min-width: 100%;
-  min-height: 100%;
-  display: block;
-  position: relative;
-  top: 10%;
-  /* Centralise */
 }

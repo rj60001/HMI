@@ -1,5 +1,19 @@
-<?php $db = mysqli_connect("db697606360.db.1and1.com", "dbo697606360", "iN5@n1tY", "db697606360"); ?>
 <html>
+  <?php
+    $db = mysqli_connect("localhost", "root", "", "hmi");
+    $uid = "";
+    $userRow = [];
+    if(isset($_COOKIE["user"])){
+      $uid = $_COOKIE["user"];
+      $userRow = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM users WHERE uid=".$uid));
+    }
+    else {
+      echo('<style>
+        #forumBtn, #toolBtn {
+          cursor: not-allowed;
+        }</style>');
+    }
+  ?>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Nomios</title>
@@ -9,14 +23,25 @@
     <link rel="stylesheet" href="css/menuStyles.css">
     <link rel="stylesheet" href="css/inputStyles.css">
     <link rel="stylesheet" href="css/mediaStyles.css">
+    <link rel="stylesheet" href="css/popupStyles.css">
+    <link rel="stylesheet" href="css/forumStyles.css">
   </head>
   <body>
-    Version 0.1
     <script src="https://www.w3schools.com/lib/w3.js"></script>
     <script src="js/entryScript.js"></script>
     <script src="js/menuScript.js"></script>
     <script src="js/inputScript.js"></script>
     <!-- Above are all relevant scripts -->
+    <?php
+    if(isset($_COOKIE["accessedBefore"])){
+      echo('<style>
+        #bgObjCon, #enterBtnCon {
+          display: none;
+        }</style>
+      ');
+    }
+    ?>
+    <script>window.onload = init;</script>
     <div id="dayChangeBtn" info="day" onclick="dayChangeClick();"><i class="material-icons">brightness_3</i></div>
     <div id="enterBtnCon"><h1 id="enterBtn">A</h1></div>
     <div id="bgObjCon">
@@ -47,10 +72,12 @@
         <p onclick="menuBtnClick('account');"><i class="material-icons">person</i></p>
         <hr class="menuRule">
         <p onclick="menuBtnClick('home');"><i class="material-icons">home</i></p>
-        <p onclick="menuBtnClick('tool');"><i class="material-icons" onclick="menuBtnClick('tool');">build</i></p>
+        <p onclick="menuBtnClick('tool');"><i id="toolBtn" class="material-icons" onclick="menuBtnClick('tool');">build</i></p>
         <p onclick="menuBtnClick('news');"><i class="material-icons">announcement</i></p>
         <p onclick="menuBtnClick('about');"><i class="material-icons">help</i></p>
-        <p onclick="menuBtnClick('forum');"><i class="material-icons">subject</i></p>
+        <p  onclick="menuBtnClick('forum');"><i id="forumBtn" class="material-icons">subject</i></p>
+        <hr class="menuRule postBtn">
+        <p id="forumPostMenuBtn" class="postBtn" onclick="displayPU('postingPU');"><i class="material-icons">create</i></p>
       </div>
       <div id="homePage" class="page">
         <p name="title" class="title">Nomios</p>
@@ -63,92 +90,116 @@
       <div id="toolPage" class="page">
         <p name="title" class="title">Nomios</p>
         <div class="textCon">
-          <p name="subTitle" class="subTitle">TOOL</p>
-          <p class="text">This is the main tool page. Here you can add or pull data from the database on any DNA sequence, by completing the form that follows:</p>
-          <br>
-          <fieldset>
-            <legend> DNA Sequence </legend>
-            <textarea id="dnaSeqence" onkeypress="dnaInputCheck(this);"></textarea>
-          </fieldset>
-          </p>
+          <?php
+            if(isset($_COOKIE["user"])){
+              echo('<p name="subTitle" class="subTitle">TOOL</p>
+                    <p class="text">This is the main tool page. Here you can add or pull data from the database on any DNA sequence, by completing the form that follows:</p>
+                    <br>
+                    <br>
+                    <form action="index.php?page=tool" method="post">
+                      <select name="prevDiseasesT pushDown extender">
+                        <option name="NULL">Submitted diseases</option>');
+              $q = "SELECT * FROM diseases";
+              $r = mysqli_query($db, $q);
+              while($row = mysqli_fetch_array($r)){
+                echo("<option value='".$row[0]."'>".$row[1]."</option>");
+              }
+              echo('  </select>
+                      <fieldset class="pushDown">
+                        <legend> DNA Sequence </legend>
+                        <textarea name="dnaSequenceT" onkeypress="dnaInputCheck(this);"></textarea>
+                      </fieldset>
+                      <fieldset class="pushDown">
+                        <legend> Histone Sequence </legend>
+                        <textarea name="histoneSequenceT" onkeypress="dnaInputCheck(this);"></textarea>');
+              $q = "SELECT hmid, name FROM histoneMods";
+              $r = mysqli_query($db, $q);
+              while($row = mysqli_fetch_array($r)){
+                echo('<div class="button histoneModBlock">'.$row["name"].'</div>');
+              }
+              echo('  </fieldset>
+                      <input name="submitT" type="submit" value="Query" class="button extender"/>
+                      <input name="submittedT" type="hidden" value="TRUE"/>
+                    </form>');
+            }
+            else {
+              echo('Sign in to see this content.');
+            }
+          ?>
         </div>
       </div>
       <div id="newsPage" class="page">
-        <p name="title" class="tindexitle">Nomios</p>
+        <p name="title" class="Title">Nomios</p>
         <div class="textCon">
-          <p name="subTitle" class="subTitle"></p>
+          <p name="subTitle" class="subTitle">NEWS</p>
           <p class="text"></p>
         </div>
       </div>
       <div id="aboutPage" class="page">
         <p name="title" class="title">Nomios</p>
         <div class="textCon">
-          <p name="subTitle" class="subTitle"></p>
+          <p name="subTitle" class="subTitle">ABOUT</p>
           <p class="text"></p>
         </div>
       </div>
       <div id="forumPage" class="page">
         <p name="title" class="title">Nomios</p>
         <div class="textCon">
-          <p name="subTitle" class="subTitle"></p>
-          <p class="text"></p>
+          <p name="subTitle" class="subTitle">FORUM</p>
+          <div id="forumPageContent">
+            Please sign in to view this content.
+            </div>
+          </div>
+        </div>
+        <div id="forumSingleViewPage" class="page">
+        <p name="title" class="title">Nomios</p>
+        <div class="textCon">
+          <p name="subTitle" class="subTitle">FORUM</p>
+          <div id="forumSingleViewPageContent">
+            <?php
+              if(isset($_GET["thread"]) && isset($_COOKIE["user"])){
+		            echo("<script>menuBtnClick('forumSingleView');</script>");
+		            $tid = $_GET["thread"];
+		            $r = mysqli_query($db, "SELECT subject, message, firstName FROM thread INNER JOIN users ON thread.uid = users.uid WHERE tid=".$tid);
+		            $rowT = mysqli_fetch_array($r);
+		            echo("<br><br><div class='forumObj OP'><div class='forumCon'><b>$rowT[0]</b><br>$rowT[1]<br><em class='forumNameTag'>$rowT[2]</em></div></div>");
+		            $r = mysqli_query($db, "SELECT message, firstName FROM message INNER JOIN users ON message.uid = users.uid WHERE tid=".$tid);
+		            while($row = mysqli_fetch_array($r)){
+			            echo("<br><div class='forumObj'><div class='forumCon'>$row[0]<br><em class='forumNameTag'>$row[1]</em></div></div>");
+		            }
+	            }
+              else {
+                echo('Sign in to see this content.');
+              }
+            ?>
+            </div>
+          </div>
         </div>
       </div>
       <div id="accountPage" class="page">
         <p name="title" class="title">Nomios</p>
         <div class="textCon">
           <p name="subTitle" class="subTitle">ACCOUNT</p>
-          <div>
-            <br>
-            <fieldset class="doubleForm">
-              <div class="con">
-                <form action="./index.php" method="post">
-                  <input name="firstNameSU" type="text" value="Rosalind" info="Rosalind" onfocus="clearValue(this);" onblur="restoreValue(this);"/>
-                  <input name="secondNameSU" type="text" value="Franklin" info="Franklin" onfocus="clearValue(this);" onblur="restoreValue(this);"/>
-                  <input name="emailAddressSU" type="email" value="fr@example.com" info="fr@example.com" onfocus="clearValue(this);" onblur="restoreValue(this);"/>
-                  <input name="passwordSU" type="password" value="Password" info="Password" onfocus="clearValue(this);" onblur="restoreValue(this); checkPassword(this);"/>
-                  <input name="passwordConSU" type="password" value="Password" info="Password" onfocus="clearValue(this);" onblur="restoreValue(this); checkPassword(this);"/>
-                  <select name="interestSU">
-                    <option value="NULL">Interest</option>
-                    <option value="Scientist">For science!</option>
-                    <option value="Company">For a company</option>
-                    <option value="Student">I'm a student :)</option>
-                    <option value="Curious">Just curious</option>
-                  </select>
-                  <input type="submit" value="Sign up" class="button"/>
-                  <input name="submittedSU" type="hidden" value="TRUE"/>
-                </form>
-                </div>
-                </fieldset>
-                <fieldset class="doubleForm">
-                  <div class="con">
-                    <form action="./index.php" method="post">
-                      <input id="emailAddressSI" type="email" value="fr@example.com" info="fr@example.com" onfocus="clearValue(this);" onblur="restoreValue(this);"/>
-                      <input id="passwordSI" type="password" value="Password" info="Password" onfocus="clearValue(this);" onblur="restoreValue(this);"/>
-                      <input type="submit" value="Sign in" class="button"/>
-                      <input name="submittedSI" type="hidden" value="TRUE"/>
-                    </form>
-                  </div>
-                </fieldset>
-             </div>
+          <div id="accountPageContent">
           </div>
         </div>
-        <?php
-          $trim = array_map('trim', $_POST);
-          if(isset($trim["submittedSU"])){
-            $fn = $trim["firstNameSU"];
-            $sn = $trim["secondNameSU"];
-            $ea = $trim["emailAddressSU"];
-            $pw = $trim["passwordSU"];
-            $in = $trim["interestSU"];
-
-            $q = "INSERT INTO users VALUES(NULL, $fn, $sn, $ea, crypt($pw, 'iN5@n1tY'), $in)";
-            $r = mysqli_query($db, $q);
-            echo($popupTop);
-            #echo();
-            echo($popupBottom);
+      </div>
+      <?php
+        $popupTop = '<div class="boardConPU"><div class="mainConPU"><div class="textConPU"><p class="titlePU">Notification<span class="crossPU">X</span></p>';
+        $altPopupTop = substr($popupTop, 0, 23).' style="display: none" id="postingPU">'.substr($popupTop, 24);
+        $popupBottom = '</div></div></div>';
+        include("php/onload/onloadLOAD.php");
+        include("php/submission/submissionLOAD.php");
+        #Tags that need to be loaded on start bu require PHP.
+        if(isset($_COOKIE["user"])){
+          if(isset($_GET["thread"])){
+              echo($altPopupTop.'<br>Post A Reply<br><br><form action="index.php?page=forum&thread='.$_GET["thread"].'" method="post"><textarea name="messagePM" class="textareaPU" info="Message" onfocus="clearValue(this);" onblur="restoreValue(this);">Message</textarea><br><br><input name="submittedPM" type="submit" class="button btnPU"/></form>'.$popupBottom);
           }
-        ?>
+          else {
+              echo($altPopupTop.'<br>Start A Thread<br><br><form action="index.php?page=forum" method="post"><textarea class="textareaPU subjectTextareaPU" name="subjectPT" info="Subject" onfocus="clearValue(this);" onblur="restoreValue(this);">Subject</textarea><br><br><textarea name="messagePT" class="textareaPU" info="Message" onfocus="clearValue(this);" onblur="restoreValue(this);">Message</textarea><br><br><input name="submittedPT" type="submit" class="button btnPU"/></form>'.$popupBottom);
+          }
+        }
+      ?>
       </div>
    </body>
 </html>
