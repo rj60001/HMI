@@ -1,5 +1,4 @@
 <html>
-poop
   <?php
     $db = mysqli_connect("localhost", "root", "", "hmi");
     $uid = "";
