@@ -24,7 +24,7 @@
       $r = mysqli_query($db, $q);
       mail($ea, "Nomios - Please Confirm Your Account", "Confirm your account by clicking http://www.netballmanager.co.uk/hmi/index.php?page=account&email=$ea&hash=$hash", "FROM: reiss1999@gmail.com");
       echo($popupTop);
-      echo("<p>Go take a look at your inbox for a confirmation before you sign in.</p>");
+      echo("<p>Take a look at your inbox for a confirmation before you sign in.</p>");
       echo($popupBottom);
     }
     else {
