@@ -97,6 +97,10 @@
                     <br>
                     <br>
                     <form action="index.php?page=tool" method="post">
+                      <input id="searchInput" name="searchInput" type="text" value="Search" info="Search" onfocus="clearValue(this);" onblur="restoreValue(this);"/>
+                      <input name="searchSubmitted" type="hidden" value="TRUE"/>
+                    </form>
+                    <form action="index.php?page=tool" method="post">
                       <select name="prevDiseasesT pushDown extender">
                         <option name="NULL">Submitted diseases</option>');
               $q = "SELECT * FROM diseases";

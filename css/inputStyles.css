@@ -1,4 +1,13 @@
-
+/*IDs*/
+#searchInput {
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 7%;
+  max-height: 7%;
+  font-size: 110%;
+  margin-right: 0%;
+  margin-left: 0%;
+}
 /* Elements */
 select {
   background-color: #EFEFEF;
@@ -55,7 +64,7 @@ textarea::-webkit-scrollbar {
 textarea::-webkit-scrollbar-thumb {
   background-color: #D1C1BC;
 }
-
+/*Classes*/
 .info {
   font-size: 80%;
   width: 90%;
@@ -91,7 +100,7 @@ textarea::-webkit-scrollbar-thumb {
   font-size: 80%;
   padding-left: 5%;
   padding-right: 5%;
-  
+
   p {
     display: block;
     height: 50%;
@@ -123,7 +132,7 @@ textarea::-webkit-scrollbar-thumb {
   padding-left: 0;
   padding-right: 0;
   font-size: 100%;
-} 
+}
 
 .con {
   min-width: 100%;
