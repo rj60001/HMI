@@ -138,21 +138,22 @@
           <p name="subTitle" class="subTitle">FORUM</p>
           <div id="forumSingleViewPageContent">
             <?php
-              function convert($m) {
-                $chars = ['[*]', '[/*]', '[**]', '[/**]'];
-                $replaceChars = ['<em>', '</em>', '<b>', '</b>'];
+              function convert($m) { //Converts artificial mark-up to HTML.
+                $chars = ['[i]', '[/i]', '[b]', '[/b]', '[l]', '[/l]'];
+                $replaceChars = ['<em>', '</em>', '<b>', '</b>', '<ul>', '</ul>'];
                 for($i=0;$i<count($chars);$i++){
                   $m = str_replace($chars[$i], $replaceChars[$i], $m);
                 }
                 return $m;
               }
+
               if(isset($_GET["thread"]) && isset($_COOKIE["user"])){
 		            echo("<script>menuBtnClick('forumSingleView');</script>");
 		            $tid = $_GET["thread"];
 		            $r = mysqli_query($db, "SELECT subject, message, firstName FROM thread INNER JOIN users ON thread.uid = users.uid WHERE tid=".$tid);
 		            $rowT = mysqli_fetch_array($r);
-                $m = convert($rowT[0]);
-		            echo("<br><br><div class='forumObj OP'><div class='forumCon'><b>$m</b><br>$rowT[1]<br><em class='forumNameTag'>$rowT[2]</em></div></div>");
+                $m = convert($rowT[1]);
+		            echo("<br><br><div class='forumObj OP'><div class='forumCon'><b>$rowT[0]</b><br>$m<br><em class='forumNameTag'>$rowT[2]</em></div></div>");
 		            $r = mysqli_query($db, "SELECT message, firstName FROM message INNER JOIN users ON message.uid = users.uid WHERE tid=".$tid);
 		            while($row = mysqli_fetch_array($r)){
                   $m = convert($row[0]);
