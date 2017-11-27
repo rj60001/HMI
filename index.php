@@ -32,16 +32,6 @@
     <script src="js/menuScript.js"></script>
     <script src="js/inputScript.js"></script>
     <!-- Above are all relevant scripts -->
-    <?php
-    if(isset($_COOKIE["accessedBefore"])){
-      echo('<style>
-        #bgObjCon, #enterBtnCon {
-          display: none;
-        }</style>
-      ');
-    }
-    ?>
-    <script>window.onload = init;</script>
     <div id="dayChangeBtn" info="day" onclick="dayChangeClick();"><i class="material-icons">brightness_3</i></div>
     <div id="enterBtnCon"><h1 id="enterBtn">A</h1></div>
     <div id="bgObjCon">

@@ -1,7 +1,7 @@
 function menuBtnClick(value) {
   document.getElementById("homePage").style.opacity = '0';
   values = document.getElementsByClassName("postBtn");
-  if((value === "forum" || value === "forumSingleView") && document.cookie.indexOf("user")){
+  if((value === "forum" || value === "forumSingleView") && document.cookie.substring(document.cookie.indexOf("user"), document.cookie.indexOf("user")+4) === "user"){
     for(i=0;i < values.length; i++){
       values[i].style.display = "block";
     }
@@ -14,6 +14,9 @@ function menuBtnClick(value) {
 
   if(value === "forum" && window.location.href.indexOf("thread") != -1){
     window.location.href = "index.php?page=forum";
+  }
+  if((value === "forum" || value === "tool") && document.cookie.substring(document.cookie.indexOf("user"), document.cookie.indexOf("user")+4) !== "user"){
+    return 0;
   }
   value += "Page"
   page = document.getElementById(value).style;

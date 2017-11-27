@@ -6,6 +6,10 @@ function init() {
   bgObjCon = document.getElementById("bgObjCon");
   menu = document.getElementById("mainCon");
   body = document.getElementsByTagName("BODY")[0];
+  if(document.cookie.substring(document.cookie.indexOf("accessedBefore=TRUE"), document.cookie.indexOf("accessedBefore=TRUE")+19) === "accessedBefore=TRUE"){
+    document.getElementsByTagName("HEAD")[0].innerHTML += '<style> #bgObjCon, #enterBtnCon {display: none;}</style>';
+    menuPopUp(enterBtn, bgObjs, bgObjCon, menu, body);
+  }
   enterBtn.onclick = function(){
     menuPopUp(enterBtn, bgObjs, bgObjCon, menu, body);
     document.cookie = "accessedBefore=TRUE;";
@@ -158,9 +162,11 @@ function dayChangeClick(){
 function closeBtnClick(){
   crosses = document.getElementsByClassName("crossPU");
   tabs = document.getElementsByClassName("boardConPU");
-  for(i=0;i < tabs.length; i++){
+  for(i=0;i < crosses.length; i++){
     crosses[i].onclick = function(){
-      tabs[i].style.display = "none";
+      for(j=0;j < tabs.length; j++){
+        tabs[j].style.display = "none";
+      }
     }
   }
 }
