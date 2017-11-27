@@ -8,10 +8,9 @@
       $userRow = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM users WHERE uid=".$uid));
     }
     else {
-      echo('<style>
-        #forumBtn, #toolBtn {
-          cursor: not-allowed;
-        }</style>');
+      echo('<style>#forumBtn, #toolBtn {
+        cursor: not-allowed;
+      }</style>');
     }
   ?>
   <head>
@@ -25,6 +24,16 @@
     <link rel="stylesheet" href="css/mediaStyles.css">
     <link rel="stylesheet" href="css/popupStyles.css">
     <link rel="stylesheet" href="css/forumStyles.css">
+    <?php
+      if(isset($_COOKIE["accessedBefore"])){ //Disables the entry screen before init() is triggered so that it does not display.
+        echo('<style> #bgObjCon, #enterBtnCon {
+          display: none;
+        }
+        #mainCon {
+          animation-duration: 1s;
+        }</style>');
+      }
+    ?>
   </head>
   <body>
     <script src="https://www.w3schools.com/lib/w3.js"></script>
@@ -116,9 +125,6 @@
                       <input name="submittedT" type="hidden" value="TRUE"/>
                     </form>');
             }
-            else {
-              echo('Sign in to see this content.');
-            }
           ?>
         </div>
       </div>
@@ -162,9 +168,6 @@
 			            echo("<br><div class='forumObj'><div class='forumCon'>$row[0]<br><em class='forumNameTag'>$row[1]</em></div></div>");
 		            }
 	            }
-              else {
-                echo('Sign in to see this content.');
-              }
             ?>
             </div>
           </div>

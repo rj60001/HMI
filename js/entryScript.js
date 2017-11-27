@@ -5,13 +5,11 @@ function init() {
   bgObjs = document.getElementsByName("bgObj");
   bgObjCon = document.getElementById("bgObjCon");
   menu = document.getElementById("mainCon");
-  body = document.getElementsByTagName("BODY")[0];
   if(document.cookie.substring(document.cookie.indexOf("accessedBefore=TRUE"), document.cookie.indexOf("accessedBefore=TRUE")+19) === "accessedBefore=TRUE"){
-    document.getElementsByTagName("HEAD")[0].innerHTML += '<style> #bgObjCon, #enterBtnCon {display: none;}</style>';
-    menuPopUp(enterBtn, bgObjs, bgObjCon, menu, body);
+    menuPopUp(enterBtn, bgObjs, bgObjCon, menu);
   }
   enterBtn.onclick = function(){
-    menuPopUp(enterBtn, bgObjs, bgObjCon, menu, body);
+    menuPopUp(enterBtn, bgObjs, bgObjCon, menu);
     document.cookie = "accessedBefore=TRUE;";
   }
   closeBtnClick();
@@ -21,7 +19,7 @@ function randint(min, max) {
   return Math.floor(Math.random() * ((max-min) +1)) + min;
 }
 
-function menuPopUp(enterBtn, bgObjs, bgObjCon, menu, body) {
+function menuPopUp(enterBtn, bgObjs, bgObjCon, menu) {
   enterBtn.style.animationName = "flyAway";
   enterBtn.style.animationDuration = "7s";
   enterBtn.style.animationIterationCount = "1";
