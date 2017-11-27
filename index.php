@@ -99,28 +99,10 @@
                       <input id="searchInput" name="searchInput" type="text" value="Search" info="Search" onfocus="clearValue(this);" onblur="restoreValue(this);"/>
                       <input name="searchSubmitted" type="hidden" value="TRUE"/>
                     </form>
-                    <form action="index.php?page=tool" method="post">
-                      <select name="prevDiseasesT pushDown extender">
-                        <option name="NULL">Submitted diseases</option>');
-              $q = "SELECT * FROM diseases";
-              $r = mysqli_query($db, $q);
-              while($row = mysqli_fetch_array($r)){
-                echo("<option value='".$row[0]."'>".$row[1]."</option>");
-              }
-              echo('  </select>
-                      <fieldset class="pushDown">
-                        <legend> DNA Sequence </legend>
-                        <textarea name="dnaSequenceT" onkeypress="dnaInputCheck(this);"></textarea>
-                      </fieldset>
-                      <fieldset class="pushDown">
-                        <legend> Histone Sequence </legend>
-                        <textarea name="histoneSequenceT" onkeypress="dnaInputCheck(this);"></textarea>');
-              $q = "SELECT hmid, name FROM histoneMods";
-              $r = mysqli_query($db, $q);
-              while($row = mysqli_fetch_array($r)){
-                echo('<div class="button histoneModBlock">'.$row["name"].'</div>');
-              }
-              echo('  </fieldset>
+                    <hr>
+                    <br>
+                    <form>
+                      <p class="text">Here you can create your own DNA sequence and histone modification sequence. Note that the tool is still in beta - there is <b>no</b> histone code checking.</p>
                       <input name="submitT" type="submit" value="Query" class="button extender"/>
                       <input name="submittedT" type="hidden" value="TRUE"/>
                     </form>');
@@ -147,7 +129,6 @@
         <div class="textCon">
           <p name="subTitle" class="subTitle">FORUM</p>
           <div id="forumPageContent">
-            Please sign in to view this content.
             </div>
           </div>
         </div>
@@ -157,15 +138,25 @@
           <p name="subTitle" class="subTitle">FORUM</p>
           <div id="forumSingleViewPageContent">
             <?php
+              function convert($m) {
+                $chars = ['[*]', '[/*]', '[**]', '[/**]'];
+                $replaceChars = ['<em>', '</em>', '<b>', '</b>'];
+                for($i=0;$i<count($chars);$i++){
+                  $m = str_replace($chars[$i], $replaceChars[$i], $m);
+                }
+                return $m;
+              }
               if(isset($_GET["thread"]) && isset($_COOKIE["user"])){
 		            echo("<script>menuBtnClick('forumSingleView');</script>");
 		            $tid = $_GET["thread"];
 		            $r = mysqli_query($db, "SELECT subject, message, firstName FROM thread INNER JOIN users ON thread.uid = users.uid WHERE tid=".$tid);
 		            $rowT = mysqli_fetch_array($r);
-		            echo("<br><br><div class='forumObj OP'><div class='forumCon'><b>$rowT[0]</b><br>$rowT[1]<br><em class='forumNameTag'>$rowT[2]</em></div></div>");
+                $m = convert($rowT[0]);
+		            echo("<br><br><div class='forumObj OP'><div class='forumCon'><b>$m</b><br>$rowT[1]<br><em class='forumNameTag'>$rowT[2]</em></div></div>");
 		            $r = mysqli_query($db, "SELECT message, firstName FROM message INNER JOIN users ON message.uid = users.uid WHERE tid=".$tid);
 		            while($row = mysqli_fetch_array($r)){
-			            echo("<br><div class='forumObj'><div class='forumCon'>$row[0]<br><em class='forumNameTag'>$row[1]</em></div></div>");
+                  $m = convert($row[0]);
+			            echo("<br><div class='forumObj'><div class='forumCon'>$m<br><em class='forumNameTag'>$row[1]</em></div></div>");
 		            }
 	            }
             ?>

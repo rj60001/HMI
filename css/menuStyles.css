@@ -11,8 +11,9 @@ p {
 }
 
 hr {
-  outline-width: thin;
-  outline-color: #FEFEFE;
+  border-width: thin;
+  border-color: #FEFEFE;
+  border-style: solid;
 }
 
 fieldset {
@@ -72,6 +73,7 @@ fieldset {
 }
 /*Classes*/
 .menuRule {
+  border-color: #D1C1BC;
   width: 70%;
 }
 

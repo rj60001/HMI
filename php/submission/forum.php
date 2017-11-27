@@ -30,7 +30,7 @@
 
     if(empty($errors)){
       $r = mysqli_query($db, "INSERT INTO message VALUES(0, $tid, $uid, '$m')");
-      echo('<script>reload();</script>');
+      echo('<script>window.location.href = "index.php?page=forum&thread='.$tid.'";</script>');
     }
     else {
       echo($popupTop);

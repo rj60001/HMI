@@ -116,8 +116,14 @@ div {
 }
 
 .extender {
-  min-width: 100%;
-  font-size: 120%;
+  min-width: 100% !important;
+  max-width: 100% !important;
+  min-height: 7% !important;
+  max-height: 7% !important;
+  padding-left: 0% !important;
+  padding-right: 0% !important;
+  margin: 0% !important; 
+  font-size: 120% !important;
 }
 
 .strip {
