@@ -41,7 +41,7 @@
     <script src="js/menuScript.js"></script>
     <script src="js/inputScript.js"></script>
     <!-- Above are all relevant scripts -->
-    <div id="dayChangeBtn" info="day" onclick="dayChangeClick();"><i class="material-icons">brightness_3</i></div>
+    <div id="dayChangeBtn" onclick="dayChangeClick();"><i class="material-icons">brightness_3</i></div>
     <div id="enterBtnCon"><h1 id="enterBtn">A</h1></div>
     <div id="bgObjCon">
       <div name="bgObj" class="bgObjBig" style="position: absolute; top: 69%; left: 10%; animation-fill-mode: backwards;">A</div>
@@ -139,8 +139,8 @@
           <div id="forumSingleViewPageContent">
             <?php
               function convert($m) { //Converts artificial mark-up to HTML.
-                $chars = ['[i]', '[/i]', '[b]', '[/b]', '[l]', '[/l]'];
-                $replaceChars = ['<em>', '</em>', '<b>', '</b>', '<ul>', '</ul>'];
+                $chars = ['[i]', '[/i]', '[b]', '[/b]', '[l]', '[/l]', '[li]', '[/li]'];
+                $replaceChars = ['<em>', '</em>', '<b>', '</b>', '<ul>', '</ul>', '<li>', '</li>'];
                 for($i=0;$i<count($chars);$i++){
                   $m = str_replace($chars[$i], $replaceChars[$i], $m);
                 }
@@ -182,10 +182,10 @@
         #Tags that need to be loaded on start bu require PHP.
         if(isset($_COOKIE["user"])){
           if(isset($_GET["thread"])){
-              echo($altPopupTop.'<br>Post A Reply<br><br><form action="index.php?page=forum&thread='.$_GET["thread"].'" method="post"><textarea name="messagePM" class="textareaPU" info="Message" onfocus="clearValue(this);" onblur="restoreValue(this);">Message</textarea><br><br><input name="submittedPM" type="submit" class="button btnPU"/></form>'.$popupBottom);
+              echo($altPopupTop.'<br>Post A Reply<br><br><form action="index.php?page=forum&thread='.$_GET["thread"].'" method="post"><textarea name="messagePM" class="textareaPU PUInput" info="Message" onfocus="clearValue(this);" onblur="restoreValue(this);">Message</textarea><br><br><input name="submittedPM" type="submit" class="button btnPU PUInput"/></form>'.$popupBottom);
           }
           else {
-              echo($altPopupTop.'<br>Start A Thread<br><br><form action="index.php?page=forum" method="post"><textarea class="textareaPU subjectTextareaPU" name="subjectPT" info="Subject" onfocus="clearValue(this);" onblur="restoreValue(this);">Subject</textarea><br><br><textarea name="messagePT" class="textareaPU" info="Message" onfocus="clearValue(this);" onblur="restoreValue(this);">Message</textarea><br><br><input name="submittedPT" type="submit" class="button btnPU"/></form>'.$popupBottom);
+              echo($altPopupTop.'<br>Start A Thread<br><br><form action="index.php?page=forum" method="post"><textarea class="textareaPU subjectTextareaPU PUInput" name="subjectPT" info="Subject" onfocus="clearValue(this);" onblur="restoreValue(this);">Subject</textarea><br><br><textarea name="messagePT" class="textareaPU PUInput" info="Message" onfocus="clearValue(this);" onblur="restoreValue(this);">Message</textarea><br><br><input name="submittedPT" type="submit" class="button btnPU extender"/></form>'.$popupBottom);
           }
         }
       ?>

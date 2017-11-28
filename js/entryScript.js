@@ -8,10 +8,16 @@ function init() {
   if(document.cookie.substring(document.cookie.indexOf("accessedBefore=TRUE"), document.cookie.indexOf("accessedBefore=TRUE")+19) === "accessedBefore=TRUE"){
     menuPopUp(enterBtn, bgObjs, bgObjCon, menu);
   }
+  else {
+    document.cookie = "colorMode=day;";
+  }
   enterBtn.onclick = function(){
     menuPopUp(enterBtn, bgObjs, bgObjCon, menu);
     document.cookie = "accessedBefore=TRUE;";
   }
+  btn = document.getElementById("dayChangeBtn");
+  body = document.getElementsByTagName("BODY")[0];
+  loadColorScheme(body, btn);
   closeBtnClick();
 }
 
@@ -40,7 +46,7 @@ function menuPopUp(enterBtn, bgObjs, bgObjCon, menu) {
   }, 3000);
 }
 
-function setColorScheme(time){
+function setColorScheme(time, body){
   if(time === "day") {
     body.style.background = "linear-gradient(45deg, #17EA29, #16A7E5, #17EA29)";
     body.style.backgroundSize = "400% 400%";
@@ -141,20 +147,27 @@ function setColorScheme(time){
   }
 }
 
+function loadColorScheme(body, btn){
+  if(document.cookie.substring(document.cookie.indexOf("colorMode"), document.cookie.indexOf("colorMode")+11) === "colorMode=n") {
+    setColorScheme("night", body);
+    btn.innerHTML = '<i class="material-icons">brightness_1</i>';
+  }
+  else if(document.cookie.substring(document.cookie.indexOf("colorMode"), document.cookie.indexOf("colorMode")+11) === "colorMode=d") {
+    setColorScheme("day", body);
+    btn.innerHTML = '<i class="material-icons">brightness_3</i>';
+  }
+}
 
 function dayChangeClick(){
   body = document.getElementsByTagName("body")[0];
   btn = document.getElementById("dayChangeBtn");
-  if(btn.getAttribute("info") === "day") {
-    setColorScheme("night");
-    btn.setAttribute("info", "night");
-    btn.innerHTML = '<i class="material-icons">brightness_1</i>';
+  if(document.cookie.substring(document.cookie.indexOf("colorMode"), document.cookie.indexOf("colorMode")+11) === "colorMode=n"){
+    document.cookie = "colorMode=day;";
   }
-  else if(btn.getAttribute("info") !== "day") {
-    setColorScheme("day");
-    btn.setAttribute("info", "day");
-    btn.innerHTML = '<i class="material-icons">brightness_3</i>';
+  else {
+    document.cookie = "colorMode=night;";
   }
+  loadColorScheme(body, btn);
 }
 
 function closeBtnClick(){

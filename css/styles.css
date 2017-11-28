@@ -122,15 +122,13 @@ div {
   max-height: 7% !important;
   padding-left: 0% !important;
   padding-right: 0% !important;
-  margin: 0% !important; 
+  margin: 0% !important;
   font-size: 120% !important;
 }
 
 .strip {
   min-width: 100%;
   max-width: 100%;
-  min-height: 7%;
-  max-height: 7%;
   background-color: #EFEFEF;
   border-color: #EFEFEF;
   border-radius: 5px;
@@ -139,11 +137,4 @@ div {
   font-family: "Comfortaa", cursive;
   font-size: 150%;
   cursor: pointer;
-}
-
-.stripCon {
-  max-width: 90%;
-  min-width: 90%;
-  padding-left: 5%;
-  padding-right: 5%;
 }
