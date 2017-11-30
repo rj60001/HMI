@@ -3,9 +3,13 @@
     $db = mysqli_connect("localhost", "root", "", "hmi");
     $uid = "";
     $userRow = [];
+    $admin = FALSE;
     if(isset($_COOKIE["user"])){
       $uid = $_COOKIE["user"];
       $userRow = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM users WHERE uid=".$uid));
+      if(mysqli_fetch_array(mysqli_query($db, "SELECT level FROM users WHERE uid=".$uid))[0] == "1"){
+        $admin = TRUE;
+      }
     }
     else {
       echo('<style>#forumBtn, #toolBtn {
@@ -103,6 +107,8 @@
                     <br>
                     <form>
                       <p class="text">Here you can create your own DNA sequence and histone modification sequence. Note that the tool is still in beta - there is <b>no</b> histone code checking.</p>
+                      <br>
+                      <br>
                       <input name="submitT" type="submit" value="Query" class="button extender"/>
                       <input name="submittedT" type="hidden" value="TRUE"/>
                     </form>');
@@ -154,22 +160,35 @@
 		            $rowT = mysqli_fetch_array($r);
                 $m = convert($rowT[1]);
 		            echo("<br><br><div class='forumObj OP'><div class='forumCon'><b>$rowT[0]</b><br>$m<br><em class='forumNameTag'>$rowT[2]</em></div></div>");
-		            $r = mysqli_query($db, "SELECT message, firstName FROM message INNER JOIN users ON message.uid = users.uid WHERE tid=".$tid);
+		            $r = mysqli_query($db, "SELECT message, firstName, mid FROM message INNER JOIN users ON message.uid = users.uid WHERE tid=".$tid);
 		            while($row = mysqli_fetch_array($r)){
                   $m = convert($row[0]);
-			            echo("<br><div class='forumObj'><div class='forumCon'>$m<br><em class='forumNameTag'>$row[1]</em></div></div>");
+			            echo("<br><div class='forumObj message'><div class='forumCon'><div onclick='document.getElementById(\"replyingPU\").style.display = \"block\"; document.getElementById(\"midPR\").value = \"".$row[2]."\";'>$m<br><em class='forumNameTag'>$row[1]</em></div>");
+                  if($admin == TRUE){
+                    echo('<form action="'.$_SERVER['REQUEST_URI'].'" method="post"><input name="deleteMid" type="hidden" value="'.$row[2].'"/><input class="red large deleteBtn" type="submit" value="Delete"/></b></form>');
+                  }
+                  echo("</div></div>");
+                  $rR = mysqli_query($db, "SELECT message, firstName, rid FROM replies INNER JOIN users ON replies.uid = users.uid WHERE replies.mid=".$row[2]);
+                  while($rowR = mysqli_fetch_array($rR)){
+                    $m = convert($rowR[0]);
+  			            echo("<br><div class='forumObj reply'><div class='forumCon'>$m<br><em class='forumNameTag'>".$rowR[1]."</em>");
+                    if($admin == TRUE){
+                      echo('<form action="'.$_SERVER['REQUEST_URI'].'" method="post"><input name="deleteRid" type="hidden" value="'.$rowR[2].'"/><input class="red large deleteBtn" type="submit" value="Delete"/></b></form>');
+                    }
+                    echo("</div></div><br>");
+                  }
 		            }
 	            }
             ?>
             </div>
           </div>
         </div>
-      </div>
-      <div id="accountPage" class="page">
-        <p name="title" class="title">Nomios</p>
-        <div class="textCon">
-          <p name="subTitle" class="subTitle">ACCOUNT</p>
-          <div id="accountPageContent">
+        <div id="accountPage" class="page">
+          <p name="title" class="title">Nomios</p>
+          <div class="textCon">
+            <p name="subTitle" class="subTitle">ACCOUNT</p>
+            <div id="accountPageContent">
+            </div>
           </div>
         </div>
       </div>
@@ -183,6 +202,7 @@
         if(isset($_COOKIE["user"])){
           if(isset($_GET["thread"])){
               echo($altPopupTop.'<br>Post A Reply<br><br><form action="index.php?page=forum&thread='.$_GET["thread"].'" method="post"><textarea name="messagePM" class="textareaPU PUInput" info="Message" onfocus="clearValue(this);" onblur="restoreValue(this);">Message</textarea><br><br><input name="submittedPM" type="submit" class="button btnPU PUInput"/></form>'.$popupBottom);
+              echo(substr($popupTop, 0, 23).'style="display: none" id="replyingPU">'.substr($popupTop, 24).'<br>Reply To A Message<br><br><form action="index.php?page=forum&thread='.$_GET["thread"].'" method="post"><textarea name="messagePR" class="textareaPU PUInput" info="Message" onfocus="clearValue(this);" onblur="restoreValue(this);">Message</textarea><br><br><input id="midPR" name="midPR" type="hidden" value=""/><input name="submittedPR" type="submit" class="button btnPU PUInput"/></form>'.$popupBottom);
           }
           else {
               echo($altPopupTop.'<br>Start A Thread<br><br><form action="index.php?page=forum" method="post"><textarea class="textareaPU subjectTextareaPU PUInput" name="subjectPT" info="Subject" onfocus="clearValue(this);" onblur="restoreValue(this);">Subject</textarea><br><br><textarea name="messagePT" class="textareaPU PUInput" info="Message" onfocus="clearValue(this);" onblur="restoreValue(this);">Message</textarea><br><br><input name="submittedPT" type="submit" class="button btnPU extender"/></form>'.$popupBottom);

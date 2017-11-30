@@ -28,7 +28,7 @@
   box-sizing: border-box;
   z-index: 1000;
   box-shadow: 2px 2px 10px #222;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .mainConPU::-webkit-scrollbar {

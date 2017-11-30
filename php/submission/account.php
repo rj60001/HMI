@@ -20,7 +20,7 @@
     }
 
     if(empty($errors)){
-      $q = "INSERT INTO users VALUES(NULL, '$fn', '$sn', '$ea', '".crypt($pw, 'iN5@n1tY')."', '$in', '$hash')";
+      $q = "INSERT INTO users VALUES(NULL, '$fn', '$sn', '$ea', '".crypt($pw, 'iN5@n1tY')."', '$in', '$hash', 0)";
       $r = mysqli_query($db, $q);
       mail($ea, "Nomios - Please Confirm Your Account", "Confirm your account by clicking http://www.netballmanager.co.uk/hmi/index.php?page=account&email=$ea&hash=$hash", "FROM: reiss1999@gmail.com");
       echo($popupTop);

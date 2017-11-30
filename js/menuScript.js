@@ -34,9 +34,9 @@ function menuBtnClick(value) {
   page.animationName = "fadeIn";
 }
 
-function loadUserData(name, ea){
+function loadUserData(name, ea, admin){
   d = new Date();
-  document.getElementById("accountPageContent").innerHTML = '<br><fieldset><br><br><form action="index.php?page=account" method="post"><p class="info">'+name+'</p><p class="info">'+ea+'</p><input name="passwordAE" type="password" value="Password" info="Password" onfocus="clearValue(this);" onblur="restoreValue(this); checkPassword(this);"/><input name="passwordConAE" type="password" value="Password" info="Password" onfocus="clearValue(this);" onblur="restoreValue(this); checkPassword(this);"/><input name="submitAE" type="submit" value="Submit"/><input name="submittedAE" type="hidden" value="TRUE"></type></fieldset><br><div class="button red large" onclick="document.cookie = \'user=;expires=Thu, 01 Jan 1970 00:00:00 UTC\'; window.location.href=\'http://www.google.co.uk\';"><p>Sign out</p></div>';
+  document.getElementById("accountPageContent").innerHTML = '<br><fieldset><br><br><form action="index.php?page=account" method="post"><p class="info">'+name+'</p><p class="info">'+ea+'</p>'+admin+'<input name="passwordAE" type="password" value="Password" info="Password" onfocus="clearValue(this);" onblur="restoreValue(this); checkPassword(this);"/><input name="passwordConAE" type="password" value="Password" info="Password" onfocus="clearValue(this);" onblur="restoreValue(this); checkPassword(this);"/><input name="submitAE" type="submit" value="Submit"/><input name="submittedAE" type="hidden" value="TRUE"></type></fieldset><br><div id="signOutBtn" class="button red large" onclick="document.cookie = \'user=;expires=Thu, 01 Jan 1970 00:00:00 UTC\'; window.location.href=\'http://www.google.co.uk\';"><p>Sign out</p></div>';
 }
 
 function loadAccountPage(){

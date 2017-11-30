@@ -18,7 +18,11 @@
       if($num == 1){
         $name = ($userRow[1]." ".$userRow[2]);
         $ea = $userRow[3];
-        echo('<script>loadUserData("'.$name.'", "'.$ea.'");</script>');
+        $a = '';
+        if($admin == TRUE){
+          $a = '<p class=\'info\'>Admin</p>';
+        }
+        echo('<script>loadUserData("'.$name.'", "'.$ea.'", "'.$a.'");</script>');
       }
       else if($num =! 1) {
         echo('<script>document.cookie = "user=;expires='.(time()-100).'"; document.getElementById("accountPage").innerHTML = \''.$accountMenu.'\';</script>'); #Delete user cookie if user not found in database.

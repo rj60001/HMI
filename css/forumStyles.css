@@ -9,8 +9,27 @@
 }
 
 .OP {
+	background-color: #FFB71C;
+	border-color: #FFB71C;
+	color: #EFEFEF;
+}
+
+.message {
+	cursor: pointer;
 	background-color: #EFEFEF;
+	border-color: #EFEFEF;
 	color: #444;
+	margin-left: 5%;
+	width: 95%;
+}
+
+.reply {
+	float: right;
+	margin-left: 10%;
+	width: 90%;
+	background-color: rgba(0,0,0,0);
+	border-color: #EFEFEF;
+	color: #EFEFEF;
 }
 
 .forumCon {
