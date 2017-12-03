@@ -1,14 +1,4 @@
 /*IDs*/
-#searchInput {
-  min-width: 100%;
-  max-width: 100%;
-  min-height: 7%;
-  max-height: 7%;
-  font-size: 110%;
-  margin-right: 0%;
-  margin-left: 0%;
-}
-
 #signOutBtn:hover {
   background-color: #CC0000 !important;
   border-color: #CC0000 !important;
@@ -51,9 +41,12 @@ input {
 }
 
 textarea {
-  background-color: rgba(0, 0, 0, 0);
+  background-color: #EFEFEF;;
   color: #FEFEFE;
-  border-color: rgba(0, 0, 0, 0);
+  border-color: #EFEFEF;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 5px;
   font-family: "Comfortaa", cursive;
   font-size: 80%;
   min-width: 100%;

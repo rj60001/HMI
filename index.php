@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="css/mediaStyles.css">
     <link rel="stylesheet" href="css/popupStyles.css">
     <link rel="stylesheet" href="css/forumStyles.css">
+    <link rel="stylesheet" href="css/toolStyles.css">
     <?php
       if(isset($_COOKIE["accessedBefore"])){ //Disables the entry screen before init() is triggered so that it does not display.
         echo('<style> #bgObjCon, #enterBtnCon {
@@ -44,6 +45,7 @@
     <script src="js/entryScript.js"></script>
     <script src="js/menuScript.js"></script>
     <script src="js/inputScript.js"></script>
+    <script src="js/toolScript.js"></script>
     <!-- Above are all relevant scripts -->
     <div id="dayChangeBtn" onclick="dayChangeClick();"><i class="material-icons">brightness_3</i></div>
     <div id="enterBtnCon"><h1 id="enterBtn">A</h1></div>
@@ -102,13 +104,30 @@
                     <form action="index.php?page=tool" method="post">
                       <input id="searchInput" name="searchInput" type="text" value="Search" info="Search" onfocus="clearValue(this);" onblur="restoreValue(this);"/>
                       <input name="searchSubmitted" type="hidden" value="TRUE"/>
-                    </form>
-                    <hr>
-                    <br>
-                    <form>
-                      <p class="text">Here you can create your own DNA sequence and histone modification sequence. Note that the tool is still in beta - there is <b>no</b> histone code checking.</p>
+                      <hr>
+                      <br>
+                      <p class="text">Here you can create your own DNA sequence and histone modification sequence in  5\'-3\' direction. Note that the tool is still in beta - there is <b>no</b> histone code checking.</p>
                       <br>
                       <br>
+                      <textarea name="dnaSequenceT" onkeydown="dnaInputCheck(this);" info="ATCG" onfocus="clearValue(this);" onblur="restoreValue(this);">ATCG</textarea>
+                      <br>
+                      <br>
+                      <div id="hmodBg"><div id="hmodSequence" class="toolCon"></div></div>
+                      <br>
+                      <br>
+                      <div id="histoneModDiv">
+                        <div class="toolCon">
+                        <div class="button histoneMod" onclick="removeLastHmod();">Remove</div>
+                        ');
+                        $q = "SELECT hmid, name FROM histonemods";
+                        $r = mysqli_query($db, $q);
+                        while($row = mysqli_fetch_array($r)){
+                          echo('<div class="button histoneMod" onclick="addHmod(\''.$row[1].'\', \''.$row[0].'\');">'.$row[1].'</div>');
+                        }
+                        echo('</div>
+                      </div>
+                      <br><br>
+                      <input id="histoneModsT" name="histoneModsT" type="hidden" value=""/>
                       <input name="submitT" type="submit" value="Query" class="button extender"/>
                       <input name="submittedT" type="hidden" value="TRUE"/>
                     </form>');

@@ -1,0 +1,44 @@
+/*IDs*/
+#searchInput {
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 7%;
+  max-height: 7%;
+  font-size: 110%;
+  margin-right: 0%;
+  margin-left: 0%;
+}
+
+#histoneModDiv {
+  border-color: #EFEFEF;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 5px;
+  background-color: rgba(0,0,0,0);
+}
+
+#hmodBg {
+  border-color: #EFEFEF;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 5px;
+  background-color: #EFEFEF;
+  color: rgb(22, 167, 229);
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 40%;
+  overflow-y: auto;
+}
+/*Classes*/
+.histoneMod {
+  max-width: 10%;
+  min-width: 10%;
+  max-height: 10%;
+  min-height: 7%;
+  text-align: left;
+  line-height: 3;
+}
+
+.toolCon {
+  margin: 5% 5% 5% 5%;
+}
