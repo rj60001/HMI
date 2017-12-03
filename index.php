@@ -101,9 +101,10 @@
                     <p class="text">This is the main tool page. Here you can add or pull data from the database on any DNA sequence, by completing the form that follows:</p>
                     <br>
                     <br>
+                    <form action="index.php?page=tool" method="get">
+                      <input id="searchText" name="searchText" type="text" value="Search" info="Search" onfocus="clearValue(this);" onblur="restoreValue(this);"/>
+                    </form>
                     <form action="index.php?page=tool" method="post">
-                      <input id="searchInput" name="searchInput" type="text" value="Search" info="Search" onfocus="clearValue(this);" onblur="restoreValue(this);"/>
-                      <input name="searchSubmitted" type="hidden" value="TRUE"/>
                       <hr>
                       <br>
                       <p class="text">Here you can create your own DNA sequence and histone modification sequence in  5\'-3\' direction. Note that the tool is still in beta - there is <b>no</b> histone code checking.</p>
@@ -135,6 +136,17 @@
           ?>
         </div>
       </div>
+      <div id="toolSingleView" class="page">
+        <p name="title" class="title">Nomios</p>
+        <div class="textCon">
+          <p name="subTitle" class="subTitle">TOOL</p>
+          <?php
+            if(isset($_GET["searchText"])){
+              echo("<script>menuBtnClick('toolSingleView');</script>");
+            }
+          ?>
+          </div>
+        </div>
       <div id="newsPage" class="page">
         <p name="title" class="Title">Nomios</p>
         <div class="textCon">
