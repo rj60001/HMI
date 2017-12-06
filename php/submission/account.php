@@ -1,8 +1,8 @@
 <?php
   if(isset($trim["submittedSU"])){
-    $fn = $trim["firstNameSU"];
-    $sn = $trim["secondNameSU"];
-    $ea = $trim["emailAddressSU"];
+    $fn = strip_tags($trim["firstNameSU"]);
+    $sn = strip_tags($trim["secondNameSU"]);
+    $ea = strip_tags($trim["emailAddressSU"]);
     $pw = $trim["passwordConSU"];
     $in = $trim["interestSU"];
     $hash = md5($pw);

@@ -17,3 +17,22 @@ function removeLastHmod(){
   text.innerHTML = final;
   list.value = String(ids);
 }
+
+function searchRedirect(id, disease, tool){ //tool when true means that we are searching for a sequence.
+  url = "index.php?searchType=";
+  if(tool === true){
+    url += "tool&disease=";
+    if(disease === false){
+      url += "0";
+    }
+    else {
+      url += "1";
+    }
+    url += "&sequence="+id;
+  }
+  else {
+    url += "forum&thread="+id;
+  }
+  url += "&page=search";
+  window.location.href = url;
+}

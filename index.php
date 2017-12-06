@@ -87,7 +87,7 @@
       <div id="homePage" class="page">
         <p name="title" class="title">Nomios</p>
         <div class="textCon">
-          <p name="subTitle" class="subTitle">WELCOME</p>
+          <p name="subTitle" class="subTitle">Welcome</p>
           <p name="text" class="text">Lorem ipsum dolor sit amet, an vim partem graeco aeterno, affert liberavisse intellegebat ad quo, usu oblique omnesque constituto cu. No mei unum ignota noster. Mel esse delenit in. Viris dignissim in vis. Sed agam delicata consequat ne, elit dicit cum in.Ius vero deserunt no. Ne amet erant qui, autem explicari eam ex. Ponderum intellegebat cum id. Nec aliquip repudiare at.In mundi tractatos adipiscing ius, alia neglegentur qui id. Ferri aliquando interesset has et, et vix numquam mediocritatem. Eum eu porro inani. Vel ne dicunt pertinacia. Suas quas efficiendi pri cu.Ne mel lucilius moderatius, has oratio veniam persius ut. Utroque nominavi splendide nec ei. Ex pro idque legere mediocrem, ex qui homero splendide. Ne est definiebas consequuntur, duo ex saepe ullamcorper. Mea ne nibh labitur definitionem.
           Sit no wisi mundi vulputate, no debet ullamcorper sea. An liber atomorum pertinacia ius, quando petentium et usu, cu sea erant civibus accumsan. His quod veri cetero ut, sit in possim minimum. Iuvaret dolorem philosophia sit ei.<p>
         </div>
@@ -101,8 +101,9 @@
                     <p class="text">This is the main tool page. Here you can add or pull data from the database on any DNA sequence, by completing the form that follows:</p>
                     <br>
                     <br>
-                    <form action="index.php?page=tool" method="get">
+                    <form action="index.php" method="get">
                       <input id="searchText" name="searchText" type="text" value="Search" info="Search" onfocus="clearValue(this);" onblur="restoreValue(this);"/>
+                      <input name="page" value="tool" type="hidden"/>
                     </form>
                     <form action="index.php?page=tool" method="post">
                       <hr>
@@ -128,6 +129,8 @@
                         echo('</div>
                       </div>
                       <br><br>
+                      <input name="sequenceName" type="text" value="Name" info="Name" onfocus="clearValue(this);" onblur="restoreValue(this);"/>
+                      <br><br>
                       <input id="histoneModsT" name="histoneModsT" type="hidden" value=""/>
                       <input name="submitT" type="submit" value="Query" class="button extender"/>
                       <input name="submittedT" type="hidden" value="TRUE"/>
@@ -136,43 +139,40 @@
           ?>
         </div>
       </div>
-      <div id="toolSingleView" class="page">
+      <div id="toolSingleViewPage" class="page">
         <p name="title" class="title">Nomios</p>
         <div class="textCon">
-          <p name="subTitle" class="subTitle">TOOL</p>
-          <?php
-            if(isset($_GET["searchText"])){
-              echo("<script>menuBtnClick('toolSingleView');</script>");
-            }
-          ?>
+          <p name="subTitle" class="subTitle">Tool</p>
+          <div id="toolSingleViewPageContent">
           </div>
         </div>
+      </div>
       <div id="newsPage" class="page">
         <p name="title" class="Title">Nomios</p>
         <div class="textCon">
-          <p name="subTitle" class="subTitle">NEWS</p>
+          <p name="subTitle" class="subTitle">News</p>
           <p class="text"></p>
         </div>
       </div>
       <div id="aboutPage" class="page">
         <p name="title" class="title">Nomios</p>
         <div class="textCon">
-          <p name="subTitle" class="subTitle">ABOUT</p>
+          <p name="subTitle" class="subTitle">About</p>
           <p class="text"></p>
         </div>
       </div>
       <div id="forumPage" class="page">
         <p name="title" class="title">Nomios</p>
         <div class="textCon">
-          <p name="subTitle" class="subTitle">FORUM</p>
-          <div id="forumPageContent">
+          <p name="subTitle" class="subTitle">Forum</p>
+            <div id="forumPageContent">
             </div>
           </div>
         </div>
         <div id="forumSingleViewPage" class="page">
         <p name="title" class="title">Nomios</p>
         <div class="textCon">
-          <p name="subTitle" class="subTitle">FORUM</p>
+          <p name="subTitle" class="subTitle">Forum</p>
           <div id="forumSingleViewPageContent">
             <?php
               function convert($m) { //Converts artificial mark-up to HTML.
@@ -217,8 +217,16 @@
         <div id="accountPage" class="page">
           <p name="title" class="title">Nomios</p>
           <div class="textCon">
-            <p name="subTitle" class="subTitle">ACCOUNT</p>
+            <p name="subTitle" class="subTitle">Account</p>
             <div id="accountPageContent">
+            </div>
+          </div>
+        </div>
+        <div id="searchViewPage" class="page">
+          <p name="title" class="title">Nomios</p>
+          <div class="textCon">
+            <p name="subTitle" class="subTitle">Search</p>
+            <div id="searchViewPageContent">
             </div>
           </div>
         </div>
