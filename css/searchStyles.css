@@ -1,0 +1,9 @@
+/*IDs*/
+  #searchBoxAllForm {
+    text-align: center;
+    padding: 5% 5% 5% 5%;
+  }
+  #searchBoxAll {
+    transform: translateY(100%);
+    color: #EFEFEF;
+  }

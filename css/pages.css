@@ -1,0 +1,91 @@
+/*IDs*/
+  #mainCon { /*Where all non-menu content is.*/
+    opacity: 0;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    min-width: 1px; /*Fills up if nothing is in it.*/
+    min-height: 1px; /* ^ */
+    animation-duration: 4s; /*For first load.*/
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    overflow-x: hidden; /*No horizontal scrolling*/
+  }
+
+  #mainCon::-webkit-scrollbar {
+    background-color: #EFEFEF;
+    width: 1%;
+  }
+
+  #mainCon::-webkit-scrollbar-thumb {
+    background-color: #333;
+  }
+
+  #menuCon { /*Where all menu content is.*/
+    position: fixed;
+    width: 5%;
+    height: 100%;
+    min-width: 1px;
+    min-height: 1px;
+    background-color: #333;
+    text-align: center;
+    color: #EFEFEF;
+  }
+
+  #homePage { /*This is the first page to load so it needs to be already viewable when the page loads.*/
+    opacity: 1;
+  }
+
+/*Classes*/
+  /*Menu-specific classes*/
+    .material-icons {
+      cursor: pointer;
+    }
+
+    .menuRule {
+      border-color: #EFEFEF;
+      width: 70%;
+    }
+
+    .postBtn { /*This is the button for posting a thread/message in a thread.*/
+      display: none;
+    }
+
+  .page { /*A page is where specific content. E.g. All tool content is in the tool page. Not to be confused with a web page.*/
+    opacity: 0;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 91%;
+    height: 96%;
+    min-width: 1px;
+    min-height: 1px;
+    margin-left: 7%;
+    margin-right: 2%;
+    margin-bottom: 4%;
+    margin-top: 2%;
+    animation-iteration-count: 1;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    transition-timing-function: ease-in-out;
+  }
+
+  /*Classes found within pages.*/
+    .textCon {
+      width: 100%;
+      height: 100%;
+      min-width: 1px;
+      min-height: 1px;
+      margin-top: -5%;
+    }
+
+    .subTitle {
+      font-size: 400%;
+    }
+
+    .text {
+      font-size: 130%;
+      padding-right: 1%;
+    }

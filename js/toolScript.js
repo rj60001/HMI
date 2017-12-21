@@ -18,6 +18,13 @@ function removeLastHmod(){
   list.value = String(ids);
 }
 
+function split(){
+  text = document.getElementById("hmodSequence");
+  list = document.getElementById("histoneModsT");
+  text.innerHTML += " | ";
+  list.value += "|";
+}
+
 function searchRedirect(id, disease, tool){ //tool when true means that we are searching for a sequence.
   url = "index.php?searchType=";
   if(tool === true){

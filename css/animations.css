@@ -1,0 +1,33 @@
+/* On first load */
+  @keyframes bounce {
+    50% {transform: translateY(-5%);}
+    100% {transform: translateY(5%);}
+  }
+
+  @keyframes flyAway {
+    100% {transform: translateY(2000px);}
+  }
+
+  @keyframes floatOne {
+    50% {transform: translate(10%, 10%);}
+  }
+
+  @keyframes floatTwo {
+    50% {transform: translate(-10%, -10%);}
+  }
+
+  @keyframes floatThree {
+    50% {transform: translate(-10%, 10%);}
+  }
+
+  @keyframes floatFour {
+    50% {transform: translate(10%, -10%);}
+  }
+
+  /*For page switching*/
+  @keyframes fadeIn {
+      100% {opacity: 1;}
+  }
+  @keyframes fadeOut {
+      100% {opacity: 0;}
+  }

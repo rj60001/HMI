@@ -1,0 +1,90 @@
+/*IDs*/
+  #dayChangeBtn {
+    position: fixed;
+    right: 2vw;
+    top: 2vw;
+    z-index: 1000;
+    color: #666;
+  }
+
+  #searchBox { /*For the forum and the tool.*/
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 7%;
+    max-height: 7%;
+    font-size: 110%;
+    margin-right: 0%;
+    margin-left: 0%;
+  }
+/*Elements*/
+  ::selection {
+    background-color: inherit;
+    color: inherit;
+  }
+
+  body {
+    background-color: #EFEFEF;
+    color: #333;
+    font-family: 'Comfortaa', cursive;
+    overflow: hidden;
+    box-sizing: border-box;
+    cursor: default;
+  }
+
+  div {
+    display: block;
+    box-sizing: border-box;
+  }
+
+  p {
+    margin-bottom: -1%;
+  }
+
+  hr {
+    border-width: thin;
+    border-color: #444;
+    border-style: solid;
+  }
+/*Classes*/
+  .floatAesthetic {
+    box-shadow: 7px 7px 17px #AAA;
+  }
+  /*Coloured text classes*/
+    .coloredText {
+      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text !important;
+    }
+
+    /*Colors*/
+      .redPurple { /*xY: starts with x colour ends with Y colour.*/
+        background: linear-gradient(to top right, #F2092C 0%, #B50FC4 100%);
+      }
+
+      .greenYellow {
+        background: linear-gradient(to top right, #1FE63F 0%, #F9E213 100%);
+      }
+
+      .orangeBlue {
+        background: linear-gradient(to top right, #f2870A 0%, #11E3C3 100%);
+      }
+
+  /*Other*/
+    .large{
+      min-width: 100%;
+      max-width: 100%;
+      max-height: 10%;
+      min-height: 10%;
+      font-size: 100%;
+      margin-left: 0;
+    }
+  /*Results*/
+    .strip {
+      min-width: 100%;
+      max-width: 100%;
+      border-radius: 3px;
+      border-style: none;
+      color: #EFEFEF;
+      font-size: 150%;
+      cursor: pointer;
+      padding: 5%;
+    }

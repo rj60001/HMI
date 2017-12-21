@@ -32,23 +32,27 @@ if(isset($trim["submittedT"])){
   $result = interpretHistoneModSequence($modsStr, $db);
   //Database storage
   $dnaStrs = str_split($dnaStr, 127);
+  $modsStrs = explode("|", $modsStr);
+  foreach($modsStrs as $modsString){
+    str_replace("|", "", $modsString);
+  }
   $queries = [];
   array_push($queries, "INSERT INTO nucelosomesequence VALUES(0, NULL, '".$name."')");
-  foreach($dnaStrs as $dna){
-    array_push($queries, "INSERT INTO nucleosomednasequence VALUES(0, '".$dna."')");
+  for($i=0;$i<length($dnaStrs);$i++){
+    array_push($queries, "INSERT INTO nucleosomednasequence VALUES(0, '".$dnaStrs[i]."')");
     $ndsid = mysqli_fetch_array(mysqli_query($db, "SELECT ndsid FROM nucleosomednasequence ORDER BY ndsid DESC LIMIT 1"))[0];
     $nsid = mysqli_fetch_array(mysqli_query($db, "SELECT nsid FROM nucelosomesequence ORDER BY nsid DESC LIMIT 1"))[0];
-    array_push($queries, "INSERT INTO nucleosome VALUES(0, $ndsid, '$modsStr', $nsid)");
+    array_push($queries, "INSERT INTO nucleosome VALUES(0, $ndsid, '".$modsStrs[i]."', $nsid)");
   }
   foreach($queries as $query){
     $r = mysqli_query($db, $query);
   }
   displayResults($result, $nsid);
 }
-else if(isset($_GET["searchText"]) && isset($_GET["page"])){
+else if(isset($_GET["searchBox"]) && isset($_GET["page"])){
   echo('<script>menuBtnClick("searchView"); document.getElementById("searchViewPageContent").innerHTML = \'<hr><br><br>');
   if($_GET["page"] == "tool"){
-    $r = mysqli_query($db, "SELECT name, nsid FROM nucelosomesequence WHERE name LIKE '%".$_GET['searchText']."%'");
+    $r = mysqli_query($db, "SELECT name, nsid FROM nucelosomesequence WHERE name LIKE '%".$_GET['searchBox']."%'");
     while($row = mysqli_fetch_array($r)){
       echo('<div class="strip" onclick="searchRedirect('.$row[1].', false, true);">'.$row[0].'</div><br><br>');
     }

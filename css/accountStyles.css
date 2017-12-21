@@ -1,0 +1,46 @@
+/*IDs*/
+  #signInForm, #signUpForm {
+    min-width: 49%;
+    max-width: 49%;
+    height: auto;
+    max-height: none;
+    float: left;
+    border-radius: 3px;
+    border-style: none;
+  }
+
+  #signInForm > form, #signUpForm > form {
+    margin: 5%;
+  }
+
+  #signInForm {
+    float: right;
+    vertical-align: top;
+  }
+
+  #con { /*Is a container for the two forms.*/
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    max-height: 100%;
+  }
+
+  #downButton {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    cursor: pointer;
+  }
+
+  #accountDetailsForm {
+    border-radius: 3px;
+    border-style: none;
+    padding: 5%;
+  }
+/*Classes*/
+  .info {
+    font-size: 80%;
+    width: 90%;
+    min-height: 8%;
+    color: #EFEFEF;
+  }

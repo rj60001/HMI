@@ -1,0 +1,43 @@
+/*IDs*/
+  #enterBtn {
+    display: block;
+    cursor: pointer;
+    transition-timing-function: ease-in-out;
+    position: relative;
+    z-index: 2;
+  }
+
+  #bgObjCon {
+    font-family: 'Megrim', cursive;
+  }
+
+    #bgObjCon > div {
+      animation-name: floatOne;
+      animation-duration: 5s;
+      animation-fill-mode: forwards;
+      animation-iteration-count: infinite;
+      transition-timing-function: ease-in-out;
+      color: #333;
+    }
+/*Elements*/
+  h1 {
+    font-family: 'Megrim', cursive;
+    font-size: 1000%;
+    text-align: center;
+    padding-left: auto;
+    padding-right: auto;
+    box-sizing: border-box;
+  }
+/*Classes*/
+  /*On first load*/
+    .bgObjBig {
+      font-size: 600%;
+    }
+
+    .bgObjMed {
+      font-size: 400%;
+    }
+
+    .bgObjSmall {
+      font-size: 200%;
+    }

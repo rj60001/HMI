@@ -1,171 +1,88 @@
-/*IDs*/
-#signOutBtn:hover {
-  background-color: #CC0000 !important;
-  border-color: #CC0000 !important;
-  color: #EFEFEF !important;
-}
 /* Elements */
-select {
-  background-color: #EFEFEF;
-  border-radius: 5px;
-  border-style: solid;
-  border-width: 5px;
-  border-color: #EFEFEF;
-  color: #16A7E5;
-  font-family: "Comfortaa", cursive;
-  width: 90%;
-  font-size: 80%;
-  margin-left: 5%;
-  margin-right: 5%;
-  margin-bottom: 2%;
-  min-height: 8%;
-  cursor: pointer;
-}
-
-input {
-  background-color: #EFEFEF;
-  border-radius: 5px;
-  border-style: solid;
-  border-width: 5px;
-  border-color: #EFEFEF;
-  color: #16A7E5;
-  font-family: "Comfortaa", cursive;
-  font-size: 80%;
-  width: 90%;
-  min-height: 8%;
-  box-sizing: border-box;
-  margin-left: 5%;
-  margin-right: 5%;
-  margin-bottom: 2%;
-  cursor: pointer;
-}
-
-textarea {
-  background-color: #EFEFEF;;
-  color: #FEFEFE;
-  border-color: #EFEFEF;
-  border-radius: 5px;
-  border-style: solid;
-  border-width: 5px;
-  font-family: "Comfortaa", cursive;
-  font-size: 80%;
-  min-width: 100%;
-  max-width: 100%;
-  min-height: 40%;
-  max-height: 40%;
-  text-transform: uppercase;
-}
-
-textarea::-webkit-scrollbar {
-  background-color: #666;
-}
-
-textarea::-webkit-scrollbar-thumb {
-  background-color: #D1C1BC;
-}
-/*Classes*/
-.info {
-  font-size: 80%;
-  width: 90%;
-  min-height: 8%;
-  box-sizing: border-box;
-  margin-left: 5%;
-  margin-right: 5%;
-}
-
-.doubleForm {
-  min-width: 49%;
-  max-width: 49%;
-  display: inline;
-  height: 75%;
-  overflow-y: hidden;
-}
-
-.button {
-  background-color: rgba(0, 0, 0, 0);
-  border-width: thick;
-  border-radius: 5px;
-  border-color: #EFEFEF;
-  border-style: solid;
-  box-sizing: border-box;
-  text-align: center;
-  min-width: 90%;
-  max-width: 90%;
-  min-height: 15%;
-  max-height: 15%;
-  color: #EFEFEF;
-  box-sizing: border-box;
-  font-family: "Comfortaa", cursive;
-  font-size: 80%;
-  padding-left: 5%;
-  padding-right: 5%;
-
-  p {
-    display: block;
-    height: 50%;
-    transform: translateY(-50%);
+  select, input, textarea, .button {
+    background: rgba(238, 238, 238, 0.7);
+    color: #333;
+    border-style: none;
+    border-radius: 3px;
+    cursor: pointer;
+    width: 100%;
+    min-height: 8%;
+    font-family: "Roboto Mono", monospace;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 2%;
+    padding: 5px;
   }
-}
 
-.button:hover {
-  background-color: #EFEFEF;
-  color: #16A7E5;
-  cursor: pointer;
-}
+  form {
+    max-width: 90%;
+    min-width: 90%;
+    margin: 0;
+    margin-top: 2%;
+  }
 
-.large{
-  min-width: 100%;
-  max-width: 100%;
-  max-height: 10%;
-  min-height: 10%;
-  padding-left: 0;
-  padding-right: 0;
-  font-size: 100%;
-  margin-left: 0;
-}
+  textarea {
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 40%;
+    max-height: 40%;
+    text-transform: uppercase;
+  }
 
-.con {
-  min-width: 100%;
-  min-height: 100%;
-  display: block;
-  position: relative;
-  top: 10%;
-  /* Centralise */
-}
+    textarea::-webkit-scrollbar {
+      background-color: #EFEFEF;
+    }
 
-.PUInput {
-  color: #444 !important;
-}
+    textarea::-webkit-scrollbar-thumb {
+      background-color: #333;
+    }
+    /*Red button*/
+      .redBtn {
+        background-color: #E50000 !important;
+        border-color: #E50000 !important;
+        color: #EFEFEF !important;
+      }
 
-textarea:hover,
-input:hover,
-textarea:active,
-input:active,
-textarea:focus,
-input:focus,
-button:focus,
-button:active,
-button:hover,
-label:focus,
-.btn:active,
-.btn.active
-{
-  outline:0px !important;
-  -webkit-appearance:none;
-}
+      .redBtn:hover, #signOutBtn:hover { /*Added specifity to overide button hover for signOutBtn.*/
+        background-color: #CC0000 !important;
+        border-color: #CC0000 !important;
+      }
 
-.deleteBtn {
-  margin-top: 2%;
-  margin-bottom: -2%;
-}
+      .redBtn > p {
+        transform: translateY(50%);
+      }
+  /*Button*/
+    .button {
+      text-align: center;
+      min-height: 12%;
+      max-height: 12%
+      cursor: pointer;
+      p {
+        display: block;
+        height: 50%;
+        transform: translateY(-50%);
+        font-size: 120%;
+      }
+    }
 
-.red {
-  background-color: #E50000 !important;
-  border-color: #E50000 !important;
-  color: #EFEFEF !important;
-}
-
-.red:hover {
-  background-color: #CC0000 !important;
-  border-color: #CC0000 !important;
-}
+    button:hover, input:hover, select:hover, textarea:hover  { /*Used hover here AND javaScript for input hovering so as */
+      background-color: #EFEFEF !important;     /*to include submit inout buttons. Also to achieve hover effect.*/
+      border-color: #EFEFEF !important;
+    }
+  /*Removes chrome slection effects.*/
+    textarea:hover,
+    input:hover,
+    textarea:active,
+    input:active,
+    textarea:focus,
+    input:focus,
+    button:focus,
+    button:active,
+    button:hover,
+    label:focus,
+    .btn:active,
+    .btn.active
+    {
+      outline:0px !important;
+      -webkit-appearance:none;
+    }

@@ -1,44 +1,55 @@
 /*IDs*/
-#searchText {
-  min-width: 100%;
-  max-width: 100%;
-  min-height: 7%;
-  max-height: 7%;
-  font-size: 110%;
-  margin-right: 0%;
-  margin-left: 0%;
-}
+  #histoneModDiv { /*For containing the histone modification buttons.*/
+    border-width: 5px;
+    border-radius: 3px;
+    background-color: rgba(238, 238, 238, 0.7);
+  }
 
-#histoneModDiv {
-  border-color: #EFEFEF;
-  border-radius: 5px;
-  border-style: solid;
-  border-width: 5px;
-  background-color: rgba(0,0,0,0);
-}
+  #hmodBg { /*For displaying the mod sequence*/
+    border-style: none;
+    border-radius: 3px;
+    color: #333;
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 40%;
+    overflow-y: auto;
+    background: #EFEFEF;
+  }
 
-#hmodBg {
-  border-color: #EFEFEF;
-  border-radius: 5px;
-  border-style: solid;
-  border-width: 5px;
-  background-color: #EFEFEF;
-  color: rgb(22, 167, 229);
-  min-width: 100%;
-  max-width: 100%;
-  min-height: 40%;
-  overflow-y: auto;
-}
+  #searchBoxToolForm, #toolForm {
+    border-color: #333;
+    background-color: #333;
+    border-radius: 3px;
+    padding: 5% 5% 5% 5%;
+    color: #EFEFEF;
+  }
+
+  #searchBoxToolForm {
+    padding-bottom: -2%;
+  }
+
+  #removeHistoneBtn {
+    margin-right: 0%;
+  }
 /*Classes*/
-.histoneMod {
-  max-width: 10%;
-  min-width: 10%;
-  max-height: 10%;
-  min-height: 7%;
-  text-align: left;
-  line-height: 3;
-}
+  .histoneMod {
+    max-width: 47%;
+    min-width: 47%;
+    margin: 1% 1% 1% 0%; /*Top right bottom left*/
+    max-height: 10%;
+    min-height: 10%;
+    display: inline-block;
+    box-sizing: content-box;
+    border-style: none;
+    border-radius: 3px;
+  }
 
-.toolCon {
-  margin: 5% 5% 5% 5%;
-}
+  .histoneMod:hover {
+    background-color: #EFEFEF;
+    border-color: #EFEFEF;
+    color: #333;
+  }
+
+  .toolCon {
+    margin: 5% 5% 5% 5%;
+  }

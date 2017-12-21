@@ -9,9 +9,9 @@
 		if(count($s) > 25){
 			$s = substr($s, 0, 25)."...";
 		}
-		echo("<div class='strip' onclick='window.location.href = `index.php?page=forum&thread=$row[0]`;'><a>$s</a><a style='float: right;'> | $fn</a>"); //Each thread displayed.
+		echo("<div class='strip greenYellow floatAesthetic' onclick='window.location.href = `index.php?page=forum&thread=$row[0]`;'><a>$s</a><a style='float: right;'> | $fn</a>"); //Each thread displayed.
 		if($admin == TRUE){
-			echo("<form action='".$_SERVER["REQUEST_URI"]."' method='post'><input name='deleteTid' type='hidden' value='".$row[0]."'/><input class='red large deleteBtn' type='submit' value='Delete'/></b></form>");
+			echo("<form action='".$_SERVER["REQUEST_URI"]."' method='post'><input name='deleteTid' type='hidden' value='".$row[0]."'/><input class='large deleteBtn' type='submit' value='Delete'/></b></form>");
 		}
 		echo("</div><br>");
 	}

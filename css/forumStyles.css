@@ -1,43 +1,38 @@
-.forumObj {
-	background-color: transparent;
-	border-color: #EFEFEF;
-	border-style: solid;
-	border-radius: 5px;
-	border-width: 5px;
-	color: #EFEFEF;
-	font-family: "Comfortaa", cursive;
-}
+/*Classes*/
+  .forumObj { /*This applies to any type of post in a thread.*/
+	   border-style: none;
+	   border-radius: 3px;
+     display: flex;
+   }
 
-.OP {
-	background-color: #FFB71C;
-	border-color: #FFB71C;
-	color: #EFEFEF;
-}
+   .forumCon > em, .forumCon > b, .forumCon > ul, .forumCon > t, .forumCon > br, ul > li, em > b, b > em, t > em, t > b, t > ul, t, em { /*t = I created this tag element.*/
+     color: #EFEFEF; /*Makes sure that the rule is directly taken by each element in a forumObj ready for nightmode.*/
+   }
 
-.message {
-	cursor: pointer;
-	background-color: #EFEFEF;
-	border-color: #EFEFEF;
-	color: #444;
-	margin-left: 5%;
-	width: 95%;
-}
+   .forumCon {
+   	 min-width: 90%;
+   	 max-width: 90%;
+   	 padding: 5% 5% 5% 5%;
+   }
 
-.reply {
-	float: right;
-	margin-left: 10%;
-	width: 90%;
-	background-color: rgba(0,0,0,0);
-	border-color: #EFEFEF;
-	color: #EFEFEF;
-}
+   .forumNameTag {
+   	 float: right;
+   }
 
-.forumCon {
-	min-width: 90%;
-	max-width: 90%;
-	padding: 5% 5% 5% 5%;
-}
+   .deleteBtn {
+     margin-top: 2%;
+     margin-bottom: -2%;
+   }
+   /*Post types*/
+       .message { /*Reply to an OP.*/
+	        cursor: pointer;
+	        margin-left: 5%;
+	        width: 95%;
+       }
 
-.forumNameTag {
-	float: right;
-}
+       .reply { /*Reply to a message.*/
+	        float: right;
+	        margin-left: 10%;
+	        width: 90%;
+          margin-bottom: 2%;
+        }
