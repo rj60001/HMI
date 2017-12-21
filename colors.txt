@@ -1,3 +1,0 @@
-#EFEFEF = White
-#333 = Black
-#23E820 = Green
