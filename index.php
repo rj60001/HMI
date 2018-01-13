@@ -100,11 +100,13 @@
           if(isset($_COOKIE["user"])){
             /*For searching through all forum posts and sequences.*/
             echo('<form id="searchBoxAllForm" action="index.php" method="get">
-              <input id="searchBoxAll" name="searchBoxAll" class="redPurple floatAesthetic" type="text" value="Search" info="Search" onfocus="clearValue(this); selected(this);" onblur="restoreValue(this); deselected(this);"/>
+              <input id="searchBoxAll" name="searchValue" class="redPurple floatAesthetic" type="text" value="Search" info="Search" onfocus="clearValue(this); selected(this);" onblur="restoreValue(this); deselected(this);"/>
               <input name="page" value="tool" type="hidden"/>
             </form>');
           }
         ?>
+        <div id="searchPageCon" class="textCon">
+        </div>
       </div>
       <div id="homePage" class="page">
         <p id="homeTitle" class="coloredText redPurple">Nomios</p>
@@ -120,10 +122,6 @@
                     <p class="text">This is the main tool page. Here you can add or pull data from the database on any DNA sequence, by completing the form that follows:</p>
                     <br>
                     <br>
-                    <form id="searchBoxToolForm" action="index.php" method="get" class="redPurple floatAesthetic">
-                      <input id="searchBox" name="searchBox" type="text" value="Search" info="Search" onfocus="clearValue(this); selected(this);" onblur="restoreValue(this); deselected(this);"/>
-                      <input name="page" value="tool" type="hidden"/>
-                    </form>
                     <form id="toolForm" action="index.php?page=tool" method="post" class="greenYellow floatAesthetic">
                       <p class="text">Here you can create your own DNA sequence and histone modification sequence in  5\'-3\' direction. Note that the tool is still in beta - there is <b>no</b> histone code checking.</p>
                       <br>
@@ -155,12 +153,14 @@
                     </form>');
             }
           ?>
+          <br><br>
         </div>
       </div>
       <div id="toolSingleViewPage" class="page">
         <div class="textCon">
           <p class="subTitle">Tool</p>
           <div id="toolSingleViewPageContent">
+            <br><br>
           </div>
         </div>
       </div>
@@ -168,18 +168,21 @@
         <div class="textCon">
           <p class="subTitle">News</p>
           <p class="text"></p>
+          <br><br>
         </div>
       </div>
       <div id="aboutPage" class="page">
         <div class="textCon">
           <p class="subTitle">About</p>
           <p class="text"></p>
+          <br><br>
         </div>
       </div>
       <div id="forumPage" class="page">
         <div class="textCon">
           <p class="subTitle">Forum</p>
             <div id="forumPageContent">
+              <br><br>
             </div>
           </div>
         </div>
@@ -224,6 +227,7 @@
 		            }
 	            }
             ?>
+            <br><br>
             </div>
           </div>
         </div>
@@ -231,13 +235,7 @@
           <div class="textCon">
             <p class="subTitle" id="accountSubTitleStrip">Account</p>
             <div id="accountPageContent">
-            </div>
-          </div>
-        </div>
-        <div id="searchViewPage" class="page">
-          <div class="textCon">
-            <p class="subTitle">Search</p>
-            <div id="searchViewPageContent">
+              <br><br>
             </div>
           </div>
         </div>
