@@ -41,10 +41,6 @@
         }
         #mainCon {
           animation-duration: 1s;
-        }
-        body {
-          background-image: url("images/backGround.png");
-          background-repeat: repeat;
         }</style>');
       }
     ?>
@@ -98,14 +94,21 @@
       <div id="searchPage" class="page">
         <?php
           if(isset($_COOKIE["user"])){
-            /*For searching through all forum posts and sequences.*/
+            # For searching through forum posts and sequences. selected="selected" is used instead of just selected as it is XHTML compliant. This also indicated the default option of select.
             echo('<form id="searchBoxAllForm" action="index.php" method="get">
-              <input id="searchBoxAll" name="searchValue" class="redPurple floatAesthetic" type="text" value="Search" info="Search" onfocus="clearValue(this); selected(this);" onblur="restoreValue(this); deselected(this);"/>
+              <div><select name="searchType" class="greenYellow floatAesthetic">
+                <option value="currentUserSequences" selected="selected">My sequences</option>
+                <option value="currentUserThreads">My threads</option>
+                <option value="sequences">All sequences</option>
+                <option value="threads">All threads</option>
+                <option value="dieases">All diseases</option>
+              </select>
+              <input id="searchBoxAll" name="searchValue" class="redPurple floatAesthetic" type="text" value="Search" info="Search" onfocus="clearValue(this); selected(this);" onblur="restoreValue(this); deselected(this);"/></div>
               <input name="page" value="tool" type="hidden"/>
             </form>');
           }
         ?>
-        <div id="searchPageCon" class="textCon">
+        <div id="searchResultsCon" class="textCon"> <!-- This is where the results show up from a search. -->
         </div>
       </div>
       <div id="homePage" class="page">

@@ -20,7 +20,7 @@ function menuBtnClick(value) { /*Used to switch between pages.*/
   }
   value += "Page"
   page = document.getElementById(value).style;
-  pages = ["homePage", "accountPage", "toolPage", "newsPage", "aboutPage", "forumPage", "forumSingleViewPage", "toolSingleViewPage", "searchViewPage", "searchPage"];
+  pages = ["homePage", "accountPage", "toolPage", "newsPage", "aboutPage", "forumPage", "forumSingleViewPage", "toolSingleViewPage", "searchPage"];
   pages.splice(pages.indexOf(value), 1);
   for(i = 0; i < pages.length; i++){
     document.getElementById(pages[i]).style.animationName = "fadeOut";

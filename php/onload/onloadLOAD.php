@@ -2,7 +2,6 @@
   include("account.php");
   if(isset($_COOKIE["user"])){
     require_once("forum.php");
-    require_once("search.php");
   }
   echo("<script>");
   if(isset($_GET["page"]) && isset($_COOKIE["user"])){

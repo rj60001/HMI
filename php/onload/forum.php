@@ -6,7 +6,7 @@
 	while($row = mysqli_fetch_array($r)){
 		$fn = mysqli_fetch_array(mysqli_query($db, "SELECT firstName FROM users WHERE uid=".$row[2]))[0];
 		$s = $row[1];
-		if(count($s) > 25){
+		if(count($s) > 25){ # This makes sure that only a set amount of the subject text is printed so as not to overspill the strip.
 			$s = substr($s, 0, 25)."...";
 		}
 		echo("<div class='strip greenYellow floatAesthetic' onclick='window.location.href = `index.php?page=forum&thread=$row[0]`;'><a>$s</a><a style='float: right;'> | $fn</a>"); //Each thread displayed.
