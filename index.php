@@ -95,19 +95,23 @@
         <?php
           if(isset($_COOKIE["user"])){
             # For searching through forum posts and sequences. selected="selected" is used instead of just selected as it is XHTML compliant. This also indicated the default option of select.
-            echo('<form id="searchBoxAllForm" action="index.php" method="get">
+            echo('<form id="searchBoxAllForm" action="index.php?page=search" method="post">
               <div><select name="searchType" class="greenYellow floatAesthetic">
                 <option value="currentUserSequences" selected="selected">My sequences</option>
                 <option value="currentUserThreads">My threads</option>
                 <option value="sequences">All sequences</option>
                 <option value="threads">All threads</option>
-                <option value="dieases">All diseases</option>
+                <option value="diseases">All diseases</option>
               </select>
               <input id="searchBoxAll" name="searchValue" class="redPurple floatAesthetic" type="text" value="Search" info="Search" onfocus="clearValue(this); selected(this);" onblur="restoreValue(this); deselected(this);"/></div>
               <input name="page" value="tool" type="hidden"/>
             </form>');
           }
         ?>
+        <br>
+        <br>
+        <br>
+        <br>
         <div id="searchResultsCon" class="textCon"> <!-- This is where the results show up from a search. -->
         </div>
       </div>
@@ -247,9 +251,9 @@
         $popupTop = '<div class="boardConPU"><div class="popUpBox redPurple"><div class="textConPU"><p class="titlePU">Notification<span class="crossPU">X</span></p>';
         $altPopupTop = substr($popupTop, 0, 23).' style="display: none" id="postingPU">'.substr($popupTop, 24); /*For replies to original post in the forum.*/
         $popupBottom = '</div></div></div>';
-        include("php/onload/onloadLOAD.php");
-        include("php/submission/submissionLOAD.php");
-        #Tags that need to be loaded on start bu require PHP.
+        require_once("php/onload/onloadLOAD.php");
+        require_once("php/submission/submissionLOAD.php");
+        #Tags that need to be loaded on start but require PHP.
         if(isset($_COOKIE["user"])){
           if(isset($_GET["thread"])){
               echo($altPopupTop.'<br>Post A Reply<br><br><form action="index.php?page=forum&thread='.$_GET["thread"].'" method="post"><textarea name="messagePM" class="textareaPU PUInput" info="Message" onfocus="clearValue(this); selected(this);" onblur="restoreValue(this); deselected(this);">Message</textarea><br><br><input name="submittedPM" type="submit" class="button btnPU PUInput"/></form>'.$popupBottom);

@@ -27,6 +27,7 @@
         echo("menuBtnClick('tool');");
         break;
       case "search":
+        echo("menuBtnClick('search');");
         break;
       default:
         echo("menuBtnClick('home');");
