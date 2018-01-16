@@ -1,4 +1,11 @@
 /*IDs*/
+  #searchDetailsCon{ /* This contains the search form. */
+    max-width: 100%;
+    min-width: 100%;
+  }
+  #searchType {
+    color: #EFEFEF;
+  }
   #searchBoxAllForm {
     text-align: center;
     padding: 5% 5% 5% 5%;

@@ -96,7 +96,7 @@
           if(isset($_COOKIE["user"])){
             # For searching through forum posts and sequences. selected="selected" is used instead of just selected as it is XHTML compliant. This also indicated the default option of select.
             echo('<form id="searchBoxAllForm" action="index.php?page=search" method="post">
-              <div><select name="searchType" class="greenYellow floatAesthetic">
+              <div><select id="searchType" name="searchType" class="greenYellow floatAesthetic">
                 <option value="currentUserSequences" selected="selected">My sequences</option>
                 <option value="currentUserThreads">My threads</option>
                 <option value="sequences">All sequences</option>
@@ -152,7 +152,14 @@
                         echo('</div>
                       </div>
                       <br><br>
-                      <input name="sequenceName" class="large" type="text" value="Name" info="Name" onfocus="clearValue(this); selected(this);" onblur="restoreValue(this); deselected(this);"/>
+                      <input name="sequenceNameT" class="large" type="text" value="Name" info="Name" onfocus="clearValue(this); selected(this);" onblur="restoreValue(this); deselected(this);"/>
+                      <select name="diseaseAssociationT" class="large">
+                        <option value="NULL" selected="selected">No disease association</option>');
+                $r = mysqli_query($db, "SELECT * FROM disease ORDER BY name DESC"); # This prints all diseases in alphabetically order so that a sequence can be associated with it one.
+                while($row = mysqli_fetch_array($r)){
+                  echo('<option value="'.$row[0].'">'.$row[1].'</option>');
+                }
+                echo('<select>
                       <br><br>
                       <input id="histoneModsT" name="histoneModsT" type="hidden" value=""/>
                       <input name="submitT" type="submit" value="Query" class="button large"/>

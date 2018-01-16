@@ -2,9 +2,8 @@
   if(isset($trim["searchValue"]) && isset($trim["searchType"])){
     $sv = $trim["searchValue"]; # This contains the text that the user is actually searching for.
     $st = $trim["searchType"]; # This tells us what filter to apply to the search.
-    $errors = [];
-    if($sv == "Search"){ # We cannot serahc for the text 'Search'.
-      $errors = ["Cannot use default value."];
+    if($sv == "Search"){ # We cannot search for the text 'Search'.
+      $sv = ""; # This sets the value so that it lists all records.
     }
 
     $q = "";
@@ -29,51 +28,42 @@
         break;
     } # All queries will return records created by the user. The 'currentUser' queries return only records created by the current user.
 
-    if(empty($errors)){
-      $r = mysqli_query($db, $q);
-      echo("<script>document.getElementById('searchResultsCon').innerHTML=\"");
-      if(mysqli_num_rows($r) >= 1){
-        while($row = mysqli_fetch_array($r)){
-          if($st == ("threads" || "currentUserThread")){ # Searching for threads.
-            $s = $row[1];
-            if(count($s) > 25){
-        			$s = substr($s, 0, 25)."...";
-        		}
-            # This displays the results of the retrived records, when one is clicked it will redirect to a page displaying all of the records='s information.'
-            echo("<div class='strip greenYellow floatAesthetic' onclick='window.location.href = `index.php?page=forum&thread=".$row[0]."`;'><a>$s</a><a style='float: right;'> | ".$row[2]."</a>"); # Each thread displayed.
-        		if($admin == TRUE){
-        			echo("<form action='".$_SERVER["REQUEST_URI"]."' method='post'><input name='deleteTid' type='hidden' value='".$row[0]."'/><input class='large deleteBtn' type='submit' value='Delete'/></b></form>");
-        		}
-        		echo("</div><br>");
+    $r = mysqli_query($db, $q);
+    echo("<script>document.getElementById('searchResultsCon').innerHTML=\"");
+    if(mysqli_num_rows($r) >= 1){
+      while($row = mysqli_fetch_array($r)){
+        if($st == ("threads" || "currentUserThread")){ # Searching for threads.
+          $s = $row[1];
+          if(count($s) > 25){
+            $s = substr($s, 0, 25)."...";
           }
-          else if($st == ("sequences" || "currentUserSequences")){ # Searching for histone modification sequences.
-            # This displays the results of the retrived records, when one is clicked it will redirect to a page displaying all of the records='s information.'
-            echo("<div class='strip greenYellow floatAesthetic' onclick='window.location.href = `index.php?page=forum&thread=".$row[0]."`;'><a>$row[1]</a><a style='float: right;'> | ".$row[2]."</a>"); # Each thread displayed.
-            if($admin == TRUE){
-              echo("<form action='".$_SERVER["REQUEST_URI"]."' method='post'><input name='deleteNsid' type='hidden' value='".$row[0]."'/><input class='large deleteBtn' type='submit' value='Delete'/></b></form>");
-            }
-            echo("</div><br>");
+          # This displays the results of the retrived records, when one is clicked it will redirect to a page displaying all of the records='s information.'
+          echo("<div class='strip greenYellow floatAesthetic' onclick='window.location.href = `index.php?page=forum&thread=".$row[0]."`;'><a>$s</a><a style='float: right;'> | ".$row[2]."</a>"); # Each thread displayed.
+          if($admin == TRUE){
+            echo("<form action='".$_SERVER["REQUEST_URI"]."' method='post'><input name='deleteTid' type='hidden' value='".$row[0]."'/><input class='large deleteBtn' type='submit' value='Delete'/></b></form>");
           }
-          else { # If we are searching all diseases. Else can only be this as any other value of $st is a logical error.
-            echo("<div class='strip greenYellow floatAesthetic' onclick='window.location.href = `index.php?page=forum&thread=".$row[0]."`;'><a>".$row[1]."</a></a>"); //Each thread displayed.
-            if($admin == TRUE){
-              echo("<form action='".$_SERVER["REQUEST_URI"]."' method='post'><input name='deleteDid' type='hidden' value='".$row[0]."'/><input class='large deleteBtn' type='submit' value='Delete'/></b></form>");
-            }
-            echo("</div><br>");
+          echo("</div><br>");
+        }
+        else if($st == ("sequences" || "currentUserSequences")){ # Searching for histone modification sequences.
+          # This displays the results of the retrived records, when one is clicked it will redirect to a page displaying all of the records='s information.'
+          echo("<div class='strip greenYellow floatAesthetic' onclick='window.location.href = `index.php?page=forum&thread=".$row[0]."`;'><a>$row[1]</a><a style='float: right;'> | ".$row[2]."</a>"); # Each thread displayed.
+          if($admin == TRUE){
+            echo("<form action='".$_SERVER["REQUEST_URI"]."' method='post'><input name='deleteNsid' type='hidden' value='".$row[0]."'/><input class='large deleteBtn' type='submit' value='Delete'/></b></form>");
           }
+          echo("</div><br>");
+        }
+        else { # If we are searching all diseases. Else can only be this as any other value of $st is a logical error.
+          echo("<div class='strip greenYellow floatAesthetic' onclick='window.location.href = `index.php?page=forum&thread=".$row[0]."`;'><a>".$row[1]."</a></a>"); //Each thread displayed.
+          if($admin == TRUE){
+            echo("<form action='".$_SERVER["REQUEST_URI"]."' method='post'><input name='deleteDid' type='hidden' value='".$row[0]."'/><input class='large deleteBtn' type='submit' value='Delete'/></b></form>");
+          }
+          echo("</div><br>");
         }
       }
-      else {
-        echo("No results.");
-      }
-      echo("\";</script>");
     }
     else {
-      echo($popupTop);
-      foreach($errors as $error){
-        echo("<p>".$error."</p>");
-      }
-      echo($popupBottom);
+      echo("No results.");
     }
+    echo("\";</script>");
   }
 ?>
