@@ -27,14 +27,13 @@
         $errors = ["No search type indicated."];
         break;
     } # All queries will return records created by the user. The 'currentUser' queries return only records created by the current user.
-
     $r = mysqli_query($db, $q);
     echo("<script>document.getElementById('searchResultsCon').innerHTML=\"");
-    if(mysqli_num_rows($r) >= 1){
+    if(mysqli_num_rows($r) > 0){ # Only display results if any rows exist from the query.
       while($row = mysqli_fetch_array($r)){
         if($st == ("threads" || "currentUserThread")){ # Searching for threads.
           $s = $row[1];
-          if(count($s) > 25){
+          if(strlen($s) > 25){
             $s = substr($s, 0, 25)."...";
           }
           # This displays the results of the retrived records, when one is clicked it will redirect to a page displaying all of the records='s information.'
@@ -46,14 +45,14 @@
         }
         else if($st == ("sequences" || "currentUserSequences")){ # Searching for histone modification sequences.
           # This displays the results of the retrived records, when one is clicked it will redirect to a page displaying all of the records='s information.'
-          echo("<div class='strip greenYellow floatAesthetic' onclick='window.location.href = `index.php?page=forum&thread=".$row[0]."`;'><a>$row[1]</a><a style='float: right;'> | ".$row[2]."</a>"); # Each thread displayed.
+          echo("<div class='strip greenYellow floatAesthetic' onclick='window.location.href = `index.php?page=toolSingleView&sequence=".$row[0]."`;'><a>$row[1]</a><a style='float: right;'> | ".$row[2]."</a>"); # Each thread displayed.
           if($admin == TRUE){
             echo("<form action='".$_SERVER["REQUEST_URI"]."' method='post'><input name='deleteNsid' type='hidden' value='".$row[0]."'/><input class='large deleteBtn' type='submit' value='Delete'/></b></form>");
           }
           echo("</div><br>");
         }
         else { # If we are searching all diseases. Else can only be this as any other value of $st is a logical error.
-          echo("<div class='strip greenYellow floatAesthetic' onclick='window.location.href = `index.php?page=forum&thread=".$row[0]."`;'><a>".$row[1]."</a></a>"); //Each thread displayed.
+          echo("<div class='strip greenYellow floatAesthetic' onclick='window.location.href = `index.php?page=toolSingleView&disease=".$row[0]."`;'><a>".$row[1]."</a></a>"); //Each thread displayed.
           if($admin == TRUE){
             echo("<form action='".$_SERVER["REQUEST_URI"]."' method='post'><input name='deleteDid' type='hidden' value='".$row[0]."'/><input class='large deleteBtn' type='submit' value='Delete'/></b></form>");
           }
@@ -61,7 +60,7 @@
         }
       }
     }
-    else {
+    else { # If no results display a message to indicate this.
       echo("No results.");
     }
     echo("\";</script>");

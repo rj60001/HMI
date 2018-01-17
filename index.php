@@ -126,9 +126,17 @@
           <?php
             if(isset($_COOKIE["user"])){
               echo('<p class="subTitle">Tool</p>
-                    <p class="text">This is the main tool page. Here you can add or pull data from the database on any DNA sequence, by completing the form that follows:</p>
+                    <p class="text">This is the tool page. Here you can add histone modification sequences to the database on top of any DNA sequence:</p>
                     <br>
                     <br>
+                    <form id="diseaseForm" action="index.php?page=tool" method="post" class="redPurple floatAesthetic">
+                      <p class="text">Use this this mini tool to create a new disease that histone modifications can be associated with.</p>
+                      <br>
+                      <br>
+                      <input name="diseaseNameD" type="text" value="Disease name" info="Disease name" onfocus="clearValue(this); selected(this);" onblur="restoreValue(this); deselected(this);"/>
+                      <input name="submitD" type="submit" value="Create" class="button large"/>
+                      <input name="submittedD" type="hidden" value="TRUE"/>
+                    </form>
                     <form id="toolForm" action="index.php?page=tool" method="post" class="greenYellow floatAesthetic">
                       <p class="text">Here you can create your own DNA sequence and histone modification sequence in  5\'-3\' direction. Note that the tool is still in beta - there is <b>no</b> histone code checking.</p>
                       <br>
@@ -172,7 +180,7 @@
       </div>
       <div id="toolSingleViewPage" class="page">
         <div class="textCon">
-          <p class="subTitle">Tool</p>
+          <p class="subTitle"><?php $disease = isset($_GET["disease"]); $disease = True ? $t = "Disease" : $t = "Sequence"; echo ($t); #This prints out a title $t depending on whether or not `disease` is set in the url ?></p>
           <div id="toolSingleViewPageContent">
             <br><br>
           </div>

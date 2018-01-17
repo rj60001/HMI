@@ -16,16 +16,10 @@
     background: #EFEFEF;
   }
 
-  #searchBoxToolForm, #toolForm {
-    border-color: #333;
-    background-color: #333;
+  #diseaseForm, #toolForm {
     border-radius: 3px;
     padding: 5% 5% 5% 5%;
     color: #EFEFEF;
-  }
-
-  #searchBoxToolForm {
-    padding-bottom: -2%;
   }
 
   #removeHistoneBtn {
