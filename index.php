@@ -180,7 +180,7 @@
       </div>
       <div id="toolSingleViewPage" class="page">
         <div class="textCon">
-          <p class="subTitle"><?php $disease = isset($_GET["disease"]); $disease = True ? $t = "Disease" : $t = "Sequence"; echo ($t); #This prints out a title $t depending on whether or not `disease` is set in the url ?></p>
+          <p class="subTitle"><?php isset($_GET["disease"]) ? $t = "Disease" : $t = "Sequence"; echo ($t); #This prints out a title $t depending on whether or not `disease` is set in the url ?></p>
           <div id="toolSingleViewPageContent">
             <br><br>
           </div>
@@ -266,6 +266,7 @@
         $popupTop = '<div class="boardConPU"><div class="popUpBox redPurple"><div class="textConPU"><p class="titlePU">Notification<span class="crossPU">X</span></p>';
         $altPopupTop = substr($popupTop, 0, 23).' style="display: none" id="postingPU">'.substr($popupTop, 24); /*For replies to original post in the forum.*/
         $popupBottom = '</div></div></div>';
+        require("php/toolFunctions.php");
         require_once("php/onload/onloadLOAD.php");
         require_once("php/submission/submissionLOAD.php");
         #Tags that need to be loaded on start but require PHP.

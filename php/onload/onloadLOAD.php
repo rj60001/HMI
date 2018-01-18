@@ -3,6 +3,7 @@
   if(isset($_COOKIE["user"])){
     require_once("forum.php");
     require_once("tool.php");
+    require_once("toolSingleView.php");
   }
   echo("<script>");
   if(isset($_GET["page"]) && isset($_COOKIE["user"])){

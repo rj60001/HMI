@@ -49,6 +49,13 @@
   .floatAesthetic {
     box-shadow: 7px 7px 17px #AAA;
   }
+
+  .text {
+    font-size: 130%;
+    padding-right: 1%;
+    max-width: 100%;
+    min-width: 100%;
+  }
   /*Coloured text classes*/
     .coloredText {
       -webkit-text-fill-color: transparent;

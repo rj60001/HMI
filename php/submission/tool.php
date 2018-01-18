@@ -1,27 +1,4 @@
 <?php
-  # Functions for both forms of submission
-  function interpretHistoneModSequence($modsStr, $db){
-    $mods = explode(",", $modsStr);
-    $result = 0;
-    foreach($mods as $mod){
-      $q = "SELECT effectType, magnitude FROM histonemods WHERE hmid=".intval($mod);
-      $r = mysqli_query($db, $q);
-      $row = mysqli_fetch_array($r);
-      if($row[0] == "1"){
-        $result -= $row[1];
-      }
-      else {
-        $result += $row[1];
-      }
-    }
-    return $result;
-  }
-
-  function displayResults($result, $nsid){
-    global $popupTop, $popupBottom; # This lets us use the specified global varibables.
-    echo($popupTop."<p>This is your result: <br>".$result."</p>".$popupBottom);
-  }
-  # ===
   if(isset($trim["submittedD"])){
     $name = strip_tags($trim["diseaseNameD"]);
     $errors = [];
@@ -69,16 +46,16 @@
       $queries = [];
       array_push($queries, "INSERT INTO nucelosomesequence VALUES(0, $uid, $diseaseAssoc, '".$name."')");
       for($i=0;$i<count($dnaStrs);$i++){ # This builds up the nucleosomes from the data we have been given.
-        $dnaFound = False;
+        $dnaFound = 0;
         $ndsid = -1;
         $r = mysqli_query($db, "SELECT * FROM nucleosomednasequence");
         while($row = mysqli_fetch_array($r)){ #If we find DNA submitted that is already in our database we dont have to enter it into the database.
           if($dnaStrs[$i] == $row[1]){
-            $dnaFound = True;
+            $dnaFound = 1;
             $ndsid = $row[0]; # Fetch the ndsid if we get a match.
           }
         }
-        if($dnaFound == False) { # Create a new DNA sequence for each nucleosome unless that DNA sequence is already in the database.
+        if($dnaFound != 1) { # Create a new DNA sequence for each nucleosome unless that DNA sequence is already in the database.
           array_push($queries, "INSERT INTO nucleosomednasequence VALUES(0, '".$dnaStrs[$i]."')");
           $ndsid = mysqli_fetch_array(mysqli_query($db, "SELECT ndsid FROM nucleosomednasequence ORDER BY ndsid DESC LIMIT 1"))[0]; # Fetch the latest ndsid (aka the one we just submitted).
         }
