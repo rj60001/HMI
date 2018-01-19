@@ -29,45 +29,65 @@
   }
   if(isset($trim["submittedT"])){ # This is for submitting a new sequence.
     $dnaStr = $trim["dnaSequenceT"];
-    $modsStr = $trim["histoneModsT"]."|"; # Allows us to extract the last histone in the list.
+    $modsStr = $trim["histoneModsT"]; # ."|"Allows us to extract the last histone in the list.
     $name = strip_tags($trim["sequenceNameT"]);
     $diseaseAssoc = $trim["diseaseAssociationT"];
     $errors = [];
     if($modsStr == "" || $dnaStr == "ATCG" || $name == "Name"){
       $errors = ["Cannot use default values."];
     }
-    if(empty($errors)){
-      $result = interpretHistoneModSequence($modsStr, $db);
-      $dnaStrs = str_split($dnaStr, 127);
-      $modsStrs = explode("|", $modsStr);
-      foreach($modsStrs as $modsString){
-        str_replace("|", "", $modsString); # Remove the symbols used to split the modsString.
+    $r = mysqli_query($db, "SELECT name FROM nucelosomesequence WHERE uid=$uid");
+    do { # This lets us break out of the do-while and use the below error script if an error occurs.
+      while($row = mysqli_fetch_array($r)){
+        if($row[0] == $name){
+          $errors = ["You already have a sequence with that name."];
+          break;
+        }
       }
-      $queries = [];
-      array_push($queries, "INSERT INTO nucelosomesequence VALUES(0, $uid, $diseaseAssoc, '".$name."')");
-      for($i=0;$i<count($dnaStrs);$i++){ # This builds up the nucleosomes from the data we have been given.
-        $dnaFound = 0;
+      $dnaStrs = str_split($dnaStr, 127); # Produces nucleosome-sized chunks of DNA.
+      $modsStrs = explode("|", $modsStr); # Produces a specified chunk of histone modifications for each specified nucleosome.
+      $did = "";
+      if($diseaseAssoc != "NULL"){
+        $did = (int)$diseaseAssoc;
+      }
+      else {
+        $did = "NULL";
+      }
+      echo $popupTop.$did.$popupBottom;
+      if(count($dnaStrs) != count($modsStrs)){
+        for($i=0;$i<abs(count($dnaStrs) - count($modsStrs));$i++){ # DIfference between the two values (abs() returns the magnitude of a number).
+          array_push($modsStrs, " ");
+        }
+      }
+      $queries = []; # Array that holds all of our nucleosome queries ONLY.
+      $r = mysqli_query($db, "INSERT INTO nucelosomesequence VALUES(NULL, $uid, $did, '".$name."')"); # Inserts the nucleosome sequence into its table.
+      $nsid = mysqli_fetch_array(mysqli_query($db, "SELECT nsid FROM nucelosomesequence WHERE uid=$uid AND name='".$name."'"))[0]; # Fetches the ID of this new record.
+      for($i=0;$i<count($dnaStrs);$i++){
+        $dna = $dnaStrs[$i]; # Current DNA.
+        $mods = $modsStrs[$i]; # Current histone mods.
         $ndsid = -1;
+        $dnaFound = 0;
         $r = mysqli_query($db, "SELECT * FROM nucleosomednasequence");
-        while($row = mysqli_fetch_array($r)){ #If we find DNA submitted that is already in our database we dont have to enter it into the database.
-          if($dnaStrs[$i] == $row[1]){
+        while($row = mysqli_fetch_array($r)){
+          if($row[1] == $dna){ # If the DNA sequence is matching.
+            $ndsid = $row[0]; # Get the id of this sequence.
             $dnaFound = 1;
-            $ndsid = $row[0]; # Fetch the ndsid if we get a match.
           }
         }
-        if($dnaFound != 1) { # Create a new DNA sequence for each nucleosome unless that DNA sequence is already in the database.
-          array_push($queries, "INSERT INTO nucleosomednasequence VALUES(0, '".$dnaStrs[$i]."')");
-          $ndsid = mysqli_fetch_array(mysqli_query($db, "SELECT ndsid FROM nucleosomednasequence ORDER BY ndsid DESC LIMIT 1"))[0]; # Fetch the latest ndsid (aka the one we just submitted).
+        if($dnaFound != 1){
+          $r = mysqli_query($db, "INSERT INTO nucleosomednasequence VALUES(NULL, '".$dna."')");
+          $ndsid = mysqli_fetch_array(mysqli_query($db, "SELECT ndsid FROM nucleosomednasequence WHERE DNASequence='".$dna."'"))[0]; # Fetches the id of the dna sequence we just inserted.
         }
-        $nsid = mysqli_fetch_array(mysqli_query($db, "SELECT nsid FROM nucelosomesequence ORDER BY nsid DESC LIMIT 1"))[0]; # Fecth the nsid from the nucleosomneSequence record we just created.
-        array_push($queries, "INSERT INTO nucleosome VALUES(0, $ndsid, '".$modsStrs[$i]."', $nsid)");
+        array_push($queries, "INSERT INTO nucleosome VALUES(NULL, $ndsid, '".$mods."', $nsid)"); # Adds the nucleosome to its table.
       }
       foreach($queries as $query){
         $r = mysqli_query($db, $query);
       }
-      displayResults($result, $nsid);
-    }
-    else {
+      echo($popupTop."<p>Your sequence has now been submitted. Navigate to your sequences to view its results.</p>".$popupBottom);
+      break;
+    } while (empty($errors));
+
+    if(!empty($errors)) {
       echo($popupTop);
       foreach($errors as $error){
         echo('<p>'.$error.'</p>');

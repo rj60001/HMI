@@ -15,7 +15,7 @@
         $q = "SELECT nsid, name, firstName FROM nucelosomesequence INNER JOIN users ON nucelosomesequence.uid=users.uid WHERE name LIKE '%".$sv."%'";
         break;
       case "diseases":
-        $q = "SELECT did, disease.name FROM disease INNER JOIN nucelosomeSequence ON disease.did=nucleosomeSequence.did WHERE disease.name LIKE '%".$sv."%'";
+        $q = "SELECT * FROM disease WHERE name LIKE '%".$sv."%'";
         break;
       case "currentUserSequences":
         $q = "SELECT nsid, name, firstName FROM nucelosomesequence INNER JOIN users ON nucelosomesequence.uid=users.uid WHERE users.uid=$uid AND name LIKE '%".$sv."%'";
@@ -31,29 +31,29 @@
     echo("<script>document.getElementById('searchResultsCon').innerHTML=\"");
     if(mysqli_num_rows($r) > 0){ # Only display results if any rows exist from the query.
       while($row = mysqli_fetch_array($r)){
-        if($st == ("threads" || "currentUserThread")){ # Searching for threads.
+        if($st == "threads" || $st == "currentUserThread"){ # Searching for threads.
           $s = $row[1];
           if(strlen($s) > 25){
             $s = substr($s, 0, 25)."...";
           }
           # This displays the results of the retrived records, when one is clicked it will redirect to a page displaying all of the records='s information.'
           echo("<div class='strip greenYellow floatAesthetic' onclick='window.location.href = `index.php?page=forum&thread=".$row[0]."`;'><a>$s</a><a style='float: right;'> | ".$row[2]."</a>"); # Each thread displayed.
-          if($admin == TRUE){
+          if($admin == TRUE){ # Allows admins to delete any thread.
             echo("<form action='".$_SERVER["REQUEST_URI"]."' method='post'><input name='deleteTid' type='hidden' value='".$row[0]."'/><input class='large deleteBtn' type='submit' value='Delete'/></b></form>");
           }
           echo("</div><br>");
         }
-        else if($st == ("sequences" || "currentUserSequences")){ # Searching for histone modification sequences.
+        else if($st == "sequences" || $st == "currentUserSequences"){ # Searching for histone modification sequences.
           # This displays the results of the retrived records, when one is clicked it will redirect to a page displaying all of the records='s information.'
-          echo("<div class='strip greenYellow floatAesthetic' onclick='window.location.href = `index.php?page=toolSingleView&sequence=".$row[0]."`;'><a>$row[1]</a><a style='float: right;'> | ".$row[2]."</a>"); # Each thread displayed.
-          if($admin == TRUE){
+          echo("<div class='strip greenYellow floatAesthetic' onclick='window.location.href = `index.php?page=tool&sequence=".$row[0]."`;'><a>$row[1]</a><a style='float: right;'> | ".$row[2]."</a>"); # Each thread displayed.
+          if($uid == mysqli_fetch_array(mysqli_query($db, "SELECT uid FROM nucelosomesequence WHERE nsid=".$row[0]))[0]){ # Alows the user to delete their own sequences but no-one elses.
             echo("<form action='".$_SERVER["REQUEST_URI"]."' method='post'><input name='deleteNsid' type='hidden' value='".$row[0]."'/><input class='large deleteBtn' type='submit' value='Delete'/></b></form>");
           }
           echo("</div><br>");
         }
         else { # If we are searching all diseases. Else can only be this as any other value of $st is a logical error.
-          echo("<div class='strip greenYellow floatAesthetic' onclick='window.location.href = `index.php?page=toolSingleView&disease=".$row[0]."`;'><a>".$row[1]."</a></a>"); //Each thread displayed.
-          if($admin == TRUE){
+          echo("<div class='strip greenYellow floatAesthetic' onclick='window.location.href = `index.php?page=tool&disease=".$row[0]."`;'><a>".$row[1]."</a></a>"); //Each thread displayed.
+          if($admin == TRUE){ # Allows admins to delete diseases.
             echo("<form action='".$_SERVER["REQUEST_URI"]."' method='post'><input name='deleteDid' type='hidden' value='".$row[0]."'/><input class='large deleteBtn' type='submit' value='Delete'/></b></form>");
           }
           echo("</div><br>");
