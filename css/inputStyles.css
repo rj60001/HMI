@@ -1,3 +1,7 @@
+/* IDs */
+#dnaSequenceT { /* Sets the DNA sequence to its typical, capitalised form. */
+  text-transform: uppercase;
+}
 /* Elements */
   select, input, textarea, .button {
     background: rgba(238, 238, 238, 0.7);
@@ -30,7 +34,6 @@
     max-width: 100%;
     min-height: 40%;
     max-height: 40%;
-    text-transform: uppercase;
   }
 
     textarea::-webkit-scrollbar {
@@ -59,7 +62,7 @@
     .button {
       text-align: center;
       min-height: 12%;
-      max-height: 12%
+      max-height: 12%;
       cursor: pointer;
       p {
         display: block;

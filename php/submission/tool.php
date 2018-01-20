@@ -1,10 +1,22 @@
 <?php
+  function checkNotes($notes){ # Allows for notes to be NULL to sae database storage.
+    if($notes == "Notes"){
+      $notes = "NULL";
+    }
+    else{
+      $notes = "'".$notes."'"; # SQL-friendly string.
+    }
+    return $notes;
+  }
+
   if(isset($trim["submittedD"])){
     $name = strip_tags($trim["diseaseNameD"]);
+    $notes = checkNotes(strip_tags($trim["notesD"]));
     $errors = [];
     if($name == "Disease name"){
       $errors = ["Name cannot be default value"];
     }
+
     else { # This checks to see if the disease is already in the database. One or the other as 'Disease Name' cannot be submitted as a value so it wont be in the database.
       $r = mysqli_query($db, "SELECT name FROM disease"); # Selects all of the name in the disease table.
       while($row = mysqli_fetch_array($r)){ # For each row in the table.
@@ -15,7 +27,7 @@
     }
 
     if(empty($errors)){
-      $q = "INSERT INTO disease VALUES(NULL, '".$name."')";
+      $q = "INSERT INTO disease VALUES(NULL, '".$name."', $notes)";
       $r = mysqli_query($db, $q);
       echo("<script>window.location.href = 'index.php?page=tool&diseaseSubmitted=TRUE';</script>");
     }
@@ -31,6 +43,7 @@
     $dnaStr = $trim["dnaSequenceT"];
     $modsStr = $trim["histoneModsT"]; # ."|"Allows us to extract the last histone in the list.
     $name = strip_tags($trim["sequenceNameT"]);
+    $notes = checkNotes(strip_tags($trim["notesT"]));
     $diseaseAssoc = $trim["diseaseAssociationT"];
     $errors = [];
     if($modsStr == "" || $dnaStr == "ATCG" || $name == "Name"){
@@ -60,7 +73,7 @@
         }
       }
       $queries = []; # Array that holds all of our nucleosome queries ONLY.
-      $r = mysqli_query($db, "INSERT INTO nucelosomesequence VALUES(NULL, $uid, $did, '".$name."')"); # Inserts the nucleosome sequence into its table.
+      $r = mysqli_query($db, "INSERT INTO nucelosomesequence VALUES(NULL, $uid, $did, '".$name."', $notes)"); # Inserts the nucleosome sequence into its table.
       $nsid = mysqli_fetch_array(mysqli_query($db, "SELECT nsid FROM nucelosomesequence WHERE uid=$uid AND name='".$name."'"))[0]; # Fetches the ID of this new record.
       for($i=0;$i<count($dnaStrs);$i++){
         $dna = $dnaStrs[$i]; # Current DNA.

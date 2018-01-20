@@ -93,17 +93,20 @@
       </div>
       <div id="searchPage" class="page">
         <?php
-          if(isset($_COOKIE["user"])){
+          if(isset($_COOKIE["user"])){ # Only display these forums if the user has lopgged in.
             # For searching through forum posts and sequences. selected="selected" is used instead of just selected as it is XHTML compliant. This also indicated the default option of select.
-            echo('<form id="searchBoxAllForm" action="index.php?page=search" method="post">
-              <div><select id="searchType" name="searchType" class="greenYellow floatAesthetic">
-                <option value="currentUserSequences" selected="selected">My sequences</option>
-                <option value="currentUserThreads">My threads</option>
-                <option value="sequences">All sequences</option>
-                <option value="threads">All threads</option>
-                <option value="diseases">All diseases</option>
-              </select>
-              <input id="searchBoxAll" name="searchValue" class="redPurple floatAesthetic" type="text" value="Search" info="Search" onfocus="clearValue(this); selected(this);" onblur="restoreValue(this); deselected(this);"/></div>
+            echo('<form id="searchBoxForm" action="index.php?page=search" method="post">
+              <div id="inputsCon">
+                <select id="searchType" name="searchType" class="redPurple floatAesthetic">
+                  <option value="currentUserSequences" selected="selected">My sequences</option>
+                  <option value="currentUserThreads">My threads</option>
+                  <option value="sequences">All sequences</option>
+                  <option value="threads">All threads</option>
+                  <option value="diseases">All diseases</option>
+                </select>
+                <input id="searchBox" name="searchValue" class="redPurple floatAesthetic" type="text" value="Search" info="Search" onfocus="clearValue(this); selected(this);" onblur="restoreValue(this); deselected(this);"/>
+                <input id="searchBtn" class="redPurple floatAesthetic" type="submit"/>
+              </div>
               <input name="page" value="tool" type="hidden"/>
             </form>');
           }
@@ -134,6 +137,7 @@
                       <br>
                       <br>
                       <input name="diseaseNameD" type="text" value="Disease name" info="Disease name" onfocus="clearValue(this); selected(this);" onblur="restoreValue(this); deselected(this);"/>
+                      <textarea name="notesD" info="Notes" onfocus="clearValue(this); selected(this);" onblur="restoreValue(this); deselected(this);">Notes</textarea>
                       <input name="submitD" type="submit" value="Create" class="button large"/>
                       <input name="submittedD" type="hidden" value="TRUE"/>
                     </form>
@@ -141,7 +145,7 @@
                       <p class="text">Here you can create your own DNA sequence and histone modification sequence in  5\'-3\' direction. Note that the tool is still in beta - there is <b>no</b> histone code checking.</p>
                       <br>
                       <br>
-                      <textarea name="dnaSequenceT" onkeydown="dnaInputCheck(this);" info="ATCG" onfocus="clearValue(this); selected(this);" onblur="restoreValue(this); deselected(this);">ATCG</textarea>
+                      <textarea id="dnaSequenceT" name="dnaSequenceT" onkeydown="dnaInputCheck(this);" info="ATCG" onfocus="clearValue(this); selected(this);" onblur="restoreValue(this); deselected(this);">ATCG</textarea>
                       <br>
                       <br>
                       <div id="hmodBg"><div id="hmodSequence" class="toolCon"></div></div>
@@ -170,6 +174,7 @@
                 echo('<select>
                       <br><br>
                       <input id="histoneModsT" name="histoneModsT" type="hidden" value=""/>
+                      <textarea class="lowercase" name="notesT" info="Notes" onfocus="clearValue(this); selected(this);" onblur="restoreValue(this); deselected(this);">Notes</textarea>
                       <input name="submitT" type="submit" value="Query" class="button large"/>
                       <input name="submittedT" type="hidden" value="TRUE"/>
                     </form>');

@@ -7,15 +7,6 @@
     color: #666;
   }
 
-  #searchBox { /*For the forum and the tool.*/
-    min-width: 100%;
-    max-width: 100%;
-    min-height: 7%;
-    max-height: 7%;
-    font-size: 110%;
-    margin-right: 0%;
-    margin-left: 0%;
-  }
 /*Elements*/
   ::selection {
     background-color: inherit;

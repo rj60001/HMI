@@ -1,16 +1,37 @@
 /*IDs*/
-  #searchDetailsCon{ /* This contains the search form. */
-    max-width: 100%;
-    min-width: 100%;
-  }
+#searchBoxForm {
+  text-align: center;
+  padding: 5% 5% 5% 5%;
+}
+
+#inputsCon {
+  max-width: 100%;
+  min-width: 100%;
+}
+
   #searchType {
     color: #EFEFEF;
+    max-width: 30%;
+    min-width: 30%;
+    margin-right: 2%;
+    float: left;
+    font-size: 110%;
   }
-  #searchBoxAllForm {
-    text-align: center;
-    padding: 5% 5% 5% 5%;
-  }
-  #searchBoxAll {
-    transform: translateY(100%);
+
+  #searchBox {
     color: #EFEFEF;
+    max-width: 50%;
+    min-width: 50%;
+    font-size: 110%;
+    margin-right: 2%;
+  }
+
+  #searchBtn {
+    color: #EFEFEF;
+    max-width: 16%;
+    min-width: 16%;
+    float: right;
+    max-height: 8%;
+    min-height: 8%;
+    font-size: 110%;
   }
