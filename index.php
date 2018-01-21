@@ -237,7 +237,7 @@
 		            $r = mysqli_query($db, "SELECT message, firstName, mid FROM message INNER JOIN users ON message.uid = users.uid WHERE tid=".$tid);
 		            while($row = mysqli_fetch_array($r)){
                   $m = convert($row[0]);
-			            echo("<br><div class='forumObj message redPurple floatAesthetic'><div class='forumCon' onclick='document.getElementById(\"replyingPU\").style.display = \"block\";'><div onclick='document.getElementById(\"midPR\").value = \"".$row[2]."\";'><t>$m</t><br><em class='forumNameTag'>$row[1]</em></div>");
+			            echo("<br><div class='forumObj message redPurple floatAesthetic'><div class='forumCon' onclick='document.getElementById(\"replyingPU\").style.display = \"block\"; document.getElementById(\"midPR\").value = \"".$row[2]."\";'><div><t>$m</t><br><em class='forumNameTag'>$row[1]</em></div>");
                   if($admin == TRUE){
                     echo('<form action="'.$_SERVER['REQUEST_URI'].'" method="post"><input name="deleteMid" type="hidden" value="'.$row[2].'"/><input class="large deleteBtn" type="submit" value="Delete" onclick="document.getElementById(\'replyingPU\').style.display = \'none\';"/></b></form>');
                   }

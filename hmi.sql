@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.6
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Jan 19, 2018 at 07:12 PM
--- Server version: 10.1.29-MariaDB
--- PHP Version: 7.2.0
+-- Host: 127.0.0.1
+-- Generation Time: Jan 21, 2018 at 10:40 PM
+-- Server version: 10.1.28-MariaDB
+-- PHP Version: 7.1.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -30,15 +30,17 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `disease` (
   `did` tinyint(100) UNSIGNED NOT NULL,
-  `name` varchar(500) COLLATE latin1_general_ci NOT NULL
+  `name` varchar(500) COLLATE latin1_general_ci NOT NULL,
+  `notes` varchar(2000) COLLATE latin1_general_ci DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
 -- Dumping data for table `disease`
 --
 
-INSERT INTO `disease` (`did`, `name`) VALUES
-(4, 'Alzheimers');
+INSERT INTO `disease` (`did`, `name`, `notes`) VALUES
+(6, 'Alzheimers', 'morkdmoirmriodg'),
+(7, 'MS', NULL);
 
 -- --------------------------------------------------------
 
@@ -163,7 +165,8 @@ CREATE TABLE `message` (
 --
 
 INSERT INTO `message` (`mid`, `tid`, `uid`, `message`) VALUES
-(33, 20, 11, 'poop');
+(33, 20, 11, 'poop'),
+(34, 25, 11, 'Even spelling your subject name can be scary!');
 
 -- --------------------------------------------------------
 
@@ -175,15 +178,16 @@ CREATE TABLE `nucelosomesequence` (
   `nsid` tinyint(100) UNSIGNED NOT NULL,
   `uid` tinyint(100) UNSIGNED NOT NULL,
   `did` tinyint(100) UNSIGNED DEFAULT NULL,
-  `name` varchar(300) COLLATE latin1_general_ci NOT NULL
+  `name` varchar(300) COLLATE latin1_general_ci NOT NULL,
+  `notes` varchar(2000) COLLATE latin1_general_ci DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
 -- Dumping data for table `nucelosomesequence`
 --
 
-INSERT INTO `nucelosomesequence` (`nsid`, `uid`, `did`, `name`) VALUES
-(46, 11, 4, 'seseafae');
+INSERT INTO `nucelosomesequence` (`nsid`, `uid`, `did`, `name`, `notes`) VALUES
+(47, 11, 6, 'first', 'hiya!');
 
 -- --------------------------------------------------------
 
@@ -203,11 +207,11 @@ CREATE TABLE `nucleosome` (
 --
 
 INSERT INTO `nucleosome` (`nid`, `ndsid`, `histoneMods`, `nsid`) VALUES
-(86, 116, '2,', 46),
-(85, 115, '2,', 46),
-(84, 114, '2,', 46),
-(83, 113, '2,', 46),
-(82, 112, '2,', 46);
+(91, 121, '9,7,', 47),
+(90, 120, '1,3,6,', 47),
+(89, 119, '2,', 47),
+(88, 118, '2,', 47),
+(87, 117, '2,', 47);
 
 -- --------------------------------------------------------
 
@@ -225,11 +229,11 @@ CREATE TABLE `nucleosomednasequence` (
 --
 
 INSERT INTO `nucleosomednasequence` (`ndsid`, `DNASequence`) VALUES
-(116, 'GTCTACATTGGTATATGAATGCGACCTAGAAGAGGGCGCTTAAAATTGGGAGTGGTTGATGCTCTATACTCCATTTGGTTTTTTCGTGCATCACCGCGATAGGCTGACAAGGGTTTAACATTGAATA'),
-(115, 'TTCAATGGTTAAAAAACAAAGGCTTACTGTGCAGACTGGAACGCCCATCTAGCGGCTCGCGTCTTGAATGCTCGGTCCCCTTTGTCATTCCGGATAAATCCATTTCCCTCATTCACCAGCTTGCGAA'),
-(114, 'GAAACTCATAGTACCTCGGGTACCAACTTACTCAGGTTATTGCTTGAAGCTGTACTATTTCAGGGGGGGAGCGCTGAAGGTCTCTTCTTCTGATGACTGAACTCGCAAGGGTCGTGAAGTCGGTTCC'),
-(113, 'GGTGCGCATCACTTTGTATGTGCAAGCAACCCAAGTGGGCCCAGCCTGGACTCAGCTGGTTCCTGTGTGAGCTCGAGGCTGGGGATGACAGCTCTTTAAACATAGGGCGGGGGCGTCGAACGGTCGA'),
-(112, 'TCTAATCTTTTGCCAACATCGTAATAGCCTCCAAGAGATTGATCATACCTATCGGCACAGAAGTGACACGACGCCGATGGGTAGCGGACTTTTGGTCAACCACAATTCCCCAGGGGACAGGTCCTGC');
+(121, 'GATGATGGGTAGGGGCCTCCAATACATCCAACACTCTACGCCCTCTCCAAGAGCTAGAAGGGCACCCTGCAGTTGGAAAGGGAACTATTTCGTAAGGCGAGCCCATACCGTCACTCATGCGGAAGAC'),
+(120, 'CTGATCGGTACGGTAACGGAGAATCTGTCGGGCTATGTCACTAATACTTTCCAAACGCCCCGTACCGATGCTGAACAAGTCGATGCAGGCTCCCGTCTTTGAAAAGGGGTAAACATACAAGTGGATA'),
+(119, 'CCACGTGTTCGTTAACTGTTGATTGGTGGCACATAAGCAATATCGTAGTCCGTCAAATTCAGCTCTGTTATCCCGGGCGTTATGTGTCAAATGGCGTAGAACGGGATTGACTGTTTGACGGTAGCTG'),
+(118, 'ACGTCGCGCGCGTAGACCTTTATCTCCGGTTCAAGCTAGGGATGTGGCTGCATGCTACGTTGTCACACCTACACTGCTCGAAGTAAATATGCGAAGCGCGCGGCCTGGCCGGAGGCGTTCCGCGCCG'),
+(117, 'TGTCCTCATAGTTTGGGCATGTTTCCCTTGTAGGTGTGAAACCACTTAGCTTCGCGCCGTAGTCCCAATGAAAAACCTATGGACTTTGTTTTGGGTAGCACCAGGAATCTGAACCGTGTGAATGTGG');
 
 -- --------------------------------------------------------
 
@@ -269,7 +273,8 @@ CREATE TABLE `thread` (
 --
 
 INSERT INTO `thread` (`tid`, `uid`, `subject`, `message`) VALUES
-(20, 11, 'Welcome To The Forum', 'Hi guys, here you can introduce yourself to the community. I will start:\r\n\r\n[i]Hey, I am [b]Reiss[/b] and I am an aspiring Biology Studenty![/i]\r\n\r\nYou [b]can[/b] use mark down:\r\n\r\n[l][li]test[/li][/l]');
+(20, 11, 'Welcome To The Forum', 'Hi guys, here you can introduce yourself to the community. I will start:\r\n\r\n[i]Hey, I am [b]Reiss[/b] and I am an aspiring Biology Studenty![/i]\r\n\r\nYou [b]can[/b] use mark down:\r\n\r\n[l][li]test[/li][/l]'),
+(25, 11, 'Hiya!', 'Welcome to BBC Bitesize A Level Geography!');
 
 -- --------------------------------------------------------
 
@@ -361,7 +366,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `disease`
 --
 ALTER TABLE `disease`
-  MODIFY `did` tinyint(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `did` tinyint(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `histonemods`
@@ -373,25 +378,25 @@ ALTER TABLE `histonemods`
 -- AUTO_INCREMENT for table `message`
 --
 ALTER TABLE `message`
-  MODIFY `mid` tinyint(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `mid` tinyint(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `nucelosomesequence`
 --
 ALTER TABLE `nucelosomesequence`
-  MODIFY `nsid` tinyint(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `nsid` tinyint(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `nucleosome`
 --
 ALTER TABLE `nucleosome`
-  MODIFY `nid` tinyint(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
+  MODIFY `nid` tinyint(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
 --
 -- AUTO_INCREMENT for table `nucleosomednasequence`
 --
 ALTER TABLE `nucleosomednasequence`
-  MODIFY `ndsid` tinyint(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
+  MODIFY `ndsid` tinyint(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
 
 --
 -- AUTO_INCREMENT for table `replies`
@@ -403,7 +408,7 @@ ALTER TABLE `replies`
 -- AUTO_INCREMENT for table `thread`
 --
 ALTER TABLE `thread`
-  MODIFY `tid` tinyint(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `tid` tinyint(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `users`

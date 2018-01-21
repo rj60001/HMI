@@ -1,9 +1,15 @@
 <?php
   # Functions for both forms of submission
-  function interpretHistoneModSequence($modsStr, $db){
-    $mods = explode(",", $modsStr);
+  function interpretHistoneModSequence($mods, $db, $type = 's'){
+    $modsArray = [];
+    if($type == 's'){
+      $modsArray = explode(",", $mods);
+    }
+    else {
+      $modsArray = $mods;
+    }
     $result = 0;
-    foreach($mods as $mod){
+    foreach($modsArray as $mod){
       $q = "SELECT effectType, magnitude FROM histonemods WHERE hmid=".intval($mod);
       $r = mysqli_query($db, $q);
       $row = mysqli_fetch_array($r);

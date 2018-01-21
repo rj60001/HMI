@@ -63,7 +63,7 @@
     }
 
     if(empty($errors)){
-      $r = mysqli_query($db, "INSERT INTO replies VALUES(0, ".$trim['midPR'].", $uid, '$m')");
+      $r = mysqli_query($db, "INSERT INTO replies VALUES(NULL, ".$trim['midPR'].", $uid, '$m')");
       echo('<script>window.location.href = "index.php?page=forum&thread='.$tid.'";</script>');
     }
     else {

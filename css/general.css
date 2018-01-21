@@ -46,6 +46,7 @@
     padding-right: 1%;
     max-width: 100%;
     min-width: 100%;
+    overflow-wrap: break-word; /* Defines where breaks are places in words when overflowing. This will only break aword if a word cannot be placed on its own line without overflowing. */
   }
   /*Coloured text classes*/
     .coloredText {
@@ -75,7 +76,7 @@
       font-size: 100%;
       margin-left: 0;
     }
-  /*Results*/
+  /*Results from queries*/
     .strip {
       min-width: 100%;
       max-width: 100%;
@@ -86,3 +87,7 @@
       cursor: pointer;
       padding: 5%;
     }
+
+      .strip > hr {
+        border-color: #EFEFEF;
+      }
