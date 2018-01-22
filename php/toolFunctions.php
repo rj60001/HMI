@@ -32,7 +32,7 @@
     global $db;
     $r = mysqli_query($db, "SELECT DNASequence FROM nucleosomednasequence"); # Fetches all current DNA sequences form the database.
     while($row = mysqli_fetch_array($r)){ # Checks each row to see if it has a dna sequence that matches our one ($dna).
-      if($dna = $row[0]){
+      if($dna == $row[0]){
         return TRUE; # Return the boolean true if so.
       }
     }

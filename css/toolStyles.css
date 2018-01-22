@@ -25,6 +25,10 @@
   #removeHistoneBtn {
     margin-right: 0%;
   }
+
+  #removeHistoneBtnTE { /* For editing a sequence */
+    margin-right: 1%;
+  }
 /*Classes*/
   .histoneMod {
     max-width: 47%;

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 21, 2018 at 10:40 PM
+-- Generation Time: Jan 22, 2018 at 11:03 PM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -30,6 +30,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `disease` (
   `did` tinyint(100) UNSIGNED NOT NULL,
+  `uid` tinyint(100) UNSIGNED NOT NULL,
   `name` varchar(500) COLLATE latin1_general_ci NOT NULL,
   `notes` varchar(2000) COLLATE latin1_general_ci DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
@@ -38,9 +39,9 @@ CREATE TABLE `disease` (
 -- Dumping data for table `disease`
 --
 
-INSERT INTO `disease` (`did`, `name`, `notes`) VALUES
-(6, 'Alzheimers', 'morkdmoirmriodg'),
-(7, 'MS', NULL);
+INSERT INTO `disease` (`did`, `uid`, `name`, `notes`) VALUES
+(6, 11, 'Alzheimers', 'morkdmoirmriodg'),
+(7, 11, 'MSS', NULL);
 
 -- --------------------------------------------------------
 
@@ -187,7 +188,7 @@ CREATE TABLE `nucelosomesequence` (
 --
 
 INSERT INTO `nucelosomesequence` (`nsid`, `uid`, `did`, `name`, `notes`) VALUES
-(47, 11, 6, 'first', 'hiya!');
+(47, 11, 6, 'first poo', 'hiya! lol');
 
 -- --------------------------------------------------------
 
@@ -211,7 +212,8 @@ INSERT INTO `nucleosome` (`nid`, `ndsid`, `histoneMods`, `nsid`) VALUES
 (90, 120, '1,3,6,', 47),
 (89, 119, '2,', 47),
 (88, 118, '2,', 47),
-(87, 117, '2,', 47);
+(87, 117, '2,', 47),
+(92, 122, '2,', 47);
 
 -- --------------------------------------------------------
 
@@ -233,7 +235,8 @@ INSERT INTO `nucleosomednasequence` (`ndsid`, `DNASequence`) VALUES
 (120, 'CTGATCGGTACGGTAACGGAGAATCTGTCGGGCTATGTCACTAATACTTTCCAAACGCCCCGTACCGATGCTGAACAAGTCGATGCAGGCTCCCGTCTTTGAAAAGGGGTAAACATACAAGTGGATA'),
 (119, 'CCACGTGTTCGTTAACTGTTGATTGGTGGCACATAAGCAATATCGTAGTCCGTCAAATTCAGCTCTGTTATCCCGGGCGTTATGTGTCAAATGGCGTAGAACGGGATTGACTGTTTGACGGTAGCTG'),
 (118, 'ACGTCGCGCGCGTAGACCTTTATCTCCGGTTCAAGCTAGGGATGTGGCTGCATGCTACGTTGTCACACCTACACTGCTCGAAGTAAATATGCGAAGCGCGCGGCCTGGCCGGAGGCGTTCCGCGCCG'),
-(117, 'TGTCCTCATAGTTTGGGCATGTTTCCCTTGTAGGTGTGAAACCACTTAGCTTCGCGCCGTAGTCCCAATGAAAAACCTATGGACTTTGTTTTGGGTAGCACCAGGAATCTGAACCGTGTGAATGTGG');
+(117, 'TGTCCTCATAGTTTGGGCATGTTTCCCTTGTAGGTGTGAAACCACTTAGCTTCGCGCCGTAGTCCCAATGAAAAACCTATGGACTTTGTTTTGGGTAGCACCAGGAATCTGAACCGTGTGAATGTGG'),
+(122, 'A');
 
 -- --------------------------------------------------------
 
@@ -390,13 +393,13 @@ ALTER TABLE `nucelosomesequence`
 -- AUTO_INCREMENT for table `nucleosome`
 --
 ALTER TABLE `nucleosome`
-  MODIFY `nid` tinyint(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `nid` tinyint(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 
 --
 -- AUTO_INCREMENT for table `nucleosomednasequence`
 --
 ALTER TABLE `nucleosomednasequence`
-  MODIFY `ndsid` tinyint(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
+  MODIFY `ndsid` tinyint(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123;
 
 --
 -- AUTO_INCREMENT for table `replies`

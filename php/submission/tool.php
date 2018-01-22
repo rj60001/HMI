@@ -26,7 +26,7 @@
     }
 
     if(empty($errors)){
-      $q = "INSERT INTO disease VALUES(NULL, '".$name."', $notes)";
+      $q = "INSERT INTO disease VALUES(NULL, $uid, '".$name."', $notes)";
       $r = mysqli_query($db, $q);
       echo("<script>window.location.href = 'index.php?page=tool&diseaseSubmitted=TRUE';</script>");
     }
@@ -45,7 +45,7 @@
     $notes = checkNotes(strip_tags($trim["notesT"]));
     $diseaseAssoc = $trim["diseaseAssociationT"];
     $errors = [];
-    if($modsStr == "" || $dnaStr == "ATCG" || $name == "Name"){
+    if($modsStr == "" || $dnaStr == "ATCG" || $name == "Name" || $notes == "Notes" ){
       $errors = ["Cannot use default values."];
     }
     $r = mysqli_query($db, "SELECT name FROM nucelosomesequence WHERE uid=$uid");
