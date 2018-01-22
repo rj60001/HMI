@@ -1,11 +1,11 @@
-function addHmod(name, id){
-  document.getElementById("hmodSequence").innerHTML += String(name)+" ";
-  document.getElementById("histoneModsT").value += String(id)+",";
+function addHmod(name, id, display = "hmodSequence", list = "histoneModsT"){ // Defaults for output. display is where the list of mods is shown to the user. list is the actual list of ids that we will use in processing.
+  document.getElementById(display).innerHTML += String(name)+" ";
+  document.getElementById(list).value += String(id)+",";
 }
 
-function removeLastHmod(){
-  text = document.getElementById("hmodSequence");
-  list = document.getElementById("histoneModsT");
+function removeLastHmod(display = "hmodSequence", list = "histoneModsT"){
+  text = document.getElementById(display);
+  list = document.getElementById(list);
   mods = text.innerHTML.split(" ");
   ids = list.value.split(",");
   mods.splice(mods.lengths-1, 1);
@@ -18,28 +18,9 @@ function removeLastHmod(){
   list.value = String(ids);
 }
 
-function split(){
-  text = document.getElementById("hmodSequence");
-  list = document.getElementById("histoneModsT");
+function split(display = "hmodSequence", list = "histoneModsT"){
+  text = document.getElementById(display);
+  list = document.getElementById(list);
   text.innerHTML += " | ";
   list.value += "|";
-}
-
-function searchRedirect(id, disease, tool){ //tool when true means that we are searching for a sequence.
-  url = "index.php?searchType=";
-  if(tool === true){
-    url += "tool&disease=";
-    if(disease === false){
-      url += "0";
-    }
-    else {
-      url += "1";
-    }
-    url += "&sequence="+id;
-  }
-  else {
-    url += "forum&thread="+id;
-  }
-  url += "&page=search";
-  window.location.href = url;
 }

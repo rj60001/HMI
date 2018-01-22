@@ -1,5 +1,5 @@
 <?php
-  function checkNotes($notes){ # Allows for notes to be NULL to sae database storage.
+  function checkNotes($notes){ # Allows for notes to be NULL to save database storage.
     if($notes == "Notes"){
       $notes = "NULL";
     }
@@ -16,7 +16,6 @@
     if($name == "Disease name"){
       $errors = ["Name cannot be default value"];
     }
-
     else { # This checks to see if the disease is already in the database. One or the other as 'Disease Name' cannot be submitted as a value so it wont be in the database.
       $r = mysqli_query($db, "SELECT name FROM disease"); # Selects all of the name in the disease table.
       while($row = mysqli_fetch_array($r)){ # For each row in the table.
@@ -40,7 +39,7 @@
     }
   }
   if(isset($trim["submittedT"])){ # This is for submitting a new sequence.
-    $dnaStr = $trim["dnaSequenceT"];
+    $dnaStr = strtoupper($trim["dnaSequenceT"]);
     $modsStr = $trim["histoneModsT"]; # ."|"Allows us to extract the last histone in the list.
     $name = strip_tags($trim["sequenceNameT"]);
     $notes = checkNotes(strip_tags($trim["notesT"]));

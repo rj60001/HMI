@@ -1,5 +1,5 @@
 /* IDs */
-#dnaSequenceT { /* Sets the DNA sequence to its typical, capitalised form. */
+#dnaSequenceT , #dnaSequenceTE { /* Sets the DNA sequence to its typical, capitalised form. */
   text-transform: uppercase;
 }
 /* Elements */

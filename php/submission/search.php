@@ -31,7 +31,7 @@
     echo("<script>document.getElementById('searchResultsCon').innerHTML=\"");
     if(mysqli_num_rows($r) > 0){ # Only display results if any rows exist from the query.
       while($row = mysqli_fetch_array($r)){
-        if($st == "threads" || $st == "currentUserThread"){ # Searching for threads.
+        if($st == "threads" || $st == "currentUserThreads"){ # Searching for threads.
           $s = $row[1];
           if(strlen($s) > 25){
             $s = substr($s, 0, 25)."...";
