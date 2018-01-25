@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.7.6
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 22, 2018 at 11:03 PM
--- Server version: 10.1.28-MariaDB
--- PHP Version: 7.1.11
+-- Host: localhost
+-- Generation Time: Jan 25, 2018 at 09:18 PM
+-- Server version: 10.1.29-MariaDB
+-- PHP Version: 7.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -30,7 +30,6 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `disease` (
   `did` tinyint(100) UNSIGNED NOT NULL,
-  `uid` tinyint(100) UNSIGNED NOT NULL,
   `name` varchar(500) COLLATE latin1_general_ci NOT NULL,
   `notes` varchar(2000) COLLATE latin1_general_ci DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
@@ -39,9 +38,9 @@ CREATE TABLE `disease` (
 -- Dumping data for table `disease`
 --
 
-INSERT INTO `disease` (`did`, `uid`, `name`, `notes`) VALUES
-(6, 11, 'Alzheimers', 'morkdmoirmriodg'),
-(7, 11, 'MSS', NULL);
+INSERT INTO `disease` (`did`, `name`, `notes`) VALUES
+(6, 'Alzheimers', 'morkdmoirmriodg'),
+(7, 'MS', NULL);
 
 -- --------------------------------------------------------
 
@@ -161,14 +160,6 @@ CREATE TABLE `message` (
   `message` longtext COLLATE latin1_general_ci NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
---
--- Dumping data for table `message`
---
-
-INSERT INTO `message` (`mid`, `tid`, `uid`, `message`) VALUES
-(33, 20, 11, 'poop'),
-(34, 25, 11, 'Even spelling your subject name can be scary!');
-
 -- --------------------------------------------------------
 
 --
@@ -188,7 +179,8 @@ CREATE TABLE `nucelosomesequence` (
 --
 
 INSERT INTO `nucelosomesequence` (`nsid`, `uid`, `did`, `name`, `notes`) VALUES
-(47, 11, 6, 'first poo', 'hiya! lol');
+(47, 11, 6, 'first', 'hiya!'),
+(48, 11, 6, 'Increased Expression of the APP (Beta-Amyloid Precursor Protein) Gene Via Increased Promoter Affinity', 'This sequence increases the expression of beta-amyloid by increasing the affinity of the promoter using histone modifications that encourage acetylation.');
 
 -- --------------------------------------------------------
 
@@ -213,7 +205,16 @@ INSERT INTO `nucleosome` (`nid`, `ndsid`, `histoneMods`, `nsid`) VALUES
 (89, 119, '2,', 47),
 (88, 118, '2,', 47),
 (87, 117, '2,', 47),
-(92, 122, '2,', 47);
+(92, 122, 'TRUE3,', 47),
+(93, 123, '2,2,2,', 47),
+(94, 122, '1,1,1,', 47),
+(95, 1, '1', 47),
+(96, 122, '1,1,1,', 47),
+(97, 125, '1,', 48),
+(98, 126, '1,', 48),
+(99, 127, '1,', 48),
+(100, 128, '1,', 48),
+(101, 129, '1,', 48);
 
 -- --------------------------------------------------------
 
@@ -236,7 +237,15 @@ INSERT INTO `nucleosomednasequence` (`ndsid`, `DNASequence`) VALUES
 (119, 'CCACGTGTTCGTTAACTGTTGATTGGTGGCACATAAGCAATATCGTAGTCCGTCAAATTCAGCTCTGTTATCCCGGGCGTTATGTGTCAAATGGCGTAGAACGGGATTGACTGTTTGACGGTAGCTG'),
 (118, 'ACGTCGCGCGCGTAGACCTTTATCTCCGGTTCAAGCTAGGGATGTGGCTGCATGCTACGTTGTCACACCTACACTGCTCGAAGTAAATATGCGAAGCGCGCGGCCTGGCCGGAGGCGTTCCGCGCCG'),
 (117, 'TGTCCTCATAGTTTGGGCATGTTTCCCTTGTAGGTGTGAAACCACTTAGCTTCGCGCCGTAGTCCCAATGAAAAACCTATGGACTTTGTTTTGGGTAGCACCAGGAATCTGAACCGTGTGAATGTGG'),
-(122, 'A');
+(122, 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'),
+(123, 'ttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt'),
+(124, 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'),
+(125, 'TAAACTATCTGGACACTAACTGGACAGTGGACGGTTTGTGTTTAATCCAGGAGAAAGTGGCATGGCAGAAGGTTCATTTCTATAATTCAGGACAGACACAATGAAGAACAAGGGCAGCGTTTGAGGT'),
+(126, 'CAGAAGTCCTCATTTACGGGGGTCGAATACGAATGATCTCTCCTAATTTTTCCTTCTTCCCCAACTCAGATGGATGTTACATCCCTGCTTAACAACAAAAAAAGACCCCCCGCCCCGCAAAATCCAC'),
+(127, 'ACTGACCACCCCCTTTAACAAAACAAAACCAAAAACAAACAAAAATATAAGAAAGAAACAAAACCCAAGCCCAGAACCCTGCTTTCAAGAAGAAGTAAATGGGTTGGCCGCTTCTTTGCCAGGTCCT'),
+(128, 'GCGCCTTGCTCCTTTGGTTCGTTCTAAAGATAGAAATTCCAGGTTGCTCGTGCCTGCTTTTGACGTTGGGGGTTAAAAAATGAGGTTTTGCTGTCTCAACAAGCAAAGAAAATCCTATTTCCTTTAA'),
+(129, 'GCTTCACTCGTTCTCATTCTCTTCCAGAAACGCCTGCCCCACCTCTCCAAACCGAGAGAAAAAACGAAATGCGGATAAAAACGCACCCTAGC'),
+(130, 'TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT');
 
 -- --------------------------------------------------------
 
@@ -271,14 +280,6 @@ CREATE TABLE `thread` (
   `message` longtext COLLATE latin1_general_ci NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
---
--- Dumping data for table `thread`
---
-
-INSERT INTO `thread` (`tid`, `uid`, `subject`, `message`) VALUES
-(20, 11, 'Welcome To The Forum', 'Hi guys, here you can introduce yourself to the community. I will start:\r\n\r\n[i]Hey, I am [b]Reiss[/b] and I am an aspiring Biology Studenty![/i]\r\n\r\nYou [b]can[/b] use mark down:\r\n\r\n[l][li]test[/li][/l]'),
-(25, 11, 'Hiya!', 'Welcome to BBC Bitesize A Level Geography!');
-
 -- --------------------------------------------------------
 
 --
@@ -301,7 +302,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`uid`, `firstName`, `secondName`, `emailAddress`, `password`, `interest`, `hash`, `level`) VALUES
-(11, 'Reiss', 'Jones', 'reiss1999@gmail.com', 'iNvyRTQWLnT9Y', 'Student', '51aa5d862c9c17f7e374faf3de1a52e6', 1);
+(11, 'Reiss', 'Jones', 'reiss1999@gmail.com', 'iNvyRTQWLnT9Y', 'Student', 'NULL', 1),
+(15, 'Testing', 'testuser', 'testuser@example.com', 'iNb94HCC8oFx.', 'Company', 'NULL', 0);
 
 --
 -- Indexes for dumped tables
@@ -381,25 +383,25 @@ ALTER TABLE `histonemods`
 -- AUTO_INCREMENT for table `message`
 --
 ALTER TABLE `message`
-  MODIFY `mid` tinyint(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `mid` tinyint(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `nucelosomesequence`
 --
 ALTER TABLE `nucelosomesequence`
-  MODIFY `nsid` tinyint(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `nsid` tinyint(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `nucleosome`
 --
 ALTER TABLE `nucleosome`
-  MODIFY `nid` tinyint(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+  MODIFY `nid` tinyint(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 
 --
 -- AUTO_INCREMENT for table `nucleosomednasequence`
 --
 ALTER TABLE `nucleosomednasequence`
-  MODIFY `ndsid` tinyint(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123;
+  MODIFY `ndsid` tinyint(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
 
 --
 -- AUTO_INCREMENT for table `replies`
@@ -411,13 +413,13 @@ ALTER TABLE `replies`
 -- AUTO_INCREMENT for table `thread`
 --
 ALTER TABLE `thread`
-  MODIFY `tid` tinyint(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `tid` tinyint(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `uid` tinyint(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `uid` tinyint(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
