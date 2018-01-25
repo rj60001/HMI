@@ -1,4 +1,5 @@
 <?php
+  # Deleting Forum Items
   if(isset($trim["deleteMid"])){
     $r = mysqli_query($db, "DELETE FROM message WHERE mid=".$trim['deleteMid']);
     $r = mysqli_query($db, "DELETE FROM replies WHERE mid=".$trim['deleteMid']);
@@ -13,6 +14,7 @@
     $r = mysqli_query($db, "DELETE FROM replies WHERE Rid=".$trim['deleteRid']);
     echo('<script>window.location.href = "index.php?'.$_SERVER['QUERY_STRING'].'";</script>');
   }
+  # ===
 
   if(isset($trim["submittedPT"])){
     $s = strip_tags($trim["subjectPT"]);

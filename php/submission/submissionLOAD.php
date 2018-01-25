@@ -5,6 +5,7 @@
     require_once("tool.php");
     require_once("search.php");
     require_once("toolSingleView.php");
+    require_once("deletionScripts");
   }
   require_once("account.php"); # The page that anyone can access.
 ?>

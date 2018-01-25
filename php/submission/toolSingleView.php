@@ -3,36 +3,22 @@
     $nucleosome = $trim["nucleosomeTE"];
     $mods = $trim["histoneModsTE"];
     $dna = strtoupper($trim["dnaSequenceTE"]);
-    $errors = [];
 
-    if(strlen($dna) != 127){
-      $errors = ["The DNA sequence does not fill the nucelosome's capacity (127bp)."]
+    $q = "";
+    $matchResult = checkDNA($dna);
+    $ndsid = -1; # Not yet assigned with an actual ID value, but needs to be decared so that it has the correct variable scope.
+    if($matchResult == FALSE) {
+      $r = mysqli_query($db, "INSERT INTO nucleosomednasequence VALUES(NULL, '$dna')");
     }
-
-    if(empty($errors)){
-      $q = "";
-      $matchResult = checkDNA($dna);
-      $ndsid = -1; # Not yet assigned with an actual ID value, but needs to be decared so that it has the correct variable scope.
-      if($matchResult == FALSE) {
-        $r = mysqli_query($db, "INSERT INTO nucleosomednasequence VALUES(NULL, '$dna')");
-      }
-      $ndsid = mysqli_fetch_array(mysqli_query($db, "SELECT ndsid FROM nucleosomednasequence WHERE DNASequence='".$dna."'"))[0];
-      if($nucleosome == "NULL"){ # This means that we need to create a new record.
-        $q = "INSERT INTO nucleosome VALUES(NULL, $ndsid, '$mods', ".$_GET["sequence"].")";
-      }
-      else { # This means we need to update a record.
-        $q = "UPDATE nucleosome SET ndsid='$ndsid', histoneMods='$mods' WHERE nid=$nucleosome";
-      }
-      $r = mysqli_query($db, $q);
-      echo('<script>window.location.href="index.php?page=tool&sequence='.$nsid.'";</script>');
+    $ndsid = mysqli_fetch_array(mysqli_query($db, "SELECT ndsid FROM nucleosomednasequence WHERE DNASequence='".$dna."'"))[0];
+    if($nucleosome == "NULL"){ # This means that we need to create a new record.
+      $q = "INSERT INTO nucleosome VALUES(NULL, $ndsid, '$mods', ".$_GET["sequence"].")";
     }
-    else {
-      echo($popupTop);
-      foreach($errors as $error){
-        echo('<p>'.$error.'</p>');
-      }
-      echo($popupBottom);
+    else { # This means we need to update a record.
+      $q = "UPDATE nucleosome SET ndsid=$ndsid, histoneMods='$mods' WHERE nid=$nucleosome";
     }
+    $r = mysqli_query($db, $q);
+    echo('<script>window.location.href="index.php?page=tool&sequence='.$nsid.'";</script>');
   }
   else if(isset($trim["nsidTD"]) && isset($_GET["disease"])){ # Editing a disease.
     $nsid = $trim["nsidTD"];
@@ -61,7 +47,7 @@
     }
 
     if(empty($errors)){
-      $r = mysqli_query($db, "UPDATE nucelosomesequence SET notes='$notes', name='$name', did=$did WHERE nsid=$nsid");
+      $r = mysqli_query($db, "UPDATE nucelosomesequence SET (notes='$notes', name='$name', did=$did) WHERE nsid=$nsid");
       echo('<script>window.location.href="index.php?page=tool&sequence='.$nsid.'";</script>');
     }
     else {
@@ -90,7 +76,7 @@
     }
 
     if(empty($errors)){
-      $r = mysqli_query($db, "UPDATE disease SET notes=$notes, name='$name' WHERE did=$did");
+      $r = mysqli_query($db, "UPDATE disease SET (notes='$notes', name='$name') WHERE did=$did");
       echo('<script>window.location.href="index.php?page=tool&disease='.$did.'";</script>');
     }
     else {

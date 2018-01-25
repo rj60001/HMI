@@ -66,9 +66,14 @@
         $did = "NULL";
       }
       echo $popupTop.$did.$popupBottom;
-      if(count($dnaStrs) != count($modsStrs)){
-        for($i=0;$i<abs(count($dnaStrs) - count($modsStrs));$i++){ # DIfference between the two values (abs() returns the magnitude of a number).
-          array_push($modsStrs, " ");
+      if(count($dnaStrs) > count($modsStrs)){
+        for($i=0;$i<abs(count($dnaStrs) - count($modsStrs));$i++){ # Difference between the two values (abs() returns the magnitude of a number).
+          array_push($modsStrs, " "); # Append mod spaces so that each nucleosomes has "mods".
+        }
+      }
+      else if(count($dnaStrs) < count($modsStrs)){
+        for($i=0;$i<abs(count($dnaStrs) - count($modsStrs));$i++){ # Difference between the two values (abs() returns the magnitude of a number).
+          array_push($dnaStrs, "NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN"); # Append unknown DNA sequence N signifies unknown, 127 Ns in each append.
         }
       }
       $queries = []; # Array that holds all of our nucleosome queries ONLY.
