@@ -1,5 +1,6 @@
 <html>
   <?php
+    error_reporting(0); # Turn off error reporting.
     $db = mysqli_connect("localhost", "root", "", "hmi");
     $uid = "";
     $userRow = [];

@@ -41,6 +41,9 @@
         break;
     }
   }
+  else if($_GET["page"] == "account" && !isset($_GET["user"])){
+    echo("menuBtnClick('account');");
+  }
   else {
     echo("menuBtnClick('home');");
   }

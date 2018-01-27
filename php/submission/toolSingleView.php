@@ -3,7 +3,6 @@
     $nucleosome = $trim["nucleosomeTE"];
     $mods = $trim["histoneModsTE"];
     $dna = strtoupper($trim["dnaSequenceTE"]);
-
     $q = "";
     $matchResult = checkDNA($dna);
     $ndsid = -1; # Not yet assigned with an actual ID value, but needs to be decared so that it has the correct variable scope.

@@ -11,7 +11,7 @@
 
   if(isset($trim["submittedD"])){
     $name = strip_tags($trim["diseaseNameD"]);
-    $notes = checkNotes(strip_tags($trim["notesD"]));
+    $notes = strip_tags($trim["notesD"]);
     $errors = [];
     if($name == "Disease name"){
       $errors = ["Name cannot be default value"];
@@ -26,7 +26,7 @@
     }
 
     if(empty($errors)){
-      $q = "INSERT INTO disease VALUES(NULL, $uid, '".$name."', $notes)";
+      $q = "INSERT INTO disease VALUES(NULL, '$name', '$notes', $uid)";
       $r = mysqli_query($db, $q);
       echo("<script>window.location.href = 'index.php?page=tool&diseaseSubmitted=TRUE';</script>");
     }
@@ -100,7 +100,7 @@
       foreach($queries as $query){
         $r = mysqli_query($db, $query);
       }
-      echo($popupTop."<p>Your sequence has now been submitted. Navigate to your sequences to view its results.</p>".$popupBottom);
+      echo('<script>window.location.href="index.php?page=tool&sequenceSubmitted=TRUE";</script>');
       break;
     } while (empty($errors));
 
