@@ -154,11 +154,12 @@
         </div>
       </div>
       <?php
-         $trim = array_map('trim', $_POST); # All submitted data is trimmed down to the fewest possible charcaters.
+        $trim = array_map('trim', $_POST); # All submitted data is trimmed down to the fewest possible charcaters.
         $popupTop = '<div class="boardConPU"><div class="popUpBox redPurple"><div class="textConPU"><p class="titlePU">Notification<span class="crossPU">X</span></p>';
         $altPopupTop = substr($popupTop, 0, 23).' style="display: none" id="postingPU">'.substr($popupTop, 24); # For forum posts.
         $popupBottom = '</div></div></div>';
         require("php/toolFunctions.php");
+        require("php/dictionary.php");
         require_once("php/onload/onloadLOAD.php");
         require_once("php/submission/submissionLOAD.php");
         #Tags that need to be loaded on start but require PHP.

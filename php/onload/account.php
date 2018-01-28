@@ -11,7 +11,7 @@
     }
   }
   else {
-    $emailAddress = isset($trim["emailAddressSI"]) ? $trim["emailAddressSI"] : "rf@examle.com";
+    $emailAddress = isset($trim["emailAddressSI"]) ? $trim["emailAddressSI"] : "rf@example.com";
     if(isset($_COOKIE["user"])){
       $q = "SELECT * FROM users WHERE uid=".$_COOKIE['user'];
       $r = mysqli_query($db, $q);
