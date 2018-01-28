@@ -23,6 +23,9 @@
       case "currentUserThreads":
         $q = "SELECT tid, subject, firstName FROM thread INNER JOIN users ON thread.uid=users.uid WHERE subject LIKE '%$sv%' OR message LIKE '%".$sv."%' AND users.uid=".$uid." ORDER BY tid DESC";
         break;
+      case "currentUserDiseases":
+        $q = "SELECT * FROM disease WHERE name LIKE '%".$sv."%' AND uid=".$uid;
+        break;
       default:
         $errors = ["No search type indicated."];
         break;
@@ -39,7 +42,7 @@
           # This displays the results of the retrived records, when one is clicked it will redirect to a page displaying all of the records='s information.'
           echo("<div class='strip greenYellow floatAesthetic' onclick='window.location.href = `index.php?page=forum&thread=".$row[0]."`;'><a>$s</a><a style='float: right;'> | ".$row[2]."</a>"); # Each thread displayed.
           if($admin == TRUE){ # Allows admins to delete any thread.
-            echo("<form action='".$_SERVER["REQUEST_URI"]."' method='post'><input name='deleteTid' type='hidden' value='".$row[0]."'/><input class='large deleteBtn' type='submit' value='Delete'/></b></form>");
+            echo("<form action='".$_SERVER["REQUEST_URI"]."' method='post'><input name='deleteTid' type='hidden' value='".$row[0]."'/><input class='removeDeleteButton' type='submit' value='Delete'/></b></form>");
           }
           echo("</div><br>");
         }
@@ -47,14 +50,14 @@
           # This displays the results of the retrived records, when one is clicked it will redirect to a page displaying all of the records='s information.'
           echo("<div class='strip greenYellow floatAesthetic' onclick='window.location.href = `index.php?page=tool&sequence=".$row[0]."`;'><a>$row[1]</a><a style='float: right;'> | ".$row[2]."</a>"); # Each thread displayed.
           if($uid == mysqli_fetch_array(mysqli_query($db, "SELECT uid FROM nucelosomesequence WHERE nsid=".$row[0]))[0]){ # Alows the user to delete their own sequences but no-one elses.
-            echo("<form action='".$_SERVER["REQUEST_URI"]."' method='post'><input name='deleteNsid' type='hidden' value='".$row[0]."'/><input class='large deleteBtn' type='submit' value='Delete'/></b></form>");
+            echo("<form action='".$_SERVER["REQUEST_URI"]."' method='post'><input name='deleteNsid' type='hidden' value='".$row[0]."'/><input class='removeDeleteButton' type='submit' value='Delete'/></b></form>");
           }
           echo("</div><br>");
         }
-        else { # If we are searching all diseases. Else can only be this as any other value of $st is a logical error.
+        else { # If we are searching diseases. Else can only be this as any other value of $st is an input error.
           echo("<div class='strip greenYellow floatAesthetic' onclick='window.location.href = `index.php?page=tool&disease=".$row[0]."`;'><a>".$row[1]."</a></a>"); //Each thread displayed.
           if($admin == TRUE){ # Allows admins to delete diseases.
-            echo("<form action='".$_SERVER["REQUEST_URI"]."' method='post'><input name='deleteDid' type='hidden' value='".$row[0]."'/><input class='large deleteBtn' type='submit' value='Delete'/></b></form>");
+            echo("<form action='".$_SERVER["REQUEST_URI"]."' method='post'><input name='deleteDid' type='hidden' value='".$row[0]."'/><input class='removeDeleteButton' type='submit' value='Delete'/></b></form>");
           }
           echo("</div><br>");
         }

@@ -1,5 +1,4 @@
 <?php
-  $trim = array_map('trim', $_POST);
   if(isset($_COOKIE["user"])){ # Pages for signed in users only
     require_once("forum.php");
     require_once("tool.php");

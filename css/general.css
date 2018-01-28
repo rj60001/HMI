@@ -33,7 +33,7 @@
 
   hr {
     border-width: thin;
-    border-color: #444;
+    color: #333;
     border-style: solid;
   }
 /*Classes*/
@@ -42,11 +42,16 @@
   }
 
   .text {
-    font-size: 130%;
+    font-size: 100%;
     padding-right: 1%;
     max-width: 100%;
     min-width: 100%;
     overflow-wrap: break-word; /* Defines where breaks are places in words when overflowing. This will only break aword if a word cannot be placed on its own line without overflowing. */
+    color: #EFEFEF;
+  }
+
+  .text > b, text > em {
+    color: #EFEFEF;
   }
   /*Coloured text classes*/
     .coloredText {
@@ -60,7 +65,7 @@
       }
 
       .greenYellow {
-        background: linear-gradient(to top right, #1FE63F 0%, #F9E213 100%);
+        background: linear-gradient(to top right, #1FC63A 0%, #E8D31E 100%);
       }
 
       .orangeBlue {
@@ -89,5 +94,5 @@
     }
 
       .strip > hr {
-        border-color: #EFEFEF;
+        color: #EFEFEF;
       }

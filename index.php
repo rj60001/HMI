@@ -1,6 +1,6 @@
 <html>
   <?php
-    error_reporting(0); # Turn off error reporting.
+    #error_reporting(0); # Turn off error reporting.
     $db = mysqli_connect("localhost", "root", "", "hmi");
     $uid = "";
     $userRow = [];
@@ -93,95 +93,20 @@
         <p id="forumPostMenuBtn" class="postBtn" onclick="displayPU('postingPU');"><i class="material-icons">create</i></p>
       </div>
       <div id="searchPage" class="page">
-        <?php
-          if(isset($_COOKIE["user"])){ # Only display these forums if the user has lopgged in.
-            # For searching through forum posts and sequences. selected="selected" is used instead of just selected as it is XHTML compliant. This also indicated the default option of select.
-            echo('<form id="searchBoxForm" action="index.php?page=search" method="post">
-              <div id="inputsCon">
-                <select id="searchType" name="searchType" class="redPurple floatAesthetic">
-                  <option value="currentUserSequences" selected="selected">My sequences</option>
-                  <option value="currentUserThreads">My threads</option>
-                  <option value="sequences">All sequences</option>
-                  <option value="threads">All threads</option>
-                  <option value="diseases">All diseases</option>
-                </select>
-                <input id="searchBox" name="searchValue" class="redPurple floatAesthetic" type="text" value="Search" info="Search" onfocus="clearValue(this); selected(this);" onblur="restoreValue(this); deselected(this);"/>
-                <input id="searchBtn" class="redPurple floatAesthetic" type="submit"/>
-              </div>
-              <input name="page" value="tool" type="hidden"/>
-            </form>');
-          }
-        ?>
-        <br>
-        <br>
-        <br>
-        <br>
+        <div id="searchFormCon">
+        </div>
         <div id="searchResultsCon" class="textCon"> <!-- This is where the results show up from a search. -->
         </div>
       </div>
       <div id="homePage" class="page">
         <p id="homeTitle" class="coloredText redPurple">Nomios</p>
+        <br>
         <p id="homeSubTitle">A tool for histone modifications, a forum for scientists.</p>
         <div class="textCon">
         </div>
       </div>
       <div id="toolPage" class="page">
-        <div class="textCon">
-          <?php
-            if(isset($_COOKIE["user"])){
-              echo('<p class="subTitle">Tool</p>
-                    <p class="text">This is the tool page. Here you can add histone modification sequences to the database on top of any DNA sequence:</p>
-                    <br>
-                    <br>
-                    <form id="diseaseForm" action="index.php?page=tool" method="post" class="redPurple floatAesthetic">
-                      <p class="text">Use this this mini tool to create a new disease that histone modifications can be associated with.</p>
-                      <br>
-                      <br>
-                      <input name="diseaseNameD" type="text" value="Disease name" info="Disease name" onfocus="clearValue(this); selected(this);" onblur="restoreValue(this); deselected(this);"/>
-                      <textarea name="notesD" info="Notes" onfocus="clearValue(this); selected(this);" onblur="restoreValue(this); deselected(this);">Notes</textarea>
-                      <input name="submitD" type="submit" value="Create" class="button large"/>
-                      <input name="submittedD" type="hidden" value="TRUE"/>
-                    </form>
-                    <form id="toolForm" action="index.php?page=tool" method="post" class="greenYellow floatAesthetic">
-                      <p class="text">Here you can create your own DNA sequence and histone modification sequence in  5\'-3\' direction. Note that the tool is still in beta - there is <b>no</b> histone code checking.</p>
-                      <br>
-                      <br>
-                      <textarea id="dnaSequenceT" name="dnaSequenceT" onkeydown="dnaInputCheck(this);" info="ATCG" onfocus="clearValue(this); selected(this);" onblur="restoreValue(this); deselected(this);">ATCG</textarea>
-                      <br>
-                      <br>
-                      <div id="hmodBg"><div id="hmodSequence" class="toolCon"></div></div>
-                      <br>
-                      <br>
-                      <div id="histoneModDiv">
-                        <div class="toolCon">
-                        <div id="removeHistoneBtn" class="button histoneMod" onclick="removeLastHmod();">Remove</div>
-                        <div class="button histoneMod" onclick="split();">Next Histone</div>
-                        ');
-                        $q = "SELECT hmid, name FROM histonemods";
-                        $r = mysqli_query($db, $q);
-                        while($row = mysqli_fetch_array($r)){
-                          echo('<div class="button histoneMod" onclick="addHmod(\''.$row[1].'\', \''.$row[0].'\');">'.$row[1].'</div>');
-                        }
-                        echo('</div>
-                      </div>
-                      <br><br>
-                      <input name="sequenceNameT" class="large" type="text" value="Name" info="Name" onfocus="clearValue(this); selected(this);" onblur="restoreValue(this); deselected(this);"/>
-                      <select name="diseaseAssociationT" class="large">
-                        <option value="NULL" selected="selected">No disease association</option>');
-                $r = mysqli_query($db, "SELECT * FROM disease ORDER BY name DESC"); # This prints all diseases in alphabetically order so that a sequence can be associated with it one.
-                while($row = mysqli_fetch_array($r)){
-                  echo('<option value="'.$row[0].'">'.$row[1].'</option>');
-                }
-                echo('<select>
-                      <br><br>
-                      <input id="histoneModsT" name="histoneModsT" type="hidden" value=""/>
-                      <textarea class="lowercase" name="notesT" info="Notes" onfocus="clearValue(this); selected(this);" onblur="restoreValue(this); deselected(this);">Notes</textarea>
-                      <input name="submitT" type="submit" value="Query" class="button large"/>
-                      <input name="submittedT" type="hidden" value="TRUE"/>
-                    </form>');
-            }
-          ?>
-          <br><br>
+        <div id="toolPageContent" class="textCon">
         </div>
       </div>
       <div id="toolSingleViewPage" class="page">
@@ -210,7 +135,6 @@
         <div class="textCon">
           <p class="subTitle">Forum</p>
             <div id="forumPageContent">
-              <br><br>
             </div>
           </div>
         </div>
@@ -218,44 +142,6 @@
         <div class="textCon">
           <p class="subTitle">Forum</p>
           <div id="forumSingleViewPageContent">
-            <?php
-              function convert($m) { //Converts artificial mark-up to HTML.
-                $chars = ['[i]', '[/i]', '[b]', '[/b]', '[l]', '[/l]', '[li]', '[/li]'];
-                $replaceChars = ['<em>', '</em>', '<b>', '</b>', '<ul>', '</ul>', '<li>', '</li>'];
-                for($i=0;$i<count($chars);$i++){
-                  $m = str_replace($chars[$i], $replaceChars[$i], $m);
-                }
-                return $m;
-              }
-
-              if(isset($_GET["thread"]) && isset($_COOKIE["user"])){
-		            echo("<script>menuBtnClick('forumSingleView');</script>");
-		            $tid = $_GET["thread"];
-		            $r = mysqli_query($db, "SELECT subject, message, firstName FROM thread INNER JOIN users ON thread.uid = users.uid WHERE tid=".$tid);
-		            $rowT = mysqli_fetch_array($r);
-                $m = convert($rowT[1]);
-		            echo("<br><br><div class='forumObj greenYellow floatAesthetic'><div class='forumCon'><b>$rowT[0]</b><br><t>$m</t><br><em class='forumNameTag'>$rowT[2]</em></div></div>");
-		            $r = mysqli_query($db, "SELECT message, firstName, mid FROM message INNER JOIN users ON message.uid = users.uid WHERE tid=".$tid);
-		            while($row = mysqli_fetch_array($r)){
-                  $m = convert($row[0]);
-			            echo("<br><div class='forumObj message redPurple floatAesthetic'><div class='forumCon' onclick='document.getElementById(\"replyingPU\").style.display = \"block\"; document.getElementById(\"midPR\").value = \"".$row[2]."\";'><div><t>$m</t><br><em class='forumNameTag'>$row[1]</em></div>");
-                  if($admin == TRUE){
-                    echo('<form action="'.$_SERVER['REQUEST_URI'].'" method="post"><input name="deleteMid" type="hidden" value="'.$row[2].'"/><input class="large deleteBtn" type="submit" value="Delete" onclick="document.getElementById(\'replyingPU\').style.display = \'none\';"/></b></form>');
-                  }
-                  echo("</div></div>");
-                  $rR = mysqli_query($db, "SELECT message, firstName, rid FROM replies INNER JOIN users ON replies.uid = users.uid WHERE replies.mid=".$row[2]);
-                  while($rowR = mysqli_fetch_array($rR)){
-                    $m = convert($rowR[0]);
-  			            echo("<br><div class='forumObj reply orangeBlue floatAesthetic'><div class='forumCon'><t>$m</t><br><em class='forumNameTag'>".$rowR[1]."</em>");
-                    if($admin == TRUE){
-                      echo('<form action="'.$_SERVER['REQUEST_URI'].'" method="post"><input name="deleteRid" type="hidden" value="'.$rowR[2].'"/><input class="large deleteBtn" type="submit" value="Delete"/></b></form>');
-                    }
-                    echo("</div></div><br>");
-                  }
-		            }
-	            }
-            ?>
-            <br><br>
             </div>
           </div>
         </div>
@@ -263,14 +149,14 @@
           <div class="textCon">
             <p class="subTitle" id="accountSubTitleStrip">Account</p>
             <div id="accountPageContent">
-              <br><br>
             </div>
           </div>
         </div>
       </div>
       <?php
+         $trim = array_map('trim', $_POST); # All submitted data is trimmed down to the fewest possible charcaters.
         $popupTop = '<div class="boardConPU"><div class="popUpBox redPurple"><div class="textConPU"><p class="titlePU">Notification<span class="crossPU">X</span></p>';
-        $altPopupTop = substr($popupTop, 0, 23).' style="display: none" id="postingPU">'.substr($popupTop, 24); /*For replies to original post in the forum.*/
+        $altPopupTop = substr($popupTop, 0, 23).' style="display: none" id="postingPU">'.substr($popupTop, 24); # For forum posts.
         $popupBottom = '</div></div></div>';
         require("php/toolFunctions.php");
         require_once("php/onload/onloadLOAD.php");
@@ -282,7 +168,9 @@
               echo(substr($popupTop, 0, 23).'style="display: none" id="replyingPU">'.substr($popupTop, 24).'<br>Reply To A Message<br><br><form action="index.php?page=forum&thread='.$_GET["thread"].'" method="post"><textarea name="messagePR" class="textareaPU PUInput" info="Message" onfocus="clearValue(this); selected(this);" onblur="restoreValue(this); deselected(this);">Message</textarea><br><br><input id="midPR" name="midPR" type="hidden" value=\'\'/><input name="submittedPR" type="submit" class="button btnPU PUInput"/></form>'.$popupBottom);
           }
           else {
-              echo($altPopupTop.'<br>Start A Thread<br><br><form action="index.php?page=forum" method="post"><textarea class="textareaPU subjectTextareaPU PUInput" name="subjectPT" info="Subject" onfocus="clearValue(this); selected(this);" onblur="restoreValue(this); deselected(this);">Subject</textarea><br><br><textarea name="messagePT" class="textareaPU PUInput" info="Message" onfocus="clearValue(this); selected(this);" onblur="restoreValue(this); deselected(this);">Message</textarea><br><br><input name="submittedPT" type="submit" class="button btnPU large"/></form>'.$popupBottom);
+              $s = isset($trim["subjectPT"]) ? $trim["subjectPT"] : "Subject";
+              $m = isset($trim["messagePT"]) ? $trim["messagePT"] : "Message";
+              echo($altPopupTop.'<br>Start A Thread<br><br><form action="index.php?page=forum" method="post"><textarea class="textareaPU subjectTextareaPU PUInput" name="subjectPT" info="Subject" onfocus="clearValue(this); selected(this);" onblur="restoreValue(this); deselected(this);">'.$s.'</textarea><br><br><textarea name="messagePT" class="textareaPU PUInput" info="Message" onfocus="clearValue(this); selected(this);" onblur="restoreValue(this); deselected(this);">'.$m.'</textarea><br><br><input name="submittedPT" type="submit" class="button btnPU large"/></form>'.$popupBottom);
           }
         }
       ?>

@@ -61,7 +61,7 @@ function setColorScheme(mode){
     sheet.insertRule("#mainCon::-webkit-scrollbar-thumb {background-color: rgb(239, 239, 239);}", 2); /*Ditto*/
     pauseSelect = true;
     for(i=0;i<elements.length;i++){
-      colors = [window.getComputedStyle(elements[i]).getPropertyValue("color"), window.getComputedStyle(elements[i]).getPropertyValue("background-color"), window.getComputedStyle(elements[i]).getPropertyValue("box-shadow")];
+      colors = [window.getComputedStyle(elements[i]).getPropertyValue("color"), window.getComputedStyle(elements[i]).getPropertyValue("background-color"), window.getComputedStyle(elements[i]).getPropertyValue("box-shadow"), window.getComputedStyle(elements[i]).getPropertyValue("outline-color")];
       for(j=0;j<colors.length;j++){
         switch(colors[j]){
           case "rgb(239, 239, 239)":
@@ -92,7 +92,7 @@ function setColorScheme(mode){
     sheet.insertRule("#mainCon::-webkit-scrollbar {background-color: rgb(239, 239, 239);}", 1); /*For this scollbar (is a pseudo-element so I had to insert a new rule.)*/
     sheet.insertRule("#mainCon::-webkit-scrollbar-thumb {background-color: rgb(51, 51, 51);}", 2); /*Ditto*/
     for(i=0;i<elements.length;i++){
-      colors = [window.getComputedStyle(elements[i]).getPropertyValue("color"), window.getComputedStyle(elements[i]).getPropertyValue("background-color"), window.getComputedStyle(elements[i]).getPropertyValue("box-shadow")];
+      colors = [window.getComputedStyle(elements[i]).getPropertyValue("color"), window.getComputedStyle(elements[i]).getPropertyValue("background-color"), window.getComputedStyle(elements[i]).getPropertyValue("box-shadow"), window.getComputedStyle(elements[i]).getPropertyValue("outline-color")];
       for(j=0;j<colors.length;j++){
         switch(colors[j]){
           case "rgb(239, 239, 239)":
@@ -129,7 +129,7 @@ function loadColorScheme(btn){ /*Used when index.php loads.*/
   }
   else if(colourMode === "colorMode=d") {
     btn.innerHTML = '<i class="material-icons">brightness_3</i>';
-    /*No need to change colour scheme if the mode is set to day as that is the default.*/
+    /* No need to change colour scheme if the mode is set to day as that is the default. */
   }
 }
 

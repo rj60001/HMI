@@ -4,6 +4,7 @@
     require_once("forum.php");
     require_once("tool.php");
     require_once("toolSingleView.php");
+    require_once("search.php");
   }
   echo("<script>");
   if(isset($_GET["page"]) && isset($_COOKIE["user"])){

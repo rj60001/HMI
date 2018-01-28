@@ -76,6 +76,12 @@
       background-color: #EFEFEF !important;     /*to include submit inout buttons. Also to achieve hover effect.*/
       border-color: #EFEFEF !important;
     }
+  .removeDeleteButton {
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 2%;
+    margin-bottom: -2%;
+  }
   /*Removes chrome slection effects.*/
     textarea:hover,
     input:hover,

@@ -22,7 +22,7 @@
     if(empty($errors)){
       $q = "INSERT INTO users VALUES(NULL, '$fn', '$sn', '$ea', '".crypt($pw, 'iN5@n1tY')."', '$in', '$hash', 0)";
       $r = mysqli_query($db, $q);
-      mail($ea, "Nomios - Please Confirm Your Account", "Confirm your account by clicking http://www.netballmanager.co.uk/hmi/index.php?page=account&email=$ea&hash=$hash", "FROM: reiss1999@gmail.com");
+      mail($ea, "Nomios - Please Confirm Your Account", "Confirm your account by clicking copy and pasting the following url: http://127.0.0.1/index.php?page=account&email=$ea&hash=$hash", "FROM: reiss1999@gmail.com");
       echo($popupTop);
       echo("<p>Take a look at your inbox for a confirmation before you sign in.</p>");
       echo($popupBottom);
@@ -41,7 +41,7 @@
     $q = "SELECT uid FROM users WHERE emailAddress='$ea' AND password='".crypt($pw, 'iN5@n1tY')."'";
     $r = mysqli_query($db, $q);
     if(mysqli_num_rows($r) == 1){
-      if(mysqli_query($db, "SELECT uid FROM users WHERE emailAddress='$ea' AND hash IS NULL")){
+      if(mysqli_num_rows(mysqli_query($db, "SELECT uid FROM users WHERE emailAddress='$ea' AND hash IS NULL")) == 1){
         echo('<script>document.cookie = "user='.mysqli_fetch_array($r)[0].';expires='.(time()+(3600*24)*30).'"; reload();</script>');
       }
       else {

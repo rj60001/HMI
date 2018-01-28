@@ -7,11 +7,13 @@
   }
   else if(isset($trim["deleteTid"])){
     $r = mysqli_query($db, "DELETE FROM thread WHERE tid=".$trim['deleteTid']);
+    $mid = mysqli_fetch_array(mysqli_query($db, "SELECT mid FROM message WHERE tid=".$trim['deleteTid']))[0]; # Fetch the message ID for deleting the replies associated with each message.
     $r = mysqli_query($db, "DELETE FROM message WHERE tid=".$trim['deleteTid']);
+    $r = mysqli_query($db, "DELETE FROM replies WHERE mid=".$mid); # Use the message ID to delete each associated reply.
     echo('<script>window.location.href = "index.php?'.$_SERVER['QUERY_STRING'].'";</script>');
   }
   else if(isset($trim["deleteRid"])){
-    $r = mysqli_query($db, "DELETE FROM replies WHERE Rid=".$trim['deleteRid']);
+    $r = mysqli_query($db, "DELETE FROM replies WHERE rid=".$trim['deleteRid']);
     echo('<script>window.location.href = "index.php?'.$_SERVER['QUERY_STRING'].'";</script>');
   }
   # ===
@@ -24,7 +26,7 @@
       $errors = ["Cannot post default values."];
     }
     if(empty($errors)){
-      $q = "INSERT INTO thread VALUES(0, $uid, '$s', '$m')";
+      $q = "INSERT INTO thread VALUES(0, $uid, '$s', '$m', CURRENT_TIMESTAMP)";
       $r = mysqli_query($db, $q);
       echo('<script>window.location.href = "index.php?page=forum&threadSubmitted=1";</script>');
     }
@@ -45,7 +47,7 @@
     }
 
     if(empty($errors)){
-      $r = mysqli_query($db, "INSERT INTO message VALUES(0, $tid, $uid, '$m')");
+      $r = mysqli_query($db, "INSERT INTO message VALUES(0, $tid, $uid, '$m', CURRENT_TIMESTAMP)");
       echo('<script>window.location.href = "index.php?page=forum&thread='.$tid.'";</script>');
     }
     else {
@@ -65,7 +67,7 @@
     }
 
     if(empty($errors)){
-      $r = mysqli_query($db, "INSERT INTO replies VALUES(NULL, ".$trim['midPR'].", $uid, '$m')");
+      $r = mysqli_query($db, "INSERT INTO replies VALUES(NULL, ".$trim['midPR'].", $uid, '$m', CURRENT_TIMESTAMP)");
       echo('<script>window.location.href = "index.php?page=forum&thread='.$tid.'";</script>');
     }
     else {

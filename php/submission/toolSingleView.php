@@ -24,16 +24,6 @@
     $r = mysqli_query($db, "UPDATE nucelosomesequence SET did=NULL WHERE nsid=$nsid");
     echo('<script>window.location.href="index.php?page=tool&disease='.$did.'";</script>');
   }
-  else if(isset($trim["nidTD"]) && isset($_GET["sequence"])){
-    $nid = $trim["nidTD"];
-    $r = mysqli_query($db, "DELETE FROM nucleosome WHERE nid=$nid");
-    echo('<script>window.location.href="index.php?page=tool&sequence='.$nsid.'";</script>');
-  }
-  else if(isset($trim["didTD"]) && isset($_GET["disease"])){
-    $nsid = $trim["nsidTD"]; # Fecth the id of the sequence.
-    $r = mysqli_query($db, "UPDATE nucelosomesequence SET did IS NULL WHERE nsid=$nsid"); # Stop it from being related to disease record.
-    echo('<script>window.location.href="index.php?page=tool&disease='.$did.'";</script>');
-  }
   else if(isset($trim["submittedTEO"]) && isset($_GET["sequence"])){
     $nsid = $_GET["sequence"];
     $notes = strip_tags($trim["notesTEO"]);
@@ -45,8 +35,15 @@
       $errors = ["Cannot use default values."];
     }
 
+    if($notes == "Notes"){
+      $notes = "NULL";
+    }
+    else {
+      $notes = "'".$notes."'";
+    }
+
     if(empty($errors)){
-      $r = mysqli_query($db, "UPDATE nucelosomesequence SET (notes='$notes', name='$name', did=$did) WHERE nsid=$nsid");
+      $r = mysqli_query($db, "UPDATE nucelosomesequence SET notes=$notes, name='$name', did=$did WHERE nsid=$nsid");
       echo('<script>window.location.href="index.php?page=tool&sequence='.$nsid.'";</script>');
     }
     else {
@@ -67,15 +64,8 @@
       $errors = ["Cannot use default values."];
     }
 
-    if($notes == "Notes"){
-      $notes = "NULL";
-    }
-    else {
-      $notes = "'".$notes."'";
-    }
-
     if(empty($errors)){
-      $r = mysqli_query($db, "UPDATE disease SET (notes='$notes', name='$name') WHERE did=$did");
+      $r = mysqli_query($db, "UPDATE disease SET notes=$notes, name='$name' WHERE did=$did");
       echo('<script>window.location.href="index.php?page=tool&disease='.$did.'";</script>');
     }
     else {
@@ -85,5 +75,10 @@
       }
       echo($popupBottom);
     }
+  }
+  else if(isset($trim["didTD"]) && isset($_GET["disease"])){
+    $nsid = $trim["nsidTD"]; # Fetch the ID of the sequence.
+    $r = mysqli_query($db, "UPDATE nucelosomesequence SET did IS NULL WHERE nsid=$nsid"); # Stop it from being related to disease record.
+    echo('<script>window.location.href="index.php?page=tool&disease='.$did.'";</script>');
   }
 ?>
