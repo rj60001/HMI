@@ -1,9 +1,9 @@
 /*IDs*/
   #mainCon { /*Where all non-menu content is.*/
     opacity: 0;
-    position: fixed;
-    top: 0px;
-    left: 0px;
+    position: fixed; /* Occupys the entire viewport. */
+    top: 0px; /* ^ */
+    left: 0px; /* ^ */
     width: 100%;
     height: 100%;
     min-width: 1px; /*Fills up if nothing is in it.*/
@@ -14,12 +14,12 @@
     overflow-x: hidden; /*No horizontal scrolling*/
   }
 
-  #mainCon::-webkit-scrollbar {
+  #mainCon::-webkit-scrollbar { /* Sets the properties of the scrollbar background. */
     background-color: #EFEFEF;
     width: 1%;
   }
 
-  #mainCon::-webkit-scrollbar-thumb {
+  #mainCon::-webkit-scrollbar-thumb { /* Sets the properties of the scrollbar 'thumb' (the bit that we use to scroll). */
     background-color: #333;
   }
 
@@ -55,7 +55,7 @@
 
   .page { /*A page is where specific content. E.g. All tool content is in the tool page. Not to be confused with a web page.*/
     opacity: 0;
-    position: absolute;
+    position: absolute; /* Specifies a particular location within the nearest, upper nested relative element. This is usually the body. */
     top: 0px;
     left: 0px;
     width: 91%;

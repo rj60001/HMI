@@ -4,21 +4,21 @@
     max-width: 49%;
     height: auto;
     max-height: none;
-    float: left;
-    border-radius: 3px;
-    border-style: none;
+    float: left;  /* This aligns the element either to the left or right. */
+    border-radius: 3px; /* This rounds the corners of elements. */
+    border-style: none; /* Changes the style-type of the border to be not exist. */
   }
 
-  #signInForm > form, #signUpForm > form {
-    margin: 5%;
+  #signInForm > form, #signUpForm > form { /* The forms within the #signUpForm and #signInForm elements. */
+    margin: 5%; /* Adds space to the outside of the element to adjust the element itself. */
   }
 
   #signInForm {
     float: right;
-    vertical-align: top;
+    vertical-align: top; /* Sets the element to be inline with the top of its adjacent element. */
   }
 
-  #con { /*Is a container for the two forms.*/
+  #con { /*Is a container for the sigg in and sign up forms.*/
     min-width: 100%;
     max-width: 100%;
     min-height: 100%;
@@ -27,13 +27,13 @@
 
   #downButton {
     display: block;
-    margin-right: auto;
-    margin-left: auto;
-    cursor: pointer;
+    margin-right: auto; /* Automatically sets both left and right margins of the element to be equal. */
+    margin-left: auto; /* ^ */
+    cursor: pointer; /* Changes the texture of the cursor. */
   }
 
   #accountDetailsForm {
     border-radius: 3px;
-    border-style: none;
-    padding: 5%;
+    border-style: none; /* Border is reduced to minium thickness */
+    padding: 5%; /* Adjusts space inside an element to move elements inside the element. */
   }

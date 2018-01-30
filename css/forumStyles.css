@@ -2,24 +2,24 @@
   .forumObj { /*This applies to any type of post in a thread.*/
 	   border-style: none;
 	   border-radius: 3px;
-     display: flex;
+     display: flex; /* Displays as a flexbox. This element is now flexible, whcich gives it access to the flex properties. */
    }
 
    .forumCon > em, .forumCon > b, .forumCon > ul, .forumCon > t, .forumCon > br, ul > li, em > b, b > em, t > em, t > b, t > ul, t, em { /*t = I created this tag element.*/
-     color: #EFEFEF; /*Makes sure that the rule is directly taken by each element in a forumObj ready for nightmode.*/
+     color: #EFEFEF; /*Makes sure that the rule is directly taken by each element in a forumObj ready for nightmode. */
    }
 
    .forumCon {
    	 min-width: 90%;
    	 max-width: 90%;
-   	 padding: 5% 5% 5% 5%;
+   	 padding: 5% 5% 5% 5%; /* All elements inside leave a border around the edge of the menubar and the rest of the viewport. */
    }
 
    .forumNameTag {
    	 float: right;
    }
    /*Post types*/
-       .message { /*Reply to an OP.*/
+       .message { /*Reply to an original post.*/
 	        cursor: pointer;
 	        margin-left: 5%;
 	        width: 95%;

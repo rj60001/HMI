@@ -9,7 +9,7 @@
   min-width: 100%;
 }
 
-  #searchType {
+  #searchType { /* The part of the search form which lets us specify what type of data we are looking for. */
     color: #EFEFEF;
     max-width: 30%;
     min-width: 30%;
@@ -18,7 +18,7 @@
     font-size: 110%;
   }
 
-  #searchBox {
+  #searchBox { /* The part of the search form which we type into. */
     color: #EFEFEF;
     max-width: 50%;
     min-width: 50%;

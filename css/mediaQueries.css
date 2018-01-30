@@ -1,4 +1,4 @@
-@media only screen and (max-width: 500px) { /*For mobile displays.*/
+@media only screen and (max-width: 500px) { /*For mobile displays (or any other display that ahs a maximum width of 500 pixels. This is NOT the width of the viewport.)*/
   #menuCon {
     max-height: 5%;
     min-height: 5%;
@@ -17,15 +17,15 @@
     margin-right: 2%;
   }
 
-  #dayChangeBtn {
+  #dayChangeBtn { /* Moves the button the chnage the color scheme to a more suitable location. */
     top: 0.5%;
     right: 1%;
   }
 
-  #accountPage, #homePage, #toolPage, #newsPage, #aboutPage, #forumPage {
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-top: 12%;
+  #accountPage, #homePage, #toolPage, #newsPage, #aboutPage, #forumPage, #forumSingleViewPage, #toolSingleViewPage, #searchPage {
+    margin-left: 5%; /* Lets us occupy slightly more room now that the menu bar has gone, and keeps a margin for easier reading.*/
+    margin-right: 5%; /* ^ */
+    margin-top: 12%; /* Shifts all pages downwards to make room for the new postion of the menu bar. */
   }
 
   .doubleForm {
@@ -35,6 +35,6 @@
   }
 
   .menuRule {
-    display: none;
+    display: none; /* No horizontal rules in the menu bar in the new position. */
   }
 }

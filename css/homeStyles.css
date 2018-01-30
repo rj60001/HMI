@@ -1,8 +1,8 @@
 /*IDs*/
   #homeTitle {
     font-size:  1000%;
-    font-weight: 700;
-    margin-top: -2%;
+    font-weight: 700; /* Sets the boldness of the text. */
+    margin-top: -2%; /* Pushes the element upwards. */
   }
 
   #homeSubTitle {

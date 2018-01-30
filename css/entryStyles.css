@@ -2,9 +2,9 @@
   #enterBtn {
     display: block;
     cursor: pointer;
-    transition-timing-function: ease-in-out;
+    transition-timing-function: ease-in-out; /* Specifies the speed curve. Slow start, quick end. */
     position: relative;
-    z-index: 2;
+    z-index: 2; /* Specifies the z component of an element. The higher the 'closer' it is to the viewport. */
   }
 
   #bgObjCon {
@@ -15,18 +15,18 @@
       animation-name: floatOne;
       animation-duration: 5s;
       animation-fill-mode: forwards;
-      animation-iteration-count: infinite;
+      animation-iteration-count: infinite; /* Constantly repeats. */
       transition-timing-function: ease-in-out;
-      color: #333;
+      color: #333; /* Sets the color of the font. */
     }
 /*Elements*/
   h1 {
-    font-family: 'Megrim', cursive;
+    font-family: 'Megrim', cursive; /* Sets the font to be used. */
     font-size: 1000%;
     text-align: center;
     padding-left: auto;
     padding-right: auto;
-    box-sizing: border-box;
+    box-sizing: border-box; /* Icludes the padding and border in the total width of the element. */
   }
 /*Classes*/
   /*On first load*/

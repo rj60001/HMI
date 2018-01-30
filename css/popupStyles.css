@@ -3,8 +3,8 @@
     position: absolute;
     top: 0px;
     left: 0px;
-    min-width: 100vw;
-    min-height: 100vh;
+    min-width: 100vw; /* 1vw = viewport width/100 */
+    min-height: 100vh; /* 1vh = viewport height/100 */
     max-width: 100vw;
     max-height: 100vh;
     background-color: rgba(64, 64, 64, 0.6);
@@ -25,15 +25,15 @@
     box-sizing: border-box;
     z-index: 999;
     box-shadow: 2px 2px 10px #222;
-    overflow-y: auto;
+    overflow-y: auto; /* Lets us scroll through the content of the notification. */
   }
 
-    .popUpBox::-webkit-scrollbar {
+    .popUpBox::-webkit-scrollbar { /* Sets the properties of the scrollbar backgound. */
       background-color: transparent;
       width: 1%;
     }
 
-    .popUpBox::-webkit-scrollbar-thumb {
+    .popUpBox::-webkit-scrollbar-thumb {  /* Sets the properties of the scrollbar draggable part. */
       background-color: #EFEFEF;
     }
 
@@ -61,8 +61,7 @@
       .textareaPU {
         background-color: #EFEFEF;
         border-color: #EFEFEF;
-
-        text-transform: none;
+        text-transform: none; /* Keeps the user inputted text as unchnaged in term sof capitalisation. */
         color: #333;
       }
 

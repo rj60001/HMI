@@ -22,7 +22,7 @@
     color: #EFEFEF;
   }
 
-  #removeHistoneBtn {
+  #removeHistoneBtn { /* For creating a sequence. */
     margin-right: 0%;
   }
 
@@ -37,7 +37,7 @@
     max-height: 10%;
     min-height: 10%;
     display: inline-block;
-    box-sizing: content-box;
+    box-sizing: content-box; /* Sets the width of the element to not include the border and margin. Lets us space out elements using margin. */
     border-style: none;
     border-radius: 3px;
   }

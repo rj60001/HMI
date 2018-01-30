@@ -1,15 +1,15 @@
 /*IDs*/
   #dayChangeBtn {
-    position: fixed;
+    position: fixed; /* Stays at a specifed location and does not move based on the nearest, upper nested relative element.*/
     right: 2vw;
     top: 2vw;
-    z-index: 1000;
+    z-index: 1000; /* Stays on top of all elements so that it can always be accessed. */
     color: #666;
   }
 
 /*Elements*/
-  ::selection {
-    background-color: inherit;
+  ::selection { /* The style of highlighted text. */
+    background-color: inherit; /* No change in style to keep the website style continous. */
     color: inherit;
   }
 
@@ -17,18 +17,18 @@
     background-color: #EFEFEF;
     color: #333;
     font-family: 'Comfortaa', cursive;
-    overflow: hidden;
+    overflow: hidden; /* Any excess width or height of an element to the outside of the viewport is hidden away from view. */
     box-sizing: border-box;
     cursor: default;
   }
 
   div {
-    display: block;
+    display: block; /* Displayed as a section of the webpage. */
     box-sizing: border-box;
   }
 
   p {
-    margin-bottom: -1%;
+    margin-bottom: -1%; /* Pushes text downwards. */
   }
 
   hr {
@@ -38,15 +38,14 @@
   }
 /*Classes*/
   .floatAesthetic {
-    box-shadow: 7px 7px 17px #AAA;
+    box-shadow: 7px 7px 17px #AAA; /* Creates a shadow effect from an element. */
   }
 
   .text {
     font-size: 100%;
-    padding-right: 1%;
     max-width: 100%;
     min-width: 100%;
-    overflow-wrap: break-word; /* Defines where breaks are places in words when overflowing. This will only break aword if a word cannot be placed on its own line without overflowing. */
+    overflow-wrap: break-word; /* Defines where breaks are places in words when overflowing. This will only break a word if a word cannot be placed on its own line without overflowing. */
     color: #EFEFEF;
   }
 
@@ -55,13 +54,13 @@
   }
   /*Coloured text classes*/
     .coloredText {
-      -webkit-text-fill-color: transparent;
-      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent; /* Lets us see the background behind a peice of text. */
+      -webkit-background-clip: text !important; /* Sets the background of an element to only be displayed where the tet is present. */
     }
 
     /*Colors*/
       .redPurple { /*xY: starts with x colour ends with Y colour.*/
-        background: linear-gradient(to top right, #F2092C 0%, #B50FC4 100%);
+        background: linear-gradient(to top right, #F2092C 0%, #B50FC4 100%); /* Creates a color gradient from the bottom left corner to the top right corner.*/
       }
 
       .greenYellow {
@@ -69,11 +68,11 @@
       }
 
       .orangeBlue {
-        background: linear-gradient(to top right, #f2870A 0%, #11E3C3 100%);
+        background: linear-gradient(to top right, #F2870A 0%, #11E3C3 100%);
       }
 
   /*Other*/
-    .large{
+    .large{ /* Occupies all space availabale to the element in the x-axis.*/
       min-width: 100%;
       max-width: 100%;
       max-height: 10%;
@@ -93,6 +92,6 @@
       padding: 5%;
     }
 
-      .strip > hr {
+      .strip > hr { /* Sets the colour of the horizontal rule within a strip element. */
         color: #EFEFEF;
       }
