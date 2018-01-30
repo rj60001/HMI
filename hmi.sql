@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 27, 2018 at 12:32 PM
--- Server version: 10.1.30-MariaDB
--- PHP Version: 7.2.1
+-- Generation Time: Jan 30, 2018 at 08:30 PM
+-- Server version: 10.1.28-MariaDB
+-- PHP Version: 7.1.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -40,8 +40,7 @@ CREATE TABLE `disease` (
 --
 
 INSERT INTO `disease` (`did`, `name`, `notes`, `uid`) VALUES
-(6, 'Alzheimers', 'morkdmoirmriodg', 11),
-(11, 'Reiss', 'annoying, fag,', 15),
+(6, 'Alzheimers', 'M', 11),
 (10, 'Cancer Risks', 'A group of sequences that influence the chances of getting cancer.', 11);
 
 -- --------------------------------------------------------
@@ -105,8 +104,8 @@ INSERT INTO `histonemods` (`hmid`, `name`, `effectType`, `magnitude`, `notes`) V
 (40, 'H4Lys16ATF2', b'0', 1, 'Can also cause DNA reparation.'),
 (41, 'H4Lys16Sas2', b'0', 1, 'Activation caused by turning chromatin structure into euchromatin.'),
 (42, 'H1Lys26Ezh2', b'1', 1, 'Transcriptional silencing'),
-(43, 'H2AArg3PRMT1\\6', b'0', 1, NULL),
-(44, 'H2AArg3PRMT5\\7', b'1', 0.2, NULL),
+(43, 'H2AArg3PRMT1/6', b'0', 1, NULL),
+(44, 'H2AArg3PRMT5/7', b'1', 0.2, NULL),
 (45, 'H4Arg2PRMT5/PRMT6', b'1', 0.2, NULL),
 (46, 'H3Arg2PRMT5', b'0', 1, NULL),
 (47, 'H3Arg8PRMT2/PRMT6', b'1', 0.2, NULL),
@@ -159,17 +158,9 @@ CREATE TABLE `message` (
   `mid` tinyint(100) UNSIGNED NOT NULL,
   `tid` tinyint(100) UNSIGNED NOT NULL,
   `uid` tinyint(100) UNSIGNED NOT NULL,
-  `message` longtext COLLATE latin1_general_ci NOT NULL
+  `message` longtext COLLATE latin1_general_ci NOT NULL,
+  `dateTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
-
---
--- Dumping data for table `message`
---
-
-INSERT INTO `message` (`mid`, `tid`, `uid`, `message`) VALUES
-(36, 28, 15, 'Reiss2'),
-(37, 28, 15, 'Reiss3'),
-(38, 28, 15, 'Reiss4');
 
 -- --------------------------------------------------------
 
@@ -192,8 +183,7 @@ CREATE TABLE `nucelosomesequence` (
 INSERT INTO `nucelosomesequence` (`nsid`, `uid`, `did`, `name`, `notes`) VALUES
 (49, 11, 10, 'HRas Repression by H2ASerMSK1', 'This causes a decrease in the risk of cancer as the proto-oncogene HRas is repressed by attracted kinase proteins via transcriptional repressive histone modification H2ASerMSK1.'),
 (48, 11, 6, 'Increased Expression of the APP (Beta-Amyloid Precursor Protein) Gene Via Increased Promoter Affinity', 'This sequence increases the expression of beta-amyloid by increasing the affinity of the promoter using histone modifications that encourage acetylation.'),
-(51, 11, 10, 'Increased Cancer Risk Caused By H2ALys4Esa1 Activation Histone Modifications', 'The H2ALys4Esa1 histone modification causes a increase in gene expression. This can cause for an increase in cancer risk as the chance of a cell becoming cancerous increases when these modifications are applied to a proto-oncogene.'),
-(52, 15, 11, 'Reiss', NULL);
+(51, 11, 10, 'Increased Cancer Risk Caused By H2ALys4Esa1 Activation Histone Modifications', 'The H2ALys4Esa1 histone modification causes a increase in gene expression. This can cause for an increase in cancer risk as the chance of a cell becoming cancerous increases when these modifications are applied to a proto-oncogene.');
 
 -- --------------------------------------------------------
 
@@ -267,7 +257,8 @@ INSERT INTO `nucleosome` (`nid`, `ndsid`, `histoneMods`, `nsid`) VALUES
 (143, 150, '', 51),
 (144, 151, '', 51),
 (145, 152, '', 51),
-(147, 153, '2,2,2,8,8,15,28,39,39,85,', 52);
+(147, 153, '2,2,2,8,8,15,28,39,39,85,', 52),
+(148, 154, '', 53);
 
 -- --------------------------------------------------------
 
@@ -321,7 +312,8 @@ INSERT INTO `nucleosomednasequence` (`ndsid`, `DNASequence`) VALUES
 (150, 'CAGCACAAGCTCAGGACATGGAGGTGCCGGATGCAGGAAGGAGGTGCAGACGGAAGGAGGAGGAAGGAAGGACGGAAGCAAGGAAGGAAGGAAGGGCTGCTGGAGCCCAGTCACCCCGGGACCGTGG'),
 (151, 'GCCGAGGTGACTGCAGACCCTCCCAGGGAGGCTGTGCACAGACTGTCTTGAACATCCCAAATGCCACCGGAACCCCAGCCCTTAGCTCCCCTCCCAGGCCTCTGTGGGCCCTTGTCGGGCACAGATG'),
 (152, 'GGATCACAGTAAATTATTGGATGGTCTTGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'),
-(153, 'AGCTTGACTTGGGAAAAAAAAAAAAAGT');
+(153, 'AGCTTGACTTGGGAAAAAAAAAAAAAGT'),
+(154, 'AAAAAAAAAAAA');
 
 -- --------------------------------------------------------
 
@@ -333,16 +325,9 @@ CREATE TABLE `replies` (
   `rid` tinyint(100) UNSIGNED NOT NULL,
   `mid` tinyint(100) UNSIGNED NOT NULL,
   `uid` tinyint(100) UNSIGNED NOT NULL,
-  `message` longtext NOT NULL
+  `message` longtext NOT NULL,
+  `dateTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `replies`
---
-
-INSERT INTO `replies` (`rid`, `mid`, `uid`, `message`) VALUES
-(1, 33, 11, 'poop 2'),
-(2, 36, 15, 'Reiss2.5');
 
 -- --------------------------------------------------------
 
@@ -354,15 +339,9 @@ CREATE TABLE `thread` (
   `tid` tinyint(100) UNSIGNED NOT NULL,
   `uid` tinyint(100) UNSIGNED NOT NULL,
   `subject` varchar(200) COLLATE latin1_general_ci NOT NULL,
-  `message` longtext COLLATE latin1_general_ci NOT NULL
+  `message` longtext COLLATE latin1_general_ci NOT NULL,
+  `dateTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
-
---
--- Dumping data for table `thread`
---
-
-INSERT INTO `thread` (`tid`, `uid`, `subject`, `message`) VALUES
-(28, 15, 'Reiss', 'Reiss');
 
 -- --------------------------------------------------------
 
@@ -386,8 +365,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`uid`, `firstName`, `secondName`, `emailAddress`, `password`, `interest`, `hash`, `level`) VALUES
-(11, 'Reiss', 'Jones', 'reiss1999@gmail.com', 'iNvyRTQWLnT9Y', 'Student', 'NULL', 1),
-(15, 'Testing', 'testuser', 'testuser@example.com', 'iNb94HCC8oFx.', 'Company', 'NULL', 0);
+(11, 'Reiss', 'Jones', 'reiss1999@gmail.com', 'iNvyRTQWLnT9Y', 'Student', NULL, 1),
+(15, 'Testing', 'testuser', 'testuser@example.com', 'iNb94HCC8oFx.', 'Company', NULL, 0);
 
 --
 -- Indexes for dumped tables
@@ -455,7 +434,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `disease`
 --
 ALTER TABLE `disease`
-  MODIFY `did` tinyint(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `did` tinyint(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `histonemods`
@@ -467,37 +446,37 @@ ALTER TABLE `histonemods`
 -- AUTO_INCREMENT for table `message`
 --
 ALTER TABLE `message`
-  MODIFY `mid` tinyint(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `mid` tinyint(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `nucelosomesequence`
 --
 ALTER TABLE `nucelosomesequence`
-  MODIFY `nsid` tinyint(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `nsid` tinyint(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `nucleosome`
 --
 ALTER TABLE `nucleosome`
-  MODIFY `nid` tinyint(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
+  MODIFY `nid` tinyint(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=149;
 
 --
 -- AUTO_INCREMENT for table `nucleosomednasequence`
 --
 ALTER TABLE `nucleosomednasequence`
-  MODIFY `ndsid` tinyint(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=154;
+  MODIFY `ndsid` tinyint(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=155;
 
 --
 -- AUTO_INCREMENT for table `replies`
 --
 ALTER TABLE `replies`
-  MODIFY `rid` tinyint(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `rid` tinyint(100) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `thread`
 --
 ALTER TABLE `thread`
-  MODIFY `tid` tinyint(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `tid` tinyint(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `users`

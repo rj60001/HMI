@@ -65,6 +65,7 @@
             <input name="submittedT" type="hidden" value="TRUE"/>
           </form><br><br>');
       echo('`;</script>');
+      # Only the histoneModsT element is submitted as the histoen mods component of the form. NOT hmodSequence.
   }
 
   if(isset($_GET["diseaseSubmitted"])){ # Display out a confirmation if a new disease has been added to the `disease` table.
