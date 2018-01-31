@@ -59,24 +59,25 @@
       echo($popupBottom);
     }
   }
-  else if(isset($trim["submittedAE"])){
+  else if(isset($trim["submittedAE"])){ # If the user is editing their password
     $pw = $trim["passwordAE"];
-    $pc = $trim["passwordConAE"];
-    $pwc = crypt($pw, 'iN5@n1tY');
+    $pc = $trim["passwordConAE"]; # Password confirmation
+    $pwc = crypt($pw, 'iN5@n1tY'); # Encrypt the password
     $errors = [];
-    if($pw !== $pc){
+    if($pw !== $pc){ # !== not same type or same value.
       $errors = ["Passwords do not match."];
     }
 
-    if($pw == "Password" || $pwc == mysqli_fetch_array(mysqli_query($db, "SELECT password FROM users WHERE uid = ".$_COOKIE["user"][0]))){
+    if($pw == "Password" || $pwc == "password" || $pwc == mysqli_fetch_array(mysqli_query($db, "SELECT password FROM users WHERE uid = ".$_COOKIE["user"][0]))){
+      # If the password has already been entered or it was left at its default value throw an error. Don't need to check $pw to see if it matches the already entered password as if it mathces $pwc, then $pwc will throw an error for it.
       $errors = ["Password is invalid."];
     }
 
-    if(empty($errors)){
+    if(empty($errors)){ # If no errors are found.
       $q = "UPDATE users SET password = '".$pwc."' WHERE uid = ".$_COOKIE["user"];
-      $r = mysqli_query($db, $q);
+      $r = mysqli_query($db, $q); # Update the password.
       echo($popupTop);
-      echo("<p>Record updated.</p>");
+      echo("<p>Password updated.</p>");
       echo($popupBottom);
     }
     else {

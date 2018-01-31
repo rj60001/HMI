@@ -26,7 +26,7 @@
         $mod = (int)$mods[$i]; # Select the current histone modification ID (hmid).
         $modName = mysqli_fetch_array(mysqli_query($db, "SELECT name FROM histonemods WHERE hmid=".$mod))[0]; # Select the histone modification name
         $final = $modName;
-        $value = $i <=> (count($mods)-2); # Returns -1 if $i is less than count($mods)-1, 0 if equal two or 1 if greater than. This si called the spaceship operator.
+        $value = $i <=> (count($mods)-2); # Returns -1 if $i is less than count($mods)-1, 0 if equal two or 1 if greater than. This is called the spaceship operator.
         if($value == -1){ # Concatenate a comma if this ISN'T the last mod in the sequence.
           $final .= " , ";
         }
@@ -123,7 +123,7 @@
       # Above line displays the currnent sequence.
       if($uid == $ownerid){ # Checks to see if the user owns this sequence.
         echo('<form action="index.php?page=tool&disease='.$did.'" method="post"><input name="nsidTD" type="hidden" value="'.$nsid.'"/><input name="submitTD" class="removeDeleteButton" type="submit" value="Remove" onfocus="selected(this);" onblur="deselected(this);"/></form>');
-        # Above lines displays a delete form.
+        # Above line displays a form to remove association of the sequence to the disease.
       }
       echo('</div><br><br>');
     }

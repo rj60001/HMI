@@ -49,7 +49,7 @@
         else if($st == "sequences" || $st == "currentUserSequences"){ # Searching for histone modification sequences.
           # This displays the results of the retrived records, when one is clicked it will redirect to a page displaying all of the records='s information.'
           echo("<div class='strip greenYellow floatAesthetic' onclick='window.location.href = `index.php?page=tool&sequence=".$row[0]."`;'><a>$row[1]</a><a style='float: right;'> | ".$row[2]."</a>"); # Each thread displayed.
-          if($uid == mysqli_fetch_array(mysqli_query($db, "SELECT uid FROM nucelosomesequence WHERE nsid=".$row[0]))[0]){ # Alows the user to delete their own sequences but no-one elses.
+          if($uid == mysqli_fetch_array(mysqli_query($db, "SELECT uid FROM nucelosomesequence WHERE nsid=".$row[0]))[0]){ # Allows the user to delete their own sequences but no-one elses.
             echo("<form action='".$_SERVER["REQUEST_URI"]."' method='post'><input name='deleteNsid' type='hidden' value='".$row[0]."'/><input class='removeDeleteButton' type='submit' value='Delete'/></b></form>");
           }
           echo("</div><br>");

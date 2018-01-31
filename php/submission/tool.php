@@ -1,17 +1,7 @@
 <?php
-  function checkNotes($notes){ # Allows for notes to be NULL to save database storage.
-    if($notes == "Notes"){
-      $notes = "NULL";
-    }
-    else{
-      $notes = "'".$notes."'"; # SQL-friendly string.
-    }
-    return $notes;
-  }
-
   if(isset($trim["submittedD"])){
     $name = strip_tags($trim["diseaseNameD"]);
-    $notes = strip_tags($trim["notesD"]);
+    $notes = checkNotes(strip_tags($trim["notesD"])); # Sets notes to be SQL compliant by encapsulating them with quotation marks if not default value and if a default value set it to be NULL.
     $errors = [];
     if($name == "Disease name"){
       $errors = ["Name cannot be default value"];
@@ -25,17 +15,10 @@
       }
     }
 
-    if($notes == "Notes"){
-      $notes = "NULL";
-    }
-    else {
-      $notes = "'".$notes."'";
-    }
-
     if(empty($errors)){
-      $q = "INSERT INTO disease VALUES(NULL, '$name', $notes, $uid)";
+      $q = "INSERT INTO disease VALUES(NULL, '$name', $notes, $uid)"; # Insert a new row into the disease table.
       $r = mysqli_query($db, $q);
-      echo("<script>window.location.href = 'index.php?page=tool&diseaseSubmitted=TRUE';</script>");
+      echo("<script>window.location.href = 'index.php?page=search&diseaseSubmitted=TRUE';</script>"); # Reload the page to prevent resubmission.
     }
     else {
       echo($popupTop);
@@ -46,77 +29,63 @@
     }
   }
   if(isset($trim["submittedT"])){ # This is for submitting a new sequence.
-    $dnaStr = strtoupper($trim["dnaSequenceT"]);
+    $dnaStr = strtoupper($trim["dnaSequenceT"]); # Convert text to be capitalised (it is not changed by CSS).
     $modsStr = $trim["histoneModsT"];
     $name = strip_tags($trim["sequenceNameT"]);
-    '".$notes."' = checkNotes(strip_tags($trim["notesT"]));
+    $notes = checkNotes(strip_tags($trim["notesT"]));
     $diseaseAssoc = $trim["diseaseAssociationT"];
     $errors = [];
     if($modsStr == "" || $dnaStr == "ATCG" || $name == "Name"){
       $errors = ["Cannot use default values."];
     }
-    if($notes == "Notes"){
-      $notes = "NULL";
-    }
-    else {
-      $notes = "'".$notes."'";
-    }
-    $r = mysqli_query($db, "SELECT name FROM nucelosomesequence WHERE uid=$uid");
-    if(empty($errors)){
-      do { # This lets us break out of the do-while and use the below error script if an error occurs.
-        while($row = mysqli_fetch_array($r)){
-          if($row[0] == $name){
-            $errors = ["You already have a sequence with that name."];
-            break;
-          }
-        }
-        $dnaStrs = str_split($dnaStr, 127); # Produces nucleosome-sized chunks of DNA.
-        $modsStrs = explode("|", $modsStr); # Produces a specified chunk of histone modifications for each specified nucleosome.
-        $did = "";
-        if($diseaseAssoc != "NULL"){
-          $did = (int)$diseaseAssoc;
-        }
-        else {
-          $did = "NULL";
-        }
-        echo $popupTop.$did.$popupBottom;
-        if(count($dnaStrs) > count($modsStrs)){
-          for($i=0;$i<abs(count($dnaStrs) - count($modsStrs));$i++){ # Difference between the two values (abs() returns the magnitude of a number).
-            array_push($modsStrs, " "); # Append mod spaces so that each nucleosomes has "mods".
-          }
-        }
-        else if(count($dnaStrs) < count($modsStrs)){
-          for($i=0;$i<abs(count($dnaStrs) - count($modsStrs));$i++){ # Difference between the two values (abs() returns the magnitude of a number).
-            array_push($dnaStrs, "NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN"); # Append unknown DNA sequence N signifies unknown, 127 Ns in each append.
-          }
-        }
-        $queries = []; # Array that holds all of our nucleosome queries ONLY.
-        $r = mysqli_query($db, "INSERT INTO nucelosomesequence VALUES(NULL, $uid, $did, '".$name."', $notes)"); # Inserts the nucleosome sequence into its table.
-        $nsid = mysqli_fetch_array(mysqli_query($db, "SELECT nsid FROM nucelosomesequence WHERE uid=$uid AND name='".$name."'"))[0]; # Fetches the ID of this new record.
-        for($i=0;$i<count($dnaStrs);$i++){
-          $dna = $dnaStrs[$i]; # Current DNA.
-          $mods = $modsStrs[$i]; # Current histone mods.
-          $ndsid = -1;
-          $dnaFound = 0;
-          $r = mysqli_query($db, "SELECT * FROM nucleosomednasequence");
-          while($row = mysqli_fetch_array($r)){
-            if($row[1] == $dna){ # If the DNA sequence is matching.
-              $ndsid = $row[0]; # Get the ID of this sequence.
-              $dnaFound = 1;
-            }
-          }
-          if($dnaFound != 1){
-            $r = mysqli_query($db, "INSERT INTO nucleosomednasequence VALUES(NULL, '".$dna."')");
-            $ndsid = mysqli_fetch_array(mysqli_query($db, "SELECT ndsid FROM nucleosomednasequence WHERE DNASequence='".$dna."'"))[0]; # Fetches the id of the dna sequence we just inserted.
-          }
-          array_push($queries, "INSERT INTO nucleosome VALUES(NULL, $ndsid, '".$mods."', $nsid)"); # Adds the nucleosome to its table.
-        }
-        foreach($queries as $query){
-          $r = mysqli_query($db, $query);
-        }
-        echo('<script>window.location.href="index.php?page=tool&sequenceSubmitted=TRUE";</script>');
+    $r = mysqli_query($db, "SELECT name FROM nucelosomesequence WHERE uid=$uid"); # Select the names from all nucleosomesequences.
+    while($row = mysqli_fetch_array($r)){ # For each returned row
+      if($row[0] == $name){ # Check if the name matches with name of a sequence that the user already owns.
+        $errors = ["You already have a sequence with that name."];
         break;
-      } while (empty($errors));
+      }
+    }
+    if(empty($errors)){
+      $dnaStrs = str_split($dnaStr, 127); # Produces nucleosome-sized chunks of DNA.
+      $modsStrs = explode("|", $modsStr); # Produces a chunk of histone modifications for each specified nucleosome.
+      $did = "";
+      if($diseaseAssoc != "NULL"){
+        $did = (int)$diseaseAssoc; # Cast the string value of the disease association as an integer.
+      }
+      else {
+        $did = "NULL";
+      }
+      if(count($dnaStrs) > count($modsStrs)){ # If we have more DNA chunks than histone modifications
+        for($i=0;$i<abs(count($dnaStrs) - count($modsStrs));$i++){ # Difference between the two values (abs() returns the magnitude of a number).
+          array_push($modsStrs, " "); # Append mod spaces so that each nucleosomes has "mods" so that it can be inserted into the database.
+        }
+      }
+      else if(count($dnaStrs) < count($modsStrs)){ # If we have more histone chunks than DNA chunks, add a new DNA chunk of unknown bases.
+        for($i=0;$i<abs(count($dnaStrs) - count($modsStrs));$i++){ # Difference between the two values (abs() returns the magnitude of a number).
+          array_push($dnaStrs, "NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN"); # Append unknown DNA sequence N signifies unknown, 127 Ns in each append.
+        }
+      }
+      $queries = []; # Array that holds all of our nucleosome queries ONLY.
+      $r = mysqli_query($db, "INSERT INTO nucelosomesequence VALUES(NULL, $uid, $did, '".$name."', $notes)"); # Inserts the nucleosome sequence into its table.
+      $nsid = mysqli_fetch_array(mysqli_query($db, "SELECT nsid FROM nucelosomesequence WHERE uid=$uid AND name='".$name."'"))[0]; # Fetches the ID of this new record.
+      for($i=0;$i<count($dnaStrs);$i++){ # For each nucleosome (defined by number of nucleosome DNA chunks).
+        $dna = $dnaStrs[$i]; # Current DNA.
+        $mods = $modsStrs[$i]; # Current histone mods.
+        $ndsid = -1; # Initialise the ID of the nucleosome DNA sequence.
+        $dnaFound = checkDNA($dna); # Check to see if DNA is already in the database.
+        if($dnaFound == TRUE){
+          $ndsid = mysqli_fetch_array(mysqli_query($db, "SELECT ndsid FROM nucleosomednasequence WHERE DNASequence=$dna"))[0]; # Fetch the ndsid of the mathcing DNA sequence.
+        }
+        else{ # If no DNA match is found
+          $r = mysqli_query($db, "INSERT INTO nucleosomednasequence VALUES(NULL, '".$dna."')"); # Insert a new DNA sequecne into the databse.
+          $ndsid = mysqli_fetch_array(mysqli_query($db, "SELECT ndsid FROM nucleosomednasequence WHERE DNASequence='".$dna."'"))[0]; # Fetches the id of the dna sequence we just inserted.
+        }
+        array_push($queries, "INSERT INTO nucleosome VALUES(NULL, $ndsid, '".$mods."', $nsid)"); # Adds a query to the queries array that inserts a new record to the nucelosome.
+      }
+      foreach($queries as $query){ # Execute all nucleosome insertion queries.
+        $r = mysqli_query($db, $query);
+      }
+      echo('<script>window.location.href="index.php?page=search&sequenceSubmitted=TRUE";</script>'); # Redirect so that the user does not resubmit the data.
     }
     else{
       echo($popupTop);
