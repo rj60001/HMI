@@ -1,31 +1,26 @@
 <?php
-  # Functions for both forms of submission
-  function interpretHistoneModSequence($mods, $db, $type = 's'){
-    $modsArray = [];
+  # Functions for both the edit tool forma nd the create tool form.
+  function interpretHistoneModSequence($mods, $db){
+    $modsArray = []; # Initialise the array.
     if($type == 's'){
       $modsArray = explode(",", $mods);
     }
     else {
       $modsArray = $mods;
     }
-    $result = 0;
-    foreach($modsArray as $mod){
+    $result = 0; # Initilaise the result varibale.
+    foreach($modsArray as $mod){ # For each mod in the sequence.
       $q = "SELECT effectType, magnitude FROM histonemods WHERE hmid=".intval($mod);
-      $r = mysqli_query($db, $q);
-      $row = mysqli_fetch_array($r);
-      if($row[0] == "1"){
+      $r = mysqli_query($db, $q); # Fetch the magnitude of its effect and whether or not it is repressive.
+      $row = mysqli_fetch_array($r); # Fetch the actualy values of these.
+      if($row[0] == "1"){ # If a repressive effect, decrease $result.
         $result -= $row[1];
       }
-      else {
+      else { # If an activator effect, increase $result.
         $result += $row[1];
       }
     }
     return $result;
-  }
-
-  function displayResults($result, $nsid){
-    global $popupTop, $popupBottom; # This lets us use the specified global varibables.
-    echo($popupTop."<p>This is your result: <br>".$result."</p>".$popupBottom);
   }
 
   function checkDNA($dna){ # THis checks to see if a DNA sequence has already been added to the database.

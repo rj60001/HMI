@@ -158,7 +158,8 @@
         $popupTop = '<div class="boardConPU"><div class="popUpBox redPurple"><div class="textConPU"><p class="titlePU">Notification<span class="crossPU">X</span></p>';
         $altPopupTop = substr($popupTop, 0, 23).' style="display: none" id="postingPU">'.substr($popupTop, 24); # For forum POST forms.
         $popupBottom = '</div></div></div>';
-        # Loads the PHP scripts that are neccessary for website function. require_once only loads the file if it has not already been loaded. Prevents display errors.
+        # Loads the PHP scripts that are neccessary for website function.
+        # Require_once makes sure that only one version of the file is included and prevents the execution of the rest of this script if it is not present - preventing a user from running an errornous version of this program.
         require_once("php/toolFunctions.php");
         require_once("php/dictionary.php");
         require_once("php/onload/onloadLOAD.php");

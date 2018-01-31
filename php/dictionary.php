@@ -69,10 +69,11 @@
     }
 
     public function readAll(){
-      $finalArray = [];
+      $finalArray = []; # Initialise the array.
       for($i=0;$i<count($this->keys);$i++){
         array_push($finalArray, $this->keys[$i]);
         array_push($finalArray, $this->values[$i]);
+        # Creates an array in the format x, y where x is the key and y is the value.
       }
       return $finalArray;
     }

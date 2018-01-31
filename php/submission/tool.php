@@ -25,8 +25,15 @@
       }
     }
 
+    if($notes == "Notes"){
+      $notes = "NULL";
+    }
+    else {
+      $notes = "'".$notes."'";
+    }
+
     if(empty($errors)){
-      $q = "INSERT INTO disease VALUES(NULL, '$name', '$notes', $uid)";
+      $q = "INSERT INTO disease VALUES(NULL, '$name', $notes, $uid)";
       $r = mysqli_query($db, $q);
       echo("<script>window.location.href = 'index.php?page=tool&diseaseSubmitted=TRUE';</script>");
     }
@@ -42,11 +49,17 @@
     $dnaStr = strtoupper($trim["dnaSequenceT"]);
     $modsStr = $trim["histoneModsT"];
     $name = strip_tags($trim["sequenceNameT"]);
-    $notes = checkNotes(strip_tags($trim["notesT"]));
+    '".$notes."' = checkNotes(strip_tags($trim["notesT"]));
     $diseaseAssoc = $trim["diseaseAssociationT"];
     $errors = [];
-    if($modsStr == "" || $dnaStr == "ATCG" || $name == "Name" || $notes == "Notes" ){
+    if($modsStr == "" || $dnaStr == "ATCG" || $name == "Name"){
       $errors = ["Cannot use default values."];
+    }
+    if($notes == "Notes"){
+      $notes = "NULL";
+    }
+    else {
+      $notes = "'".$notes."'";
     }
     $r = mysqli_query($db, "SELECT name FROM nucelosomesequence WHERE uid=$uid");
     if(empty($errors)){
