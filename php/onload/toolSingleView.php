@@ -12,7 +12,7 @@
     $html= ''; # This is the variable where we will store all HTML that needs to be displayed after the the overview strip. This will be the nucleosome-by-nucelosome breakdown of the sequence.
     $allMods = []; # Collects all mods.
     $allDNA = '';
-    $nucleosomes = []; # Two dimensional array that will contain the name number and the nucelosome id for each nucleosome. Name Number (counter) : nucleosome id.
+    $nucleosomes = []; # Two dimensional array that will contain the name number and the nucelosome ID for each nucleosome. Name Number (counter) : nucleosome id.
     while($row = mysqli_fetch_array($r)){
       $nid = $row[2];
       $html .= '<div class="strip redPurple floatAesthetic">';
@@ -43,8 +43,9 @@
     $r = mysqli_query($db, "SELECT disease.did, disease.name FROM disease INNER JOIN nucelosomesequence ON disease.did=nucelosomesequence.did WHERE nsid=$nsid"); # Selects the disease associated with the sequence if such a relationship exists.
     $row = mysqli_fetch_array($r);
     $did = $row[0]; # Fetch the disease ID.
+    $diseaseName = "";
     if($r){ # If the sequence is related to a disease, fetch the disease's name.
-      global $diseaseName = $row[1]
+      $diseaseName = $row[1];
     }
     $result = interpretHistoneModSequence($allMods, $db); # Determine the change in expression of the DNA sequence at hand.
     if($result > 0){ # If the overall change in expression activates the expression, display this to the user using the + sign.

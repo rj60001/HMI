@@ -2,12 +2,12 @@ function menuBtnClick(value) { // Used to switch between pages. value represents
   document.getElementById("homePage").style.opacity = '0'; // Prevents the homePage from popping up everytime index.php loads to create a more seamless transition.
   postEle = document.getElementsByClassName("postBtn");
   if((value === "forum" || value === "forumSingleView") && document.cookie.substring(document.cookie.indexOf("user"), document.cookie.indexOf("user")+4) === "user"){ // If the user is logged in and one of the forumpages are being accessed.
-    for(i=0;i < values.length; i++){
+    for(i=0;i < postEle.length; i++){
       postEle[i].style.display = "block"; // Display all post-related menu elements.
     }
   }
   else { // If any other page is being switched to.
-    for(i=0;i < values.length; i++){
+    for(i=0;i < postEle.length; i++){
       postEle[i].style.display = "none";
     }
   }
@@ -20,7 +20,7 @@ function menuBtnClick(value) { // Used to switch between pages. value represents
     return 0;
   }
   value += "Page";
-  page = document.getElementById(value).style; // Get the style attributes of the page we are truing to switch to.
+  page = document.getElementById(value).style; // Get the style attributes of the page we are trying to switch to.
   pages = ["homePage", "accountPage", "toolPage", "newsPage", "aboutPage", "forumPage", "forumSingleViewPage", "toolSingleViewPage", "searchPage"];
   pages.splice(pages.indexOf(value), 1); // Remove the page we are trying to switch to from the pages array.
   for(i = 0; i < pages.length; i++){

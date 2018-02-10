@@ -5,7 +5,7 @@
     $ea = strip_tags($trim["emailAddressSU"]);
     $pw = $trim["passwordConSU"];
     $in = $trim["interestSU"];
-    $hash = md5($pw); # md5 is a hash algorithm that always produces a 32 character string.
+    $hash = hashing32($pw); # Uses my hash algorithm to produce a 32 character string.
     $errors = [];
     if(mysqli_num_rows(mysqli_query($db, "SELECT * FROM users WHERE emailAddress='$ea'")) > 0){ # If the email address submitted is not unqiue.
       $errors = ["Email addresss already in use."]; # Throw an error.

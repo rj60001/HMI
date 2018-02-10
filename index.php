@@ -162,6 +162,8 @@
         # Require_once makes sure that only one version of the file is included and prevents the execution of the rest of this script if it is not present - preventing a user from running an errornous version of this program.
         require_once("php/toolFunctions.php");
         require_once("php/dictionary.php");
+        require_once("php/hashing32.php");
+        require_once("php/queue.php");
         require_once("php/onload/onloadLOAD.php");
         require_once("php/submission/submissionLOAD.php");
         # Tags that need to be loaded on start but require PHP to display the correct information.
