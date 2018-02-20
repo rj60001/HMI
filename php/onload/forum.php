@@ -29,7 +29,7 @@
 			if(strlen($s) > 25){ # This makes sure that only a set amount of the subject text is printed so as not to overflow the strip.
 				$s = substr($s, 0, 25)."...";
 			}
-			$html = "<div class='strip greenYellow floatAesthetic' onclick='window.location.href = `index.php?page=forum&thread=$row[0]`;'><a>$s</a><hr><br><a style='float: right;'>$fn at ".$row[3]."</a>";
+			$html = "<div class='strip greenYellow floatAesthetic' onclick='window.location.href = `index.php?page=forum&thread=$row[0]`;'><a>$s</a><hr><br><a style='float: right;'>$fn at ".$row[3]." GMT</a>";
 			# Each thread displayed as a strip with a link to the forum sing view so that we can view a single thread.
 			if($admin == TRUE){ # If the user is an admin, they should have the power to delete inappropriate threads. Display a form to do that.
 				$html .= "<form action='".$_SERVER["REQUEST_URI"]."' method='post'><input name='deleteTid' type='hidden' value='".$row[0]."'/><input class='removeDeleteButton' type='submit' value='Delete'/></b></form>";
@@ -60,14 +60,14 @@
 		$r = mysqli_query($db, "SELECT subject, message, firstName, dateTime FROM thread INNER JOIN users ON thread.uid = users.uid WHERE tid=".$tid); # Fetch the original post of the thread and the user's first name who psoetd it.
 		$rowT = mysqli_fetch_array($r); # Store the extracted data in an array.
 		$m = convert($rowT[1]); # Converts artificial mark up to valid HTML in the message.
-		$OPHTML = "<br><br><div class='forumObj greenYellow floatAesthetic'><div class='forumCon'><b>$rowT[0]</b><br><t>$m</t><br><em class='forumNameTag'>$rowT[2] at $rowT[3]</em></div></div>"; # Displays the original post.
+		$OPHTML = "<br><br><div class='forumObj greenYellow floatAesthetic'><div class='forumCon'><b>$rowT[0]</b><br><t>$m</t><br><em class='forumNameTag'>$rowT[2] at $rowT[3] GMT</em></div></div>"; # Displays the original post.
 
 		$posts->append($OPHTML);
 
 		$r = mysqli_query($db, "SELECT message, firstName, mid, dateTime FROM message INNER JOIN users ON message.uid = users.uid WHERE tid=".$tid); # Fetch data on all messages to the original post including the first name of the use who posted it.
 		while($rowM = mysqli_fetch_array($r)){ # For each message.
 			$m = convert($rowM[0]); # Retrive the message body.
-			$mHTML = "<br><div class='forumObj message redPurple floatAesthetic'><div class='forumCon' onclick='document.getElementById(\"replyingPU\").style.display = \"block\"; document.getElementById(\"midPR\").value = \"".$rowM[2]."\";'><div><t>$m</t><br><em class='forumNameTag'>$rowM[1] at $rowM[3]</em></div>";
+			$mHTML = "<br><div class='forumObj message redPurple floatAesthetic'><div class='forumCon' onclick='document.getElementById(\"replyingPU\").style.display = \"block\"; document.getElementById(\"midPR\").value = \"".$rowM[2]."\";'><div><t>$m</t><br><em class='forumNameTag'>$rowM[1] at $rowM[3] GMT</em></div>";
 			# The above line displays the message.
 			if($admin == TRUE){ # Dispaly a form to delete the message if the user is an admin.
 				$mHTML .= '<form action="'.$_SERVER['REQUEST_URI'].'" method="post"><input name="deleteMid" type="hidden" value="'.$rowM[2].'"/><input class="removeDeleteButton" type="submit" value="Delete" onclick="document.getElementById(\'replyingPU\').style.display = \'none\';"/></b></form>';
@@ -77,7 +77,7 @@
 			$rR = mysqli_query($db, "SELECT message, firstName, rid, dateTime FROM replies INNER JOIN users ON replies.uid = users.uid WHERE replies.mid=".$rowM[2]); # Fetch all the repleis foreach message, aswell as the firstname of the suer who posted it.
 			while($rowR = mysqli_fetch_array($rR)){
 				$m = convert($rowR[0]);
-				$rHTML = "<div class='forumObj reply orangeBlue floatAesthetic'><div class='forumCon'><t>$m</t><br><em class='forumNameTag'>".$rowR[1]." at ".$rowR[3]."</em>";
+				$rHTML = "<div class='forumObj reply orangeBlue floatAesthetic'><div class='forumCon'><t>$m</t><br><em class='forumNameTag'>".$rowR[1]." at ".$rowR[3]." GMT</em>";
 				#Display the reply.
 				if($admin == TRUE){ # Dispaly a form to delete the repy if the user is an admin.
 					$rHTML .= '<form action="'.$_SERVER['REQUEST_URI'].'" method="post"><input name="deleteRid" type="hidden" value="'.$rowR[2].'"/><input class="removeDeleteButton" type="submit" value="Delete"/></b></form>';

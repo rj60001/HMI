@@ -1,15 +1,8 @@
 <?php
   # Functions for both the edit tool form and the create tool form, for both submission and on-load pages.
   function interpretHistoneModSequence($mods, $db){
-    $modsArray = []; # Initialise the array.
-    if($type == 's'){
-      $modsArray = explode(",", $mods);
-    }
-    else {
-      $modsArray = $mods;
-    }
     $result = 0; # Initilaise the result varibale.
-    foreach($modsArray as $mod){ # For each mod in the sequence.
+    foreach($mods as $mod){ # For each mod in the sequence.
       $q = "SELECT effectType, magnitude FROM histonemods WHERE hmid=".intval($mod);
       $r = mysqli_query($db, $q); # Fetch the magnitude of its effect and whether or not it is repressive.
       $row = mysqli_fetch_array($r); # Fetch the actualy values of these.
