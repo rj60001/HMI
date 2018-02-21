@@ -155,6 +155,7 @@
       </div>
       <?php
         $trim = array_map('trim', $_POST); # Each data in the $_POST superglobal array (submiited via POST) has excess spaces removed to lower the amount of storage used by the database.
+        $trim = array_map('mysqli_real_escape_string', $trim); # Each data submitted via POST now escapes any problematic characters, sucha as quotiation marks that could distort queries in the from of strings.
         $popupTop = '<div class="boardConPU"><div class="popUpBox redPurple"><div class="textConPU"><p class="titlePU">Notification<span class="crossPU">X</span></p>';
         $altPopupTop = substr($popupTop, 0, 23).' style="display: none" id="postingPU">'.substr($popupTop, 24); # For forum POST forms.
         $popupBottom = '</div></div></div>';
