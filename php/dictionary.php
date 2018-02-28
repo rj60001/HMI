@@ -60,7 +60,7 @@
     public function editValue($key, $value){ # Edit the value as the specified key.
       $pos = dictionary::getKeyPosition($key);
       if($pos != -1){
-        $this->values[$key] = $value; # Set value at the corressponding point of its key in the $values array.
+        $this->values[$pos] = $value; # Set value at the corressponding point of its key in the $values array.
         return 0;
       }
       else {
