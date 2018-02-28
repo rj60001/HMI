@@ -155,7 +155,7 @@
       </div>
       <?php
         $trim = array_map('trim', $_POST); # Each data in the $_POST superglobal array (submiited via POST) has excess spaces removed to lower the amount of storage used by the database.
-        $trim = array_map('mysqli_real_escape_string', $trim); # Each data submitted via POST now escapes any problematic characters, sucha as quotiation marks that could distort queries in the from of strings.
+        $trim = array_map(array($db, 'real_escape_string'), $trim); # Each data submitted via POST now escapes any problematic characters, sucha as quotiation marks that could distort queries in the from of strings.
         $popupTop = '<div class="boardConPU"><div class="popUpBox redPurple"><div class="textConPU"><p class="titlePU">Notification<span class="crossPU">X</span></p>';
         $altPopupTop = substr($popupTop, 0, 23).' style="display: none" id="postingPU">'.substr($popupTop, 24); # For forum POST forms.
         $popupBottom = '</div></div></div>';
@@ -175,9 +175,9 @@
               echo(substr($popupTop, 0, 23).'style="display: none" id="replyingPU">'.substr($popupTop, 24).'<br>Reply To A Message<br><br><form action="index.php?page=forum&thread='.$_GET["thread"].'" method="post"><textarea name="messagePR" class="textareaPU PUInput" info="Message" onfocus="clearValue(this); selected(this);" onblur="restoreValue(this); deselected(this);">Message</textarea><br><br><input id="midPR" name="midPR" type="hidden" value=\'\'/><input name="submittedPR" type="submit" class="button btnPU PUInput"/></form>'.$popupBottom); # Take the first part of the popup and then concatenate HTML makes up a form for posting replies to messages.  Submittted via POST.
           }
           else { # If not displaying the forumSingleView (therefore no thread be displyed).
-              $s = isset($trim["subjectPT"]) ? $trim["subjectPT"] : "Subject"; # If the thread post was tried and failed, retain the data so that it can be corrected and resubmitted.
-              $m = isset($trim["messagePT"]) ? $trim["messagePT"] : "Message"; # ^ Else print the default value.
-              echo($altPopupTop.'<br>Start A Thread<br><br><form action="index.php?page=forum" method="post"><textarea class="textareaPU subjectTextareaPU PUInput" name="subjectPT" info="Subject" onfocus="clearValue(this); selected(this);" onblur="restoreValue(this); deselected(this);">'.$s.'</textarea><br><br><textarea name="messagePT" class="textareaPU PUInput" info="Message" onfocus="clearValue(this); selected(this);" onblur="restoreValue(this); deselected(this);">'.$m.'</textarea><br><br><input name="submittedPT" type="submit" class="button btnPU large"/></form>'.$popupBottom);
+              $subject = isset($trim["subjectPT"]) ? $trim["subjectPT"] : "Subject"; # If the thread post was tried and failed, retain the data so that it can be corrected and resubmitted.
+              $message = isset($trim["messagePT"]) ? $trim["messagePT"] : "Message"; # ^ Else print the default value.
+              echo($altPopupTop.'<br>Start A Thread<br><br><form action="index.php?page=forum" method="post"><textarea class="textareaPU subjectTextareaPU PUInput" name="subjectPT" info="Subject" onfocus="clearValue(this); selected(this);" onblur="restoreValue(this); deselected(this);">'.$subject.'</textarea><br><br><textarea name="messagePT" class="textareaPU PUInput" info="Message" onfocus="clearValue(this); selected(this);" onblur="restoreValue(this); deselected(this);">'.$message.'</textarea><br><br><input name="submittedPT" type="submit" class="button btnPU large"/></form>'.$popupBottom);
               # The above line of code prints out a form for posting a thread. Submittted via POST.
           }
         }
