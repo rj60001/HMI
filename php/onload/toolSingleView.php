@@ -8,19 +8,22 @@
     $ownerid = $row[2];
     echo('<p class="sequenceDiseaseTitle">'.$name.'</p><br><hr>'); # And display it.
     $r = mysqli_query($db, "SELECT histoneMods, ndsid, nid FROM nucleosome WHERE nsid=$nsid ORDER BY nsid"); # Fetch data on all nucleosome related to this sequence.
-    $counter = 0; # Defines the nucleosome number (to give it an arbitary name).                           Orders from first to last (ascending by default).
-    $html= ''; # This is the variable where we will store all HTML that needs to be displayed after the the overview strip. This will be the nucleosome-by-nucelosome breakdown of the sequence.
-    $allMods = []; # Collects all mods.
-    $allDNA = '';
+    $counter = 0; # Defines the nucleosome number (to give it an arbitary name). Orders from first to last (ascending by default).
+    $num = mysqli_num_rows($r); # Length of the queue.
+    $nucleosomesHTML = new queue($num); # Contains a queue of nucleosome HTML blocks.
+    $allComponents = new dictionary(["allDNA", "", "allMods", ""]);
     $nucleosomes = []; # Two dimensional array that will contain the name number and the nucelosome ID for each nucleosome. Name Number (counter) : nucleosome id.
     while($row = mysqli_fetch_array($r)){
       $nid = $row[2];
-      $html .= '<div class="strip redPurple floatAesthetic">';
+      $html = '<div class="strip redPurple floatAesthetic">';
       $counter++;
       $html .= '<p class="text"><b>Nucleosome '.$counter.'</b><p><br><hr>'; # Print the next nucleosome number in the sequence.
       $dnaSequence = mysqli_fetch_array(mysqli_query($db, "SELECT DNASequence FROM nucleosomednasequence WHERE ndsid=".$row[1]))[0];
-      $allDNA .= $dnaSequence;
+      $allDNA = $allComponents->read("allDNA").$dnaSequence;
+      $errorCode = $allComponents->editValue("allDNA", $allDNA);
       $html .= '<p class="text"><em>DNA Sequence:</em><br>'.$dnaSequence.'</p><p class="text"><em>Histone Mods:</em><br>';
+      $allMods = $allComponents->read("allMods").$row[0];
+      $errorCode = $allComponents->editValue("allMods", $allMods);
       $mods = explode(",", $row[0]);
       for($i=0;$i<count($mods);$i++){
         $mod = (int)$mods[$i]; # Select the current histone modification ID (hmid).
@@ -31,13 +34,13 @@
           $final .= " , ";
         }
         $html .= $final;
-        array_push($allMods, $mod); # Push each mod into the array of all mods. we must do it here instead of just adding the $mods array so that we don't get a two dimensional array.
       }
       if($uid == $ownerid){ # Checks to see if the user owns this sequence.
         $html .= '<form action="index.php?page=tool&sequence='.$nsid.'" method="post"><input name="nidTD" type="hidden" value="'.$nid.'"/><input name="submitTD" class="removeDeleteButton" type="submit" value="Delete" onfocus="selected(this);" onblur="deselected(this);"/></form>';
         # Displays the form for deleting a nucleosome from the sequence if the user owns this sequence.
       }
       $html .= '</div><br><br>';
+      $nucleosomesHTML->append($html);
       array_push($nucleosomes, [$counter, $nid]); # Append the array.
     }
     $r = mysqli_query($db, "SELECT disease.did, disease.name FROM disease INNER JOIN nucelosomesequence ON disease.did=nucelosomesequence.did WHERE nsid=$nsid"); # Selects the disease associated with the sequence if such a relationship exists.
@@ -47,6 +50,7 @@
     if($r){ # If the sequence is related to a disease, fetch the disease's name.
       $diseaseName = $row[1];
     }
+    $allMods = explode(",", $allComponents->read("allMods"));
     $result = interpretHistoneModSequence($allMods, $db); # Determine the change in expression of the DNA sequence at hand.
     if($result > 0){ # If the overall change in expression activates the expression, display this to the user using the + sign.
       $result = "+".$result;
@@ -55,9 +59,14 @@
     if($r){ # Only display a disease association of one exists.
       echo('<div class="strip greenYellow floatAesthetic" onclick="window.location.href=`index.php?page=tool&disease='.$did.'`"><p class="text">This sequence is derived from: <b>'.$diseaseName.'</b></p></div><br><br>');
     }
-    echo('<div class="strip greenYellow floatAesthetic"><p class="text"><b>Overall</b></p><p class="text"><em>Full DNA Sequence: <br></em>'.$allDNA.'</p><p class="text"><em>Expression Change Result: <br></em>'.$result.'</p><br><p class="text"><em>Notes: </em><br>'.$notes.'</p></div><br><br>');
+    echo('<div class="strip greenYellow floatAesthetic"><p class="text"><b>Overall</b></p><p class="text"><em>Full DNA Sequence: <br></em>'.$allComponents->read("allDNA").'</p><p class="text"><em>Expression Change Result: <br></em>'.$result.'</p><br><p class="text"><em>Notes: </em><br>'.$notes.'</p></div><br><br>');
     # This must be printed first before everthing else so that it stays at the top of the page. It displays data specific to the overall sequence.
-    echo($html); # Now print the breakdown of the sequence.
+    # === Now print the breakdown of the sequence.
+    do {
+      echo($nucleosomesHTML->get());
+      $nucleosomesHTML->pop();
+    } while($nucleosomesHTML->isEmpty() == FALSE);
+    # ===
     if($uid == mysqli_fetch_array(mysqli_query($db, "SELECT uid FROM nucelosomesequence WHERE nsid=$nsid"))[0] || $admin == TRUE){ # Editing for owner and admin only.
       if($notes == ""){
         $notes = isset($trim["notesTEO"]) ? $trim["notesTEO"] : "Notes"; # Determine the default value of the notes using the tenary operator.
