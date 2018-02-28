@@ -120,14 +120,21 @@
       <div id="newsPage" class="page">
         <div class="textCon">
           <p class="subTitle">News</p>
-          <p class="text"></p>
+          <p class="text">No news!</p>
           <br><br>
         </div>
       </div>
       <div id="aboutPage" class="page">
         <div class="textCon">
           <p class="subTitle">About</p>
-          <p class="text"></p>
+          <br>
+          <div class="strip redPurple"<p class="text"><b>Nomios</b> is a single platform for two services: </p><ulclass="text"><li>A forum for scientists. No matter what specialists field you are in, you can meet others, collaborate and learn on a single platform.</li><li>A histone modification interpreter for epigeneticists. Simulate your experiments and save time and resources. Find what the overall change in expression is for a particular histone modification sequence.</li></ul><p class="text">Founded in 2018, this platform was designed to encorage global research and quick access to knowledge concerning any questions that a scientist today might have.</p></div>
+          <br>
+          <p class="subTitle">help</p>
+          <br>
+          <div class="strip greenYellow">The following contains a simple guide for use of the <b>forum</b>: <ul><li>In order to enter the forum first click on the <i class="material-icons">subject</i> icon.<li>To start a new thread click on the <i class="material-icons">create</i> icon.</li><li>To view a thread click on one of the thread items that are displayed.</li><li>Once viewing a thread click on the <i class="material-icons">create</i> icon to reply to the original post, or click on a response to reply to it.</li></ul></div>
+          <br>
+          <div class="strip orangeBlue">The following contains a simple guide for use of the <b>histone modfication interpreter</b>:<ul><li>Click the <i class="material-icons">build</i> icon to create a disease or nucleosome sequence.</li><li>Click the <i class="material-icons">search</i> icon to search for a particular nucleosome sequence or disease.</li><li>On a Disease page, click the nucleosome sequence block to view that sequence.</li><li>On a Sequence page, click the disease block to view the associated disease's page.</li><li>Submit the edit forms on both types of page to confirm edits to a sequence or disease that you have created.</li></ul><div>
           <br><br>
         </div>
       </div>
